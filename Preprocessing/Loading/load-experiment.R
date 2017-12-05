@@ -5,23 +5,24 @@
 #' @example 
 #' 
 #' 
-load_experiment <- function(folder, obj = NULL){
+load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NULL){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
-  experiment_info = open_experiment_info(folder)
+  experiment_info <- open_experiment_info(folder, log_timestamp = exp_timestamp, returnSingle = T)
   
   if(is.null(experiment_info)) stop("Experiment info not found")
   #if multiple logs or no logs, quit
-  
+  if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
-  player_log <- open_player_log(folder, override = FALSE)
+  player_log <- open_player_log(folder, log_timestamp = exp_timestamp, override = FALSE)
   if(is.null(player_log)) stop("Player log not found")
   #preprocesses player log
   #checks if there is everything we need and if not, recomputes the stuff
   
-  test_logs = open_experiment_logs(folder)
+  test_logs <- open_experiment_logs(folder)
   
-  if(is.null(obj)) obj = UnityObject()
+  obj <- objectFun()
+  obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
   obj$data$player_log <- player_log
   ##TODO - redo this part

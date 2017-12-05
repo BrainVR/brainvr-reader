@@ -4,9 +4,9 @@
 #' @param player_log table to be saved
 #' @param orig_filename what is the name of the original file
 #' 
-save_preprocessed_player = function(directory, player_log, orig_filename = NULL){
+save_preprocessed_player = function(directory, player_log, exp_timestamp = NULL, orig_filename = NULL){
   if(is.null(orig_filename)) {
-    ptr = paste("_player_", sep = "", collapse = "")
+    ptr <- create_log_search_pattern("player", exp_timestamp)
     logs = list.files(directory, pattern = ptr, full.names = T)
     if(length(logs) != 1) stop("More player logs in the saving directory")
     filename = logs[1]
