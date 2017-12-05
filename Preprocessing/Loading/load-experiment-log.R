@@ -11,8 +11,9 @@ load_experiment_log <- function(filepath){
   bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
   
   text <- get_text_between(text, "TEST HEADER")
-  ls$experimentSettings <- get_json_between(text, "EXPERIMENT SETTINGS")
-  ls$positionSettings <- get_json_between(text, "POSITIONS")
+  ls$name <- experiment_name_from_filename(filepath)
+  ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
+  ls$positions <- get_json_between(text, "POSITIONS")
   
   #ls$positionSettings = position_to_vector(ls$positionSettings)
   
@@ -20,4 +21,10 @@ load_experiment_log <- function(filepath){
                         stringsAsFactors = F, skip = bottomHeaderIndex)
   ls$data[ncol(ls$data)] <- NULL
   return(ls)
+}
+
+experiment_name_from_filename <- function(filename){
+  ptr <- "_test_(.*)_"
+  capture_groups <- str_match(filename, ptr)
+  return(capture_groups[, 2])
 }
