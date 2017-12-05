@@ -12,7 +12,7 @@ load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NUL
   
   if(is.null(experiment_info)) stop("Experiment info not found")
   #if multiple logs or no logs, quit
-  exp_timestamp <- experiment_info$header$Timestamp
+  if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
   player_log <- open_player_log(folder, log_timestamp = exp_timestamp, override = FALSE)
   if(is.null(player_log)) stop("Player log not found")

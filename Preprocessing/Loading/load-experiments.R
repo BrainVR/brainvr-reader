@@ -8,15 +8,14 @@ load_experiments <- function(folder, objectFun){
   #open experiment_logs to see how many do we have
   experiment_infos <- open_experiment_info(folder)
   
-  if(is.null(experiment_info)) stop("Experiment info not found")
-  
-  #if only a single log
-  if (length(experiment_info) == 1){
-    return(load_experiment(folder, objectFun))
-  }
+  if(is.null(experiment_infos)) stop("Experiment info not found")
   
   # else
+  ls <- list()
+  i = 1 
   for(info in experiment_infos){
-      
+    ls[[i]] <- load_experiment(folder, objectFun, exp_timestamp = info$header$Timestamp)
+    i = i + 1
   }
+  return(ls)
 }
