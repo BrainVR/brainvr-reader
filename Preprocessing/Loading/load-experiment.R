@@ -22,6 +22,7 @@ load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NUL
   test_logs <- open_experiment_logs(folder)
   
   obj <- objectFun()
+  obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
   obj$data$player_log <- player_log
   ##TODO - redo this part
