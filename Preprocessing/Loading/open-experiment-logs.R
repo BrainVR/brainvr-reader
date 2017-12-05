@@ -3,9 +3,8 @@
 
 open_experiment_logs = function(directory, exp_timestamp = NULL){
   ls = list()
-  ptr <- "_test_"
-  if(!is.null(timestamp)) ptr <- paste0(exp_timestamp)
-  logs = list.files(directory, pattern = , full.names = T)
+  ptr <- create_log_search_pattern("test", exp_timestamp)
+  logs = list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
     smart_print(c("Could not find any test logs in ", directory))
     next

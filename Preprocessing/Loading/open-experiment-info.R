@@ -4,7 +4,7 @@
 open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle = FALSE){
   ls <- list()
   ptr <- create_log_search_pattern("ExperimentInfo", log_timestamp)
-  logs <- list.files(directory, pattern = , full.names = T)
+  logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
     print("Could not find the file for experiment log")
     return(NULL)
