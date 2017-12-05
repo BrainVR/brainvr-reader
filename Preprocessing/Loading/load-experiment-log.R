@@ -6,7 +6,7 @@ load_experiment_log <- function(filepath){
   ls <- list()
   #reads into a text file at first
   
-  text = readLines(filepath, warn = F)
+  text <- readLines(filepath, warn = F)
   #needs to be before resaving text
   bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
   
@@ -16,7 +16,7 @@ load_experiment_log <- function(filepath){
   
   #ls$positionSettings = position_to_vector(ls$positionSettings)
   
-  ls$data  = read.table(filepath, header = T, sep = ";", 
+  ls$data <- read.table(filepath, header = T, sep = ";", 
                         stringsAsFactors = F, skip = bottomHeaderIndex)
   ls$data[ncol(ls$data)] <- NULL
   return(ls)

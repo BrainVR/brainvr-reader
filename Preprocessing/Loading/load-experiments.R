@@ -12,10 +12,10 @@ load_experiments <- function(folder, objectFun){
   
   # else
   ls <- list()
-  i = 1 
+  i <- 1 
   for(info in experiment_infos){
     ls[[i]] <- load_experiment(folder, objectFun, exp_timestamp = info$header$Timestamp)
-    i = i + 1
+    i <- i + 1
   }
   return(ls)
 }
