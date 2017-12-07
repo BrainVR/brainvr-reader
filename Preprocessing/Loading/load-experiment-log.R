@@ -16,9 +16,10 @@ load_experiment_log <- function(filepath){
   ls$positions <- get_json_between(text, "POSITIONS")
   
   #ls$positionSettings = position_to_vector(ls$positionSettings)
-  
+
   ls$data <- read.table(filepath, header = T, sep = ";", 
                         stringsAsFactors = F, skip = bottomHeaderIndex)
+  #deleting the last column - always empty
   ls$data[ncol(ls$data)] <- NULL
   return(ls)
 }

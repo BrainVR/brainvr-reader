@@ -1,0 +1,21 @@
+Package: brainvr.R
+Title: Loading, preprocessing and visualising logs from brainvr framework based app
+Version: 0.1
+Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.ocm",
+                  role = c("aut", "cre"))
+Description: This package comes with functions to load, preprocess
+  and visualise data coming from the brainvr framework based unity app. It is being 
+  keep in sync with the framework newest data formatting. Check version
+  if you have trouble reading it.
+Depends: R (>= 3.1.0)
+License: MIT
+LazyData: true
+Depends:
+  stringr,
+  jsonlite
+Suggests: 
+  testthat,
+  knitr,
+  rmarkdown
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr
