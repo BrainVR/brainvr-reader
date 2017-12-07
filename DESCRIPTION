@@ -7,10 +7,10 @@ Description: This package comes with functions to load, preprocess
   and visualise data coming from the brainvr framework based unity app. It is being 
   keep in sync with the framework newest data formatting. Check version
   if you have trouble reading it.
-Depends: R (>= 3.1.0)
 License: MIT
 LazyData: true
 Depends:
+  R (>= 3.1.0),
   data.table
 Imports:
   stringr,
