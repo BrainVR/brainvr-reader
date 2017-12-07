@@ -24,7 +24,7 @@ get_trial_pointing <- function(dt_player, experiment_log, iTrial, target_pos = N
   point_situation <- quest_log[Input == "Point", ]
   ls$target <- NA
   if(nrow(point_situation) < 1){
-    smart_print(c("Warning", "get_trial_pointing", "no point event found"))
+    print(paste0("Warning", "get_trial_pointing", "no point event found"))
     ls$time <- NA
     ls$chosen <- NA
   } else { 

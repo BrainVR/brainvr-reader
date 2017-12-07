@@ -19,7 +19,7 @@ create_column <- function(nRows, type){
     return(rep(NA, nRows))
   }
   else{
-    smart_print(c("The type", type, "you have passed cannot be used."))
+    print(paste0("The type", type, "you have passed cannot be used."))
     return(NULL)
   }
 }

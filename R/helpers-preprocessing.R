@@ -10,7 +10,7 @@ add_angle_difference = function(player_log, axis = "x"){
   
   axis_angles <- player_log[[rotation_col_name]]
   if(is.null(axis_angles)){
-    smart_print(c("There isn't a rotation column of name", rotation_col_name))
+    print(paste0("There isn't a rotation column of name", rotation_col_name))
     return()
   }
   axis_angle_diffs <- c(0, diff(axis_angles))
@@ -28,4 +28,38 @@ add_distance_moved = function(player_log){
   }
   player_log[, cumulative_distance := cumsum(distance)]
   return(player_log)
+}
+
+is_column_present <- function(table, name){
+  return(name %in% names(table))
+}
+
+json_to_list <- function(text){
+  ls <- fromJSON(text)
+  return(ls)
+}
+
+replace_strings <- function(vec, strings, replacements){
+  if(length(strings) != length(replacements)){
+    cat("Strings and replllacements need to thave hte same lenght")
+    return(NULL)
+  }
+  for (i in 1:length(strings)){
+    vec[vec == strings[i]] <- replacements[i]
+  }
+  return(vec)
+}
+
+#turns vector columns in string "(x, y, z)" into three columns(Position.x, Position.y, Position.z) and returns the table
+vector3_to_columns <- function(tab, column_name){
+  xyz <- c("x", "y", "z")
+  splitted <- strsplit(substring(tab[, get(column_name)], 2, nchar(tab[, get(column_name)]) - 1), ",")
+  #turns the Vector3 into lists of 3 values
+  i <- 1
+  for (letter in xyz){
+    new_name <- paste(column_name, letter, sep=".")
+    tab[, (new_name):=as.numeric(sapply(splitted, "[", i))]
+    i <- i + 1
+  }
+  return(tab)
 }

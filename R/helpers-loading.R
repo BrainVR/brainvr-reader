@@ -21,7 +21,7 @@ get_indicies_between = function(text, string){
 }
 
 get_json_between = function(text, string){
-  ls = TextToJSON(get_text_between(text, string))
+  ls <- json_to_list(get_text_between(text, string))
   return(ls)
 }
 
@@ -39,4 +39,16 @@ experiment_name_from_filename <- function(filename){
   }
   capture_groups <- str_match(filename, ptr)
   return(capture_groups[, 2])
+}
+
+##Helper for escaping characters in quest names
+escape_regex <- function(string){
+  return(gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", string))
+}
+
+unlistToDataFrame <- function(ls){
+  listNames <- names(ls)
+  for(name in listNames){
+    row <- unlist(ls[[name]])
+  }
 }
