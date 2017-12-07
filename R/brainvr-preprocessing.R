@@ -7,7 +7,6 @@
 #' @return boolean if changed. Default false
 #' @export
 
-
 ## TODO - change so that the log is not passed by reference
 preprocess_player_log = function(player_log, type = "rigidbody"){
   changed <- F
@@ -37,7 +36,7 @@ rigidbody_preprocess <- function(player_log, changed){
 }
 
 virtualizer_preprocess <- function(player_log, changed){
-  changed = F
+  changed <- F
   ## Adding angle differences
   if (!is_column_present(player_log, "angle_diff_y")){
     player_log <- add_angle_difference(player_log, "y")
@@ -67,14 +66,14 @@ virtualizer_preprocess <- function(player_log, changed){
 #' @return 
 #' 
 #' @export
-save_preprocessed_player = function(directory, player_log, exp_timestamp = NULL, orig_filename = NULL){
+save_preprocessed_player <- function(directory, player_log, exp_timestamp = NULL, orig_filename = NULL){
   if(is.null(orig_filename)) {
     ptr <- create_log_search_pattern("player", exp_timestamp)
-    logs = list.files(directory, pattern = ptr, full.names = T)
+    logs <- list.files(directory, pattern = ptr, full.names = T)
     if(length(logs) != 1) stop("More player logs in the saving directory")
-    filename = logs[1]
+    filename <- logs[1]
     #writes preprocessed file
-    preprocessed_filename = gsub(".txt","_preprocessed.txt", filename)
+    preprocessed_filename <- gsub(".txt","_preprocessed.txt", filename)
   } else {
     preprocessed_filename <- paste0(directory, orig_filename)
     #writes preprocessed file

@@ -6,10 +6,10 @@ create_log_search_pattern <- function(log_name, log_timestamp){
   return(ptr)
 }
 
-create_separator = function(string){
-  ls = list()
-  ls$beginning = paste("\\*\\*\\*\\",string, "\\*\\*\\*", sep="")
-  ls$end = paste("\\-\\-\\-",string, "\\-\\-\\-", sep="")
+create_separator <- function(string){
+  ls <- list()
+  ls$beginning <- paste("\\*\\*\\*\\", string, "\\*\\*\\*", sep = "")
+  ls$end <- paste("\\-\\-\\-", string, "\\-\\-\\-", sep = "")
   return(ls)
 }
 

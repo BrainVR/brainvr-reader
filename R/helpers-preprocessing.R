@@ -21,7 +21,7 @@ add_angle_difference <- function(player_log, axis = "x"){
 }
 
 #calculates the distance walked between each two points of the position table and returns the table
-add_distance_moved = function(player_log){
+add_distance_moved <- function(player_log){
   for (i in 2:nrow(player_log)){
     player_log[c(i - 1, i), distance := euclid_distance(.(Position.x, Position.z)[1], 
                                                         .(Position.x, Position.z)[2])]
@@ -51,18 +51,4 @@ replace_strings <- function(vec, strings, replacements){
     vec[vec == strings[i]] <- replacements[i]
   }
   return(vec)
-}
-
-#turns vector columns in string "(x, y, z)" into three columns(Position.x, Position.y, Position.z) and returns the table
-vector3_to_columns <- function(tab, column_name){
-  xyz <- c("x", "y", "z")
-  splitted <- strsplit(substring(tab[, get(column_name)], 2, nchar(tab[, get(column_name)]) - 1), ",")
-  #turns the Vector3 into lists of 3 values
-  i <- 1
-  for (letter in xyz){
-    new_name <- paste(column_name, letter, sep=".")
-    tab[, (new_name):=as.numeric(sapply(splitted, "[", i))]
-    i <- i + 1
-  }
-  return(tab)
 }
