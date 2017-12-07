@@ -35,7 +35,7 @@ is_column_present <- function(table, name){
 }
 
 json_to_list <- function(text){
-  if(!requireNamespace("jsonlite", quitely = T)){
+  if(!requireNamespace("jsonlite", quietly = T)){
     stop("needs jsonlite to continue")
   }
   ls <- fromJSON(text)
