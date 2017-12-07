@@ -19,6 +19,13 @@ add_angle_difference = function(player_log, axis = "x"){
   player_log[, (new_col_name):= axis_angle_diffs]
   return(player_log)
 }
-convert_angle = function(difference){
-  return(((difference + 180) %% 360) - 180)
-} 
+
+#calculates the distance walked between each two points of the position table and returns the table
+add_distance_moved = function(player_log){
+  for (i in 2:nrow(player_log)){
+    player_log[c(i - 1, i), distance := euclid_distance(.(Position.x, Position.z)[1], 
+                                                        .(Position.x, Position.z)[2])]
+  }
+  player_log[, cumulative_distance := cumsum(distance)]
+  return(player_log)
+}

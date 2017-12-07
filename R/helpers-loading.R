@@ -5,6 +5,7 @@ create_log_search_pattern <- function(log_name, log_timestamp){
   }
   return(ptr)
 }
+
 create_separator = function(string){
   ls = list()
   ls$beginning = paste("\\*\\*\\*\\",string, "\\*\\*\\*", sep="")
@@ -23,9 +24,19 @@ get_json_between = function(text, string){
   ls = TextToJSON(get_text_between(text, string))
   return(ls)
 }
+
 get_text_between = function(text, string){
   indices = get_indicies_between(text, string)
   if (length(indices$beginning) != 1 || length(indices$end) != 1) return (NULL)
   text = text[(indices$beginning + 1):(indices$end - 1)]
   return(text)
+}
+
+experiment_name_from_filename <- function(filename){
+  ptr <- "_test_(.*)_"
+  if(!requireNamespace("stringr")){
+    stop("Needs stringr to continue")
+  }
+  capture_groups <- str_match(filename, ptr)
+  return(capture_groups[, 2])
 }
