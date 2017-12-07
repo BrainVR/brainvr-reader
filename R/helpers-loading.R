@@ -14,21 +14,21 @@ create_separator = function(string){
 }
 
 get_indicies_between = function(text, string){
-  ls = list()
-  ls$beginning = which(grepl(create_separator(string)$beginning, text))
-  ls$end = which(grepl(create_separator(string)$end, text))
+  ls <- list()
+  ls$beginning <- which(grepl(create_separator(string)$beginning, text))
+  ls$end <- which(grepl(create_separator(string)$end, text))
   return(ls)
 }
 
-get_json_between = function(text, string){
+get_json_between <- function(text, string){
   ls <- json_to_list(get_text_between(text, string))
   return(ls)
 }
 
-get_text_between = function(text, string){
-  indices = get_indicies_between(text, string)
+get_text_between <- function(text, string){
+  indices <- get_indicies_between(text, string)
   if (length(indices$beginning) != 1 || length(indices$end) != 1) return (NULL)
-  text = text[(indices$beginning + 1):(indices$end - 1)]
+  text <- text[(indices$beginning + 1):(indices$end - 1)]
   return(text)
 }
 

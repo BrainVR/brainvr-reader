@@ -11,6 +11,8 @@ Depends: R (>= 3.1.0)
 License: MIT
 LazyData: true
 Depends:
+  data.table
+Imports:
   stringr,
   jsonlite
 Suggests: 

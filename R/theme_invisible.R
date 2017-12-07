@@ -1,4 +1,4 @@
-theme_invisible = function(base_size = 12) {
+theme_invisible <- function(base_size = 12) {
   structure(list(
     axis.line =         theme_void,
     axis.text.x =       theme_text(colour = NA,size = base_size * 0.8 , lineheight = 0.9, vjust = 1),

@@ -4,7 +4,7 @@
 #' @example 
 #' add_angle_difference(player_log, "Y")
 #' 
-add_angle_difference = function(player_log, axis = "x"){
+add_angle_difference <- function(player_log, axis = "x"){
   rotation_col_name <- paste0("Rotation.", str_to_title(axis))
   new_col_name <- paste0("angle_diff_", axis)
   
@@ -35,6 +35,9 @@ is_column_present <- function(table, name){
 }
 
 json_to_list <- function(text){
+  if(!requireNamespace("jsonlite", quitely = T)){
+    stop("needs jsonlite to continue")
+  }
   ls <- fromJSON(text)
   return(ls)
 }
