@@ -44,5 +44,6 @@ Plotting player path
 
 ```{r}
 #set constraints
+obj$map_size <- c()
 make_trial_image(obj, 1)
 ```
