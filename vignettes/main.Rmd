@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-# Loading single experiemnt
 
+# Loading single experiemnt
 Loading single experimet the first time
 
 ```{r}

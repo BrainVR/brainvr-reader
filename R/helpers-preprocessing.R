@@ -44,7 +44,7 @@ json_to_list <- function(text){
 
 replace_strings <- function(vec, strings, replacements){
   if(length(strings) != length(replacements)){
-    cat("Strings and replllacements need to thave hte same lenght")
+    cat("Strings and replacements need to have the same length")
     return(NULL)
   }
   for (i in 1:length(strings)){

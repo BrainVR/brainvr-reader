@@ -34,7 +34,7 @@ get_text_between <- function(text, string){
 
 experiment_name_from_filename <- function(filename){
   ptr <- "_test_(.*)_"
-  if(!requireNamespace("stringr")){
+  if(!requireNamespace("stringr", quietly = T)){
     stop("Needs stringr to continue")
   }
   capture_groups <- stringr::str_match(filename, ptr)
@@ -46,7 +46,7 @@ escape_regex <- function(string){
   return(gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", string))
 }
 
-unlistToDataFrame <- function(ls){
+unlist_to_data_frame <- function(ls){
   listNames <- names(ls)
   for(name in listNames){
     row <- unlist(ls[[name]])
