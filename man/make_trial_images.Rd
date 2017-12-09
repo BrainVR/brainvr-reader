@@ -4,16 +4,16 @@
 \alias{make_trial_images}
 \title{Title}
 \usage{
-make_trial_images(dt_position, test, columns = 5, indices = c())
+make_trial_images(obj, columns = 5, indices = c())
 }
 \arguments{
-\item{dt_position}{}
-
-\item{test}{}
-
 \item{columns}{}
 
 \item{indices}{}
+
+\item{dt_position}{}
+
+\item{test}{}
 }
 \description{
 Title

@@ -21,8 +21,12 @@ mirror_positions_df <- function(df){
   if(!is_valid_positions_df(df)) return(NULL)
   df$Position.x <- -df$Position.x
   df$Position.z <- -df$Position.z
-  if("Rotation.X" %in% colnames(df)){
-    df$Rotation.X <- angle_to_360(df$Rotation.X - 180)
+  ## flips all rotations in dt_player 
+  ## all player logs should be data.table, otehrwise this breaks
+  df_colnames <- colnames(df)
+  rotation_cols <- df_colnames[grep("Rotation", df_colnames)]
+  for (column in rotation_cols){
+    df[, (column):= angle_to_360(df[, (get(column) - 180)])]
   }
   return(df)
 }

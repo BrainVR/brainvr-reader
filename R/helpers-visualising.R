@@ -45,6 +45,7 @@ make_circle <- function(center = c(0, 0), radius = 1, precision = 100){
 # 3 will go all the way across the bottom.
 #
 multiplot <- function(plotlist = NULL, file, cols = 1, layout = NULL) {
+  library(grid)
   numPlots <- length(plotlist)
   # If layout is NULL, then use 'cols' to determine layout
   if (is.null(layout)) {
@@ -68,10 +69,6 @@ multiplot <- function(plotlist = NULL, file, cols = 1, layout = NULL) {
                                          layout.pos.col = matchidx$col))
     }
   }
-}
-
-reverse_y <- function(XY){
-  return(c(XY[1], -XY[2]))
 }
 
 save_plot <- function(plt, name){
