@@ -2,18 +2,18 @@
 #'
 #' @param dt_position 
 #' @param test 
-#' @param trialID 
+#' @param trialId 
 #'
 #' @return
 #' @export
 #' @import ggplot2
 #' @examples
-make_trial_image <- function (obj, trialID){
+make_trial_image <- function (obj, trialId){
   if(!requireNamespace("ggplot2", quietly = T)){
     stop("Needs ggplot2 package")
   }
   plot <- ggplot2::ggplot()
-  plot <- add_player_path(plot, obj, trialID)
+  plot <- add_player_path(plot, obj, trialId)
   return(plot)
 }
 
