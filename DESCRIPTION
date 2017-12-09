@@ -15,7 +15,8 @@ Depends:
 Imports:
   stringr,
   jsonlite,
-  data.table
+  data.table,
+  ggplot2
 Suggests: 
   testthat,
   knitr,

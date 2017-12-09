@@ -4,14 +4,14 @@
 \alias{make_trial_image}
 \title{Title}
 \usage{
-make_trial_image(dt_position, test, trialID)
+make_trial_image(obj, trialID)
 }
 \arguments{
+\item{trialID}{}
+
 \item{dt_position}{}
 
 \item{test}{}
-
-\item{trialID}{}
 }
 \description{
 Title

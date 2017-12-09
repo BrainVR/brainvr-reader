@@ -36,3 +36,12 @@ Loading processed player log
 ```{r}
 obj <- load_experiment(dir_path)
 ```
+
+
+# Visualising
+
+Plotting player path
+
+```{r}
+make_trial_image(obj, 1)
+```

@@ -6,14 +6,14 @@
 #'
 #' @return
 #' @export
-#'
+#' @import ggplot2
 #' @examples
-make_trial_image <- function (dt_position, test, trialID){
+make_trial_image <- function (obj, trialID){
   if(!requireNamespace("ggplot2", quietly = T)){
     stop("Needs ggplot2 package")
   }
   plot <- ggplot() + theme_void()
-  plot <- add_player_path(plot, test, trialID, dt_position)
+  plot <- add_player_path(plot, obj, trialID)
   return(plot)
 }
 
