@@ -2,9 +2,10 @@ server <- function(input, output, session){
   
   trialPlayer <- reactive({
     dt_trial <- get_player_log_trial(obj, input$sliderTrial)
+    log_nrow <<- nrow(dt_trial)
+    trial_end <<- dt_trial$Time[nrow(dt_trial)]
     #set time slider to 0 (it will actually fall to min)
-    updateSliderInput(session, "sliderTime", value = 0, max = nrow(dt_trial))
-    #change slider
+    updateSliderInput(session, "sliderTime", value = 0, max = log_nrow)
     return(dt_trial)
   })
   
@@ -15,6 +16,13 @@ server <- function(input, output, session){
   
   output$plotTrialPath <- renderPlot({
     ggplot(subPlayerPos(), aes(Position.x, Position.z)) + geom_path() + 
-    xlim(-2, 110) + ylim(0, 100) + theme_void()
+    xlim(-5, 110) + ylim(0, 100) + theme_void()
+  })
+  
+  output$plotRotation <- renderPlot({
+    data <- subPlayerPos()
+    end <- trial_end
+    ggplot(data, aes(Time, Rotation.Virtualizer)) + geom_line() + 
+      xlim(data$Time[1], end) + ylim(0, 360)
   })
 }
