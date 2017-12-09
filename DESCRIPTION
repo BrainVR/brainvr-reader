@@ -14,7 +14,8 @@ Depends:
   data.table
 Imports:
   stringr,
-  jsonlite
+  jsonlite,
+  data.table
 Suggests: 
   testthat,
   knitr,

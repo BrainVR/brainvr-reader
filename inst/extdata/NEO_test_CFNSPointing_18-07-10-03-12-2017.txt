@@ -1,0 +1,144 @@
+***SESSION HEADER***
+{
+  "Participant": "NEO",
+  "Timestamp": "18-07-09-03-12-2017
+}
+---SESSION HEADER---
+***TEST HEADER***
+***EXPERIMENT SETTINGS***
+{
+  "AcceptableError": 20.0,
+  "GoalOrianetationOrder": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "GoalPointOrder": [
+    4,
+    2,
+    0,
+    3,
+    5,
+    1,
+    3,
+    2,
+    4,
+    1,
+    5,
+    0
+  ],
+  "Confirmation": true,
+  "Blackout": false,
+  "ShowArrow": false,
+  "JRD": false,
+  "GoalNames": [
+    "Emily's office",
+    "Michael's office",
+    "Daniel's office",
+    "Sarah's office",
+    "Jesicca's office",
+    "Jacob's office",
+    "Viewpoint 1",
+    "Viewpoint 2",
+    "Viewpoint 3",
+    "Viewpoint 4"
+  ],
+  "GoalOrder": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "PlayerSpeed": 40.0,
+  "PlayerHeight": 25.0,
+  "Messages": {}
+}
+---EXPERIMENT SETTINGS---
+***POSITIONS***
+{
+  "GoalPositions": [
+    "(37.2, 0.4, -10.4)",
+    "(34.5, 0.4, 33.3)",
+    "(6.9, 0.4, 47.0)",
+    "(-26.3, 0.4, 9.2)",
+    "(-34.7, 0.4, -22.7)",
+    "(-55.3, 0.4, -47.3)",
+    "(-15.8, 0.4, -33.4)",
+    "(20.5, 0.4, -11.2)",
+    "(-23.2, 0.4, 40.4)",
+    "(-34.5, 0.4, 15.0)"
+  ]
+}
+---POSITIONS---
+
+---TEST HEADER---
+Time;Sender;Index;Event;
+65230.0590;Experiment;0;WaitingToStart;
+65230.0594;Experiment;0;Started;
+65230.0600;Trial;0;WaitingToStart;
+65230.0615;Trial;0;Running;
+65259.1443;Trial;0;Finished;
+65259.1443;Trial;0;Closed;
+65259.1448;Trial;1;WaitingToStart;
+65259.1448;Trial;1;Running;
+65268.0306;Trial;1;Finished;
+65268.0306;Trial;1;Closed;
+65268.0306;Trial;2;WaitingToStart;
+65268.0306;Trial;2;Running;
+65281.7956;Trial;2;Finished;
+65281.7956;Trial;2;Closed;
+65281.7956;Trial;3;WaitingToStart;
+65281.7956;Trial;3;Running;
+65288.2727;Trial;3;Finished;
+65288.2727;Trial;3;Closed;
+65288.2727;Trial;4;WaitingToStart;
+65288.2727;Trial;4;Running;
+65293.4544;Trial;4;Finished;
+65293.4544;Trial;4;Closed;
+65293.4544;Trial;5;WaitingToStart;
+65293.4544;Trial;5;Running;
+65300.3140;Trial;5;Finished;
+65300.3140;Trial;5;Closed;
+65300.3140;Trial;6;WaitingToStart;
+65300.3145;Trial;6;Running;
+65319.2671;Trial;6;Finished;
+65319.2671;Trial;6;Closed;
+65319.2671;Trial;7;WaitingToStart;
+65319.2671;Trial;7;Running;
+65328.0019;Trial;7;Finished;
+65328.0019;Trial;7;Closed;
+65328.0019;Trial;8;WaitingToStart;
+65328.0019;Trial;8;Running;
+65342.1870;Trial;8;Finished;
+65342.1870;Trial;8;Closed;
+65342.1870;Trial;9;WaitingToStart;
+65342.1870;Trial;9;Running;
+65355.3227;Trial;9;Finished;
+65355.3227;Trial;9;Closed;
+65355.3232;Trial;10;WaitingToStart;
+65355.3232;Trial;10;Running;
+65362.2694;Trial;10;Finished;
+65362.2694;Trial;10;Closed;
+65362.2694;Trial;11;WaitingToStart;
+65362.2694;Trial;11;Running;
+65367.0273;Trial;11;Finished;
+65367.0273;Trial;11;Closed;
+65367.0273;Experiment;0;Finished;
+65367.0473;Experiment;0;Closed;

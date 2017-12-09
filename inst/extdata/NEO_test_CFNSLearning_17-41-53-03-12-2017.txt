@@ -1,0 +1,148 @@
+***SESSION HEADER***
+{
+  "Participant": "NEO",
+  "Timestamp": "17-41-52-03-12-2017"
+}
+---SESSION HEADER---
+***TEST HEADER***
+***EXPERIMENT SETTINGS***
+{
+  "AcceptedPointingError": 20.0,
+  "GoalNames": [
+    "Emily's office",
+    "Michael's office",
+    "Daniel's office",
+    "Sarah's office",
+    "Jesicca's office",
+    "Jacob's office",
+    "Viewpoint 1",
+    "Viewpoint 2",
+    "Viewpoint 3",
+    "Viewpoint 4"
+  ],
+  "GoalOrder": [
+    1,
+    5,
+    0,
+    3,
+    2,
+    4,
+    2,
+    5,
+    3,
+    4,
+    1,
+    0,
+    4,
+    3,
+    0,
+    5,
+    2,
+    1
+  ],
+  "PlayerSpeed": 40.0,
+  "PlayerHeight": 25.0,
+  "Messages": {
+    "Find": "Look around and find",
+    "Point": "Point towards",
+    "PointWrong": "Your pointing was inaccurate",
+    "GoTo": "Walk towards",
+    "Closed Experiment": "Experiment is finished. Thank you for participating"
+  }
+}
+---EXPERIMENT SETTINGS---
+***POSITIONS***
+{
+  "GoalPositions": [
+    "(37.2, 0.4, -10.4)",
+    "(34.5, 0.4, 33.3)",
+    "(6.9, 0.4, 47.0)",
+    "(-26.3, 0.4, 9.2)",
+    "(-34.7, 0.4, -22.7)",
+    "(-55.3, 0.4, -47.3)",
+    "(-15.8, 0.4, -33.4)",
+    "(20.5, 0.4, -11.2)",
+    "(-23.2, 0.4, 40.4)",
+    "(-34.5, 0.4, 15.0)"
+  ]
+}
+---POSITIONS---
+
+---TEST HEADER---
+Time;Sender;Index;Event;
+63713.1279;Experiment;0;WaitingToStart;
+63713.1284;Experiment;0;Started;
+63713.1289;Trial;0;WaitingToStart;
+63713.1329;Trial;0;Running;
+63779.6743;Trial;0;Finished;
+63779.6743;Trial;0;Closed;
+63779.6743;Trial;1;WaitingToStart;
+63779.6743;Trial;1;Running;
+63873.8100;Trial;1;Finished;
+63873.8100;Trial;1;Closed;
+63873.8100;Trial;2;WaitingToStart;
+63873.8100;Trial;2;Running;
+63999.7842;Trial;2;Finished;
+63999.7842;Trial;2;Closed;
+63999.7842;Trial;3;WaitingToStart;
+63999.7842;Trial;3;Running;
+64068.9013;Trial;3;Finished;
+64068.9013;Trial;3;Closed;
+64068.9013;Trial;4;WaitingToStart;
+64068.9013;Trial;4;Running;
+64104.2399;Trial;4;Finished;
+64104.2399;Trial;4;Closed;
+64104.2399;Trial;5;WaitingToStart;
+64104.2399;Trial;5;Running;
+64150.3694;Trial;5;Finished;
+64150.3694;Trial;5;Closed;
+64150.3694;Trial;6;WaitingToStart;
+64150.3694;Trial;6;Running;
+64188.0109;Trial;6;Finished;
+64188.0109;Trial;6;Closed;
+64188.0109;Trial;7;WaitingToStart;
+64188.0109;Trial;7;Running;
+64227.1488;Trial;7;Finished;
+64227.1488;Trial;7;Closed;
+64227.1488;Trial;8;WaitingToStart;
+64227.1488;Trial;8;Running;
+64373.4572;Trial;8;Finished;
+64373.4577;Trial;8;Closed;
+64373.4577;Trial;9;WaitingToStart;
+64373.4577;Trial;9;Running;
+64667.7128;Trial;9;Finished;
+64667.7128;Trial;9;Closed;
+64667.7128;Trial;10;WaitingToStart;
+64667.7128;Trial;10;Running;
+64973.7868;Trial;10;Finished;
+64973.7868;Trial;10;Closed;
+64973.7868;Trial;11;WaitingToStart;
+64973.8033;Trial;11;Running;
+65024.1834;Trial;11;Finished;
+65024.1834;Trial;11;Closed;
+65024.1834;Trial;12;WaitingToStart;
+65024.1834;Trial;12;Running;
+65072.8710;Trial;12;Finished;
+65072.8710;Trial;12;Closed;
+65072.8710;Trial;13;WaitingToStart;
+65072.8710;Trial;13;Running;
+65091.3008;Trial;13;Finished;
+65091.3008;Trial;13;Closed;
+65091.3008;Trial;14;WaitingToStart;
+65091.3008;Trial;14;Running;
+65123.5680;Trial;14;Finished;
+65123.5680;Trial;14;Closed;
+65123.5680;Trial;15;WaitingToStart;
+65123.5680;Trial;15;Running;
+65154.1274;Trial;15;Finished;
+65154.1274;Trial;15;Closed;
+65154.1279;Trial;16;WaitingToStart;
+65154.1279;Trial;16;Running;
+65192.2268;Trial;16;Finished;
+65192.2268;Trial;16;Closed;
+65192.2268;Trial;17;WaitingToStart;
+65192.2268;Trial;17;Running;
+65203.1723;Trial;17;Finished;
+65203.1723;Trial;17;Closed;
+65203.1728;Experiment;0;Finished;
+65203.1868;Experiment;0;Closed;

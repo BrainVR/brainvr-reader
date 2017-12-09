@@ -25,3 +25,6 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 inst/doc
+
+# Ignoring package specific thigns
+*_preprocessed_*

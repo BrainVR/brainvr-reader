@@ -45,12 +45,12 @@ load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NUL
   
   obj <- objectFun()
   obj$participant_id <- experiment_info$header$Participant
-  obj$experiment_name <- obj$data$experiment_log$name
   obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
   obj$data$player_log <- player_log
   ##TODO - redo this part
   obj$data$experiment_log <- test_logs[[1]]
+  obj$experiment_name <- obj$data$experiment_log$name
   #obj$data$results_log <- results_log
   return (obj)
 }
@@ -142,7 +142,7 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
 #' @param log_timestamp provides timestamp of a log to load
 #' @param override if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present
 #' @return data.table with the loaded player log or NULL.
-
+#' @import data.table
 open_player_log <- function(directory, log_timestamp = NULL, override = F){
   ptr <- create_log_search_pattern("player", log_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)

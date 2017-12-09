@@ -1,0 +1,76 @@
+***SESSION HEADER***
+{
+  "Participant": "NEO",
+  "Timestamp": "18-07-09-03-12-2017"
+}
+---SESSION HEADER---
+***RESULTS***
+{
+  "AveragePointTime": 10.7615547,
+  "AveragePointError": 21.7971439,
+  "CorrectPoints": 6
+}
+---RESULTS---
+***CUSTOM***
+
+---CUSTOM---
+***DATA***
+{
+  "PointTimes": [
+    26.6252518,
+    8.097218,
+    13.32922,
+    5.98538971,
+    4.63443,
+    6.44652557,
+    18.3944168,
+    8.120163,
+    13.7607193,
+    12.7671432,
+    6.577545,
+    4.400635
+  ],
+  "AngleError": [
+    4.83181763,
+    7.72569275,
+    17.9262543,
+    26.0166931,
+    2.518097,
+    20.6983948,
+    36.5109253,
+    1.717514,
+    27.1652832,
+    11.2901611,
+    23.9261475,
+    81.23874
+  ],
+  "CorrectPointing": [
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false
+  ],
+  "CorrectedChoice": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}
+---DATA---
