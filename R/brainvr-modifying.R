@@ -29,7 +29,28 @@ translate_positions <- function(obj, offset){
   return(obj)
 }
 
+#' Mirrors X and Y to negative and recomputes rotation
+#' 
+#' @param obj
+#' @return UnityObject with mirrored axes and rotation
+#' @example 
+#' obj <- mirror_axes(obj)
+#' 
+#' @export
+#' 
+mirror_axes <- function(obj){
+  mirrored_player <- mirror_positions_df(obj$data$player_log)
+  if(is.null(mirrored_player)){
+    print("Couldn't mirror positions in player log. Have you preprocessed it correctly? Quitting.")
+    return(obj)
+  }
+  mirrored_positions <- mirror_positions_list(obj$data$experiment_log$positions)
+  if(is.null(mirrored_positions)){
+    print("Couldn't mirror positions in expeirment log. Have you preprocessed it correctly? Quitting.")
+    return(obj)
+  }
 
-flip <- function(){
-  
+  obj$data$player_log <- mirrored_player
+  obj$data$experiment_log$positions <- mirrored_positions
+  return(obj)
 }

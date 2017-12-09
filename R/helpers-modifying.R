@@ -1,9 +1,34 @@
 #pure helpers for my particular unity logging 
 # translates list of positions. 
 # RETURNS  null is some translations fail. That is on PURPOSE.
+mirror_positions_list <- function(ls_positions){
+  ls_mirrored <- list()
+  listNames <- names(ls_positions)
+  for(name in listNames){
+    df <- ls_positions[[name]]
+    mirrored <- mirror_positions_df(df)
+    if(is.null(mirrored)) {
+      print(paste0("Couldn't mirror data.frame ", name))
+      return(NULL)
+    } else {
+      ls_mirrored[[name]] <- mirrored
+    }
+  }
+  return(ls_mirrored)
+}
+
+mirror_positions_df <- function(df){
+  if(!is_valid_positions_df(df)) return(NULL)
+  df$Position.x <- -df$Position.x
+  df$Position.z <- -df$Position.z
+  if("Rotation.X" %in% colnames(df)){
+    df$Rotation.X <- angle_to_360(df$Rotation.X - 180)
+  }
+  return(df)
+}
+
 translate_positions_list <- function(ls_positions, offset){
   if(!is_valid_offset(offset)) return(NULL)
-  
   ls_translated <- list()
   listNames <- names(ls_positions)
   for(name in listNames){

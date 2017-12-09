@@ -14,7 +14,7 @@ add_angle_difference <- function(player_log, axis = "x"){
     return()
   }
   axis_angle_diffs <- c(0, diff(axis_angles))
-  axis_angle_diffs <- convert_angle(axis_angle_diffs)
+  axis_angle_diffs <- angle_to_difference(axis_angle_diffs)
   
   player_log[, (new_col_name):= axis_angle_diffs]
   return(player_log)

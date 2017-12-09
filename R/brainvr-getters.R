@@ -65,10 +65,12 @@ get_walked_distnace_timewindow <- function(dt_position, timeWindow){
   return(walkedDistance)
 }
 
+get_player_log_trial <- function(obj, trialID) {
+  timewindow <- get_trial_timewindow()
+}
+
 get_player_log_timewindow <- function(dt_player, timewindow){
-  #checking for entirety
   log <- dt_player[Time > timewindow$start & Time < timewindow$finish, ]
-  #checking log
   return(log)
 }
 

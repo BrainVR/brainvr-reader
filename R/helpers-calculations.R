@@ -27,8 +27,17 @@ angle_from_positions <- function(pos_from, pos_to){
   return(angle)
 }
 
-convert_angle <- function(difference){
-  return(((difference + 180) %% 360) - 180)
+# calculates angle difference from -180 to 180
+angle_to_difference <- function(angle){
+  angle <- ((angle + 180) %% 360) - 180
+  return(angle)
+}
+
+# converts positive and negative angles to 0-360
+# asumes it is not below -360
+# 390 is converted to 30, -40 to 320 etc
+angle_to_360 <- function(angle){
+  return((angle + 360) %% 360)
 }
 
 euclid_distance <- function(x_values, y_values){
