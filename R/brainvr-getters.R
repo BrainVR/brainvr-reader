@@ -1,5 +1,5 @@
 get_trial_event_indices <- function(test, event){
-  indices <- unique(filter(test$data, Sender == "Trial" & Event == event) %>% select(Index))[[1]]
+  indices <- unique(which(test$data$Sender == "Trial" & test$data$Event == event))
   return(indices + 1)
 }
 
@@ -36,17 +36,13 @@ get_trial_timewindow <- function(test, trialID){
   #correction for c# indexing
   trialID <- trialID - 1
   ls <- list()
-  ls$WaitingToStart <- filter(test$data, Index == trialID & Sender == "Trial" & Event == "WaitingToStart") %>% 
-    select(Time) %>% first
-  ls$start <- filter(test$data, Index == trialID & Sender == "Trial" & Event == "Running") %>% select(Time) %>% first
-  #old versions had typo in the running evvent with only a single n
-  if (length(ls$start) < 1){ 
-    ls$start <- filter(test$data, Index == trialID & Sender == "Trial" & Event == "Runing") %>% select(Time) %>% first
-  }
+  df_trial <- test$data[test$data$Sender == "Trial" & test$data$Index == trialID, ]
+  
+  ls$WaitingToStart <-  df_trial[df_trial$Event == "WaitingToStart", "Time"][1]
+  ls$start <- df_trial[df_trial$Event == "Running", "Time"][1]
   #selects only hte first element - its because fome of hte old logs had potential two finished tiems 
   #if the experiment or trial was force finished before closed (finished effectively twice)
-  ls$finish <- filter(test$data, Index == trialID & Sender == "Trial" & Event == "Finished") %>% select(Time) %>% first
-  
+  ls$finish <- df_trial[df_trial$Event == "Finished", "Time"][1]
   #replaces missing values with NAs
   newValues <- sapply(ls, function(x) if(length(x)== 0) {x <- as.numeric(NA)} else {x <- x})
   ls <- as.list(newValues)

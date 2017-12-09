@@ -43,5 +43,6 @@ obj <- load_experiment(dir_path)
 Plotting player path
 
 ```{r}
+#set constraints
 make_trial_image(obj, 1)
 ```

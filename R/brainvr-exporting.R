@@ -15,14 +15,14 @@ collect_events <- function(test, dt_player){
   iFinished <- get_trial_event_indices(test, "Finished")
   trialIDs <- iFinished[!(iFinished %in% get_trial_event_indices(test, "ForceFinished"))]
   
-  finishedTrials <- test$data %>% filter(Index %in% (trialIDs-1))
   
-  synchropulse <- finishedTrials  %>% filter(Sender == "Trial") %>% filter(Event == "ArduinoPulseStart") %>% .$Time
-  trialSetup <- finishedTrials %>% filter(Sender == "Trial") %>% filter(Event == "WaitingToStart") %>% .$Time
-  trialStarted <- finishedTrials %>% filter(Sender == "Trial") %>% filter(Event == "Running") %>% .$Time
-  #I had a mistake in the old logs with running spelled with only a single N
-  if (length(trialStarted) == 0) trialStarted <- finishedTrials %>% filter(Sender == "Trial") %>% filter(Event == "Runing") %>% .$Time
-  trialEnded <- finishedTrials %>% filter(Sender == "Trial") %>% filter(Event == "Finished") %>% .$Time
+  
+  df_trials <- test$data[test$data$Index %in% (trialIDs - 1) & test$data$Sender == "Trial", ]
+  
+  synchropulse <- df_trials[df_trials$Event == "ArduinoPulseStart", "Time"]
+  trialSetup <- df_trials[df_trials$Event == "WaitingToStart", "Time"]
+  trialStarted <- df_trials[df_trials$Event == "Running", "Time"]
+  trialEnded <- df_trials[df_trials$Event == "Finished", "Time"]
   pointingStarted <- trialStarted
   pointingEnded <- c()
   pointingError <- c()

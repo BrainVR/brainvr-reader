@@ -12,7 +12,7 @@ make_trial_image <- function (obj, trialID){
   if(!requireNamespace("ggplot2", quietly = T)){
     stop("Needs ggplot2 package")
   }
-  plot <- ggplot() + theme_void()
+  plot <- ggplot2::ggplot()
   plot <- add_player_path(plot, obj, trialID)
   return(plot)
 }
