@@ -67,6 +67,14 @@ get_walked_distnace_timewindow <- function(dt_position, timeWindow){
   return(walkedDistance)
 }
 
+#' Returns data.table with player log for particular trial
+#'
+#' @param obj
+#' @param 
+#' @return player log for particulat trial
+#' 
+#' @export
+
 get_player_log_trial <- function(obj, trialId) {
   timewindow <- get_trial_timewindow(obj, trialId)
   return(get_player_log_timewindow(obj$data$player_log, timewindow))

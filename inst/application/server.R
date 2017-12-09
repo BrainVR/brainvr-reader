@@ -6,7 +6,7 @@ server <- function(input, output, session){
     trial_end <<- dt_trial$Time[nrow(dt_trial)]
     #set time slider to 0 (it will actually fall to min)
     updateSliderInput(session, "sliderTime", value = 0, max = log_nrow)
-    return(dt_trial)
+    return()
   })
   
   subPlayerPos <- reactive({
@@ -23,6 +23,6 @@ server <- function(input, output, session){
     data <- subPlayerPos()
     end <- trial_end
     ggplot(data, aes(Time, Rotation.Virtualizer)) + geom_line() + 
-      xlim(data$Time[1], end) + ylim(0, 360)
+      xlim(data$Time[1], end) + ylim(0, 360) + theme_bw()
   })
 }
