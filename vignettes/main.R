@@ -17,7 +17,6 @@ if(changed) save_preprocessed_player(dir_path, obj$data$player_log, obj$timestam
 obj <- load_experiment(dir_path)
 
 ## ------------------------------------------------------------------------
-#set constraints
-obj$map_size <- c()
-make_trial_image(obj, 1)
+obj <- translate_positions(obj, c(33.5, 0, 47.75))
+
 

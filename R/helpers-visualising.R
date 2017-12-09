@@ -46,7 +46,6 @@ make_circle <- function(center = c(0, 0), radius = 1, precision = 100){
 # 3 will go all the way across the bottom.
 #
 multiplot <- function(plotlist = NULL, file, cols = 1, layout = NULL) {
-
   numPlots <- length(plotlist)
   # If layout is NULL, then use 'cols' to determine layout
   if (is.null(layout)) {

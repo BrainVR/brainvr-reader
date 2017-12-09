@@ -32,6 +32,9 @@ get_trial_pointing <- function(dt_player, experiment_log, iTrial, target_pos = N
   return(ls)
 }
 
+#' 
+#' 
+
 get_trial_timewindow <- function(test, trialID){
   #correction for c# indexing
   trialID <- trialID - 1

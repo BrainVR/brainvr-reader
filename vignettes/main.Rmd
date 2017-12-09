@@ -37,7 +37,11 @@ Loading processed player log
 obj <- load_experiment(dir_path)
 ```
 
-
+# Recentering map
+IN case we need a new offset, we can do that as well
+```{r}
+obj <- translate_positions(obj, c(33.5, 0, 47.75))
+```
 # Visualising
 
 Plotting player path
