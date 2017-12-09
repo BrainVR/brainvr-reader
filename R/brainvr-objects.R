@@ -1,3 +1,9 @@
+#' Title 
+#'
+#' @return 
+#' @export 
+#'
+#' @examples
 UnityObject <- function(){
   obj <- list()
   obj$participant_id <- ""

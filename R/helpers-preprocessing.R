@@ -38,7 +38,7 @@ json_to_list <- function(text){
   if(!requireNamespace("jsonlite", quietly = T)){
     stop("needs jsonlite to continue")
   }
-  ls <- fromJSON(text)
+  ls <- jsonlite::fromJSON(text)
   return(ls)
 }
 

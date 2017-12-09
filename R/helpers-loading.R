@@ -37,7 +37,7 @@ experiment_name_from_filename <- function(filename){
   if(!requireNamespace("stringr")){
     stop("Needs stringr to continue")
   }
-  capture_groups <- str_match(filename, ptr)
+  capture_groups <- stringr::str_match(filename, ptr)
   return(capture_groups[, 2])
 }
 
