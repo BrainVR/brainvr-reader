@@ -9,6 +9,11 @@
 
 ## TODO - change so that the log is not passed by reference
 preprocess_player_log = function(player_log, type = "rigidbody"){
+  if(!requireNamespace("stringr", quietly = T)){
+    print("Cannot continue withouth stringr package. Please install it")
+    return(F)
+  }
+  
   changed <- F
   ## Converting position
   if (!is_column_present(player_log, "Position.x")){

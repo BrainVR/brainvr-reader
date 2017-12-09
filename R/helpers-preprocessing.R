@@ -5,7 +5,7 @@
 #' add_angle_difference(player_log, "Y")
 #' 
 add_angle_difference <- function(player_log, axis = "x"){
-  rotation_col_name <- paste0("Rotation.", str_to_title(axis))
+  rotation_col_name <- paste0("Rotation.", stringr::str_to_title(axis))
   new_col_name <- paste0("angle_diff_", axis)
   
   axis_angles <- player_log[[rotation_col_name]]

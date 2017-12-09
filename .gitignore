@@ -27,4 +27,4 @@ vignettes/*.pdf
 inst/doc
 
 # Ignoring package specific thigns
-*_preprocessed_*
+*_preprocessed*
