@@ -2,7 +2,10 @@
 #'
 #' @param playerLog: data table log as preprocessed by the Analysis fuynction
 #' @param path: path to the file. Defaults to workign directory
-#' @export
+#' @
+#' 
+#' 
+#' DOESN'T WORK ... need to fix all the getters
 export_player_log = function(playerLog, id, path = getwd()){
   playerLog[, Position := NULL]
   filePath = paste(path, "/", id, "_player.log", sep = "")
@@ -14,8 +17,6 @@ export_player_log = function(playerLog, id, path = getwd()){
 collect_events <- function(test, dt_player){
   iFinished <- get_trial_event_indices(test, "Finished")
   trialIDs <- iFinished[!(iFinished %in% get_trial_event_indices(test, "ForceFinished"))]
-  
-  
   
   df_trials <- test$data[test$data$Index %in% (trialIDs - 1) & test$data$Sender == "Trial", ]
   

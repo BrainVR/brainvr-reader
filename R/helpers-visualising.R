@@ -1,6 +1,5 @@
-add_player_path <- function(plot, obj, trialID){
-  trial_timewindow <- get_trial_timewindow(obj$data$experiment_log, trialID)
-  dt_player <- get_player_log_timewindow(obj$data$player_log, trial_timewindow)
+add_player_path <- function(plot, obj, trialId){
+  dt_player <- get_player_log_trial(obj, trialId)
   plot <- plot + geom_path(data = dt_player, aes(Position.x, Position.z))
   return(plot)
 }

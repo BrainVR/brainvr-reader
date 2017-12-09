@@ -5,15 +5,12 @@ get_trial_event_indices <- function(test, event){
 
 #' Returns pointing direction during given trial. If there are more than two pointings, selects the first one
 #' If target poistion is passed, also returnes what should have been the correct pointing angle
-#' @param dt_player player log
-#' @param expeiremnt_log expeirment log
+#' @param obj UnityObject
 #' @param target_pos vector 2 of target position
 #' 
-get_trial_pointing <- function(dt_player, experiment_log, iTrial, target_pos = NULL){
+get_trial_pointing <- function(obj, trialId, target_pos = NULL){
   ls <- list()
-  timewindow <- get_trial_timewindow(experiment_log, iTrial)
-  if (is.null(timewindow)) return(NULL)
-  quest_log <- dt_player[Time > timewindow$start & Time < timewindow$finish, ]
+  quest_log <- get_player_log_trial(obj, trialId)
   point_situation <- quest_log[Input == "Point", ]
   ls$target <- NA
   if(nrow(point_situation) < 1){
@@ -32,15 +29,20 @@ get_trial_pointing <- function(dt_player, experiment_log, iTrial, target_pos = N
   return(ls)
 }
 
+#' Gets start and finish times of trial
 #' 
+#' @param obj
+#' @param trialId
+#' @return list with waitingToStart, start and finish 
 #' 
-
-get_trial_timewindow <- function(test, trialID){
+#' @export
+get_trial_timewindow <- function(obj, trialId){
+  df_experiment <- obj$data$experiment_log$data
   #correction for c# indexing
-  trialID <- trialID - 1
-  ls <- list()
-  df_trial <- test$data[test$data$Sender == "Trial" & test$data$Index == trialID, ]
+  trialId <- trialId - 1
   
+  ls <- list()
+  df_trial <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Index == trialId, ]
   ls$WaitingToStart <-  df_trial[df_trial$Event == "WaitingToStart", "Time"][1]
   ls$start <- df_trial[df_trial$Event == "Running", "Time"][1]
   #selects only hte first element - its because fome of hte old logs had potential two finished tiems 
@@ -53,7 +55,7 @@ get_trial_timewindow <- function(test, trialID){
 }
 
 get_walked_distnace_timewindow <- function(dt_position, timeWindow){
-  dt_position <- get_player_log_timewindow(timeWindow)
+  dt_position <- get_player_log_timewindow(dt_position, timeWindow)
   if (dt_position[, .N] < 2) {
     print("The player log doesn't cover given timewindows")
     walkedDistance <- as.numeric(NA)
@@ -65,8 +67,9 @@ get_walked_distnace_timewindow <- function(dt_position, timeWindow){
   return(walkedDistance)
 }
 
-get_player_log_trial <- function(obj, trialID) {
-  timewindow <- get_trial_timewindow()
+get_player_log_trial <- function(obj, trialId) {
+  timewindow <- get_trial_timewindow(obj, trialId)
+  return(get_player_log_timewindow(obj$data$player_log, timewindow))
 }
 
 get_player_log_timewindow <- function(dt_player, timewindow){

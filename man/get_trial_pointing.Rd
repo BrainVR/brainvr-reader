@@ -5,14 +5,12 @@
 \title{Returns pointing direction during given trial. If there are more than two pointings, selects the first one
 If target poistion is passed, also returnes what should have been the correct pointing angle}
 \usage{
-get_trial_pointing(dt_player, experiment_log, iTrial, target_pos = NULL)
+get_trial_pointing(obj, trialId, target_pos = NULL)
 }
 \arguments{
-\item{dt_player}{player log}
+\item{obj}{UnityObject}
 
 \item{target_pos}{vector 2 of target position}
-
-\item{expeiremnt_log}{expeirment log}
 }
 \description{
 Returns pointing direction during given trial. If there are more than two pointings, selects the first one
