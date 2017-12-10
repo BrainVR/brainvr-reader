@@ -7,6 +7,8 @@
 plot_add_player_path(plt, df_pos)
 }
 \arguments{
+\item{plot}{}
+
 \item{data}{Data frame with Position.x and Position.z columns}
 }
 \value{

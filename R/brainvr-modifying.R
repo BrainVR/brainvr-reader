@@ -54,3 +54,24 @@ mirror_axes <- function(obj){
   obj$data$experiment_log$positions <- mirrored_positions
   return(obj)
 }
+
+
+#' Resizes the map to fit the new constraints. 
+#' 
+#' @param multiplier Conversion of a single unit to a new metric
+#' @param obj UnityObject
+#' @return ModifiedUnity object
+#' 
+#' @example 
+#' obj <- resize_layout(obj, 0.5) #makes it half as large
+#' 
+#' @export
+#' 
+resize_layout <- function(obj, multiplier){
+  # translate player log
+  resized_player <- resize_positions_df(obj$data$player_log, offset)
+  if(is.null(translated_player)){
+    print("Couldn't translate player log. Have you preprocessed it correctly? Quitting.")
+    return(obj)
+  }
+}

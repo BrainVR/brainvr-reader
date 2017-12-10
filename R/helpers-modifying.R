@@ -1,19 +1,6 @@
-#pure helpers for my particular unity logging 
-# translates list of positions. 
-# RETURNS  null is some translations fail. That is on PURPOSE.
+# MIRRORING ----
 mirror_positions_list <- function(ls_positions){
-  ls_mirrored <- list()
-  listNames <- names(ls_positions)
-  for(name in listNames){
-    df <- ls_positions[[name]]
-    mirrored <- mirror_positions_df(df)
-    if(is.null(mirrored)) {
-      print(paste0("Couldn't mirror data.frame ", name))
-      return(NULL)
-    } else {
-      ls_mirrored[[name]] <- mirrored
-    }
-  }
+  ls_mirrored <- apply_transformation(ls_positions, mirror_positions_df)
   return(ls_mirrored)
 }
 
@@ -31,20 +18,10 @@ mirror_positions_df <- function(df){
   return(df)
 }
 
+# TRANSLATING -----
 translate_positions_list <- function(ls_positions, offset){
   if(!is_valid_offset(offset)) return(NULL)
-  ls_translated <- list()
-  listNames <- names(ls_positions)
-  for(name in listNames){
-    df <- ls_positions[[name]]
-    translated <- translate_positions_df(df, offset)
-    if(is.null(translated)) {
-      print(paste0("Couldn't translate data.frame ", name))
-      return(NULL)
-    } else {
-      ls_translated[[name]] <- translated
-    }
-  }
+  ls_translated <- apply_transformation(ls_positions, translate_positions_df, offset)
   return(ls_translated)
 }
 
@@ -55,6 +32,43 @@ translate_positions_df <- function(df, offset){
   df$Position.y <- df$Position.y + offset[2]
   df$Position.z <- df$Position.z + offset[3]
   return(df)
+}
+
+# RESIZING ----
+resize_positions_list <- function(ls_positions, multiplier){
+ 
+  ls_resized <- apply_transformation(ls_positions, multiplier)
+  return(ls_resized)
+}
+
+resize_positions_df <- function(df, multiplier){
+  if(!is_valid_positions_df(df)) return(NULL)
+  df$Position.x <- df$Position.x * multiplier
+  df$Position.y <- df$Position.y * multiplier
+  df$Position.z <- df$Position.z * multiplier
+  return(df)
+}
+
+# HELPERS ----
+apply_transformation <- function(ls_positions, fun, value){
+  ls_transformed <- list()
+  listNames <- names(ls_positions)
+  for(name in listNames){
+    df <- ls_positions[[name]]
+    #mirroring doesn't pass value
+    if(missing(value)) {
+      transformed <- fun(df)
+    } else {
+      transformed <- fun(df, value)
+    }
+    if(is.null(transformed)) {
+      print(paste0("Couldn't transform data.frame ", name))
+      return(NULL)
+    } else {
+      ls_transformed[[name]] <- transformed
+    }
+  }
+  return(ls_transformed)
 }
 
 # VALIDATIONS ----

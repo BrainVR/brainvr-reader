@@ -55,7 +55,7 @@ create_plot <- function(obj){
 
 #' Adds player path to the given plot
 #' 
-#' @param plot
+#' @param plot 
 #' @param data Data frame with Position.x and Position.z columns
 #' @return plot with plotted pat
 #' 
