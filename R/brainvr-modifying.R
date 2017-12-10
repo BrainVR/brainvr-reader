@@ -9,23 +9,7 @@
 #' 
 #' @export
 translate_positions <- function(obj, offset){
-  # translate player log
-  translated_player <- translate_positions_df(obj$data$player_log, offset)
-  if(is.null(translated_player)){
-    print("Couldn't translate player log. Have you preprocessed it correctly? Quitting.")
-    return(obj)
-  }
-  # translate positions in experiment_log
-  translated_positions <- translate_positions_list(obj$data$experiment_log$positions, offset)
-  if(is.null(translated_positions)){
-    print("Couldn't translate positions in expeirment log. Have you preprocessed it correctly? Quitting.")
-    return(obj)
-  }
-  # Assign is all went well
-  # Better to assign here. So that if one goes well, we can retry later and we don¨t end up
-  # With player log translated and goal positions not
-  obj$data$player_log <- translated_player
-  obj$data$experiment_log$positions <- translated_positions
+  obj <- transform_object(obj, "mirror", translate_positions_df, translate_positions_list, offset)
   return(obj)
 }
 
@@ -39,18 +23,7 @@ translate_positions <- function(obj, offset){
 #' @export
 #' 
 mirror_axes <- function(obj){
-  mirrored_player <- mirror_positions_df(obj$data$player_log)
-  if(is.null(mirrored_player)){
-    print("Couldn't mirror positions in player log. Have you preprocessed it correctly? Quitting.")
-    return(obj)
-  }
-  mirrored_positions <- mirror_positions_list(obj$data$experiment_log$positions)
-  if(is.null(mirrored_positions)){
-    print("Couldn't mirror positions in expeirment log. Have you preprocessed it correctly? Quitting.")
-    return(obj)
-  }
-  obj$data$player_log <- mirrored_player
-  obj$data$experiment_log$positions <- mirrored_positions
+  obj <- transform_object(obj, "mirror", mirror_positions_df, mirror_positions_list)
   return(obj)
 }
 
