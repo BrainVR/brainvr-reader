@@ -4,7 +4,7 @@
 \alias{plot_add_player_path}
 \title{Adds player path to the given plot}
 \usage{
-plot_add_player_path(plot, df_pos)
+plot_add_player_path(plt, df_pos)
 }
 \arguments{
 \item{data}{Data frame with Position.x and Position.z columns}

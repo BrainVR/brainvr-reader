@@ -60,10 +60,10 @@ create_plot <- function(obj){
 #' @return plot with plotted pat
 #' 
 #' @export
-plot_add_player_path <- function(plot, df_pos){
+plot_add_player_path <- function(plt, df_pos){
   #some validations aobu the data frame
-  plot <- plot + geom_path(data = df_pos, aes(Position.x, Position.z))
-  return(plot)
+  plt <- plt + geom_path(data = df_pos, aes(Position.x, Position.z))
+  return(plt)
 }
 
 #' Adds specified points to the given plot
@@ -73,7 +73,7 @@ plot_add_player_path <- function(plot, df_pos){
 #' @return modified plot
 #' 
 #' @export
-plot_add_points <- function(plot, ls){
+plot_add_points <- function(plt, ls){
   list_names <- names(ls)
   df <- data.frame(point.x = numeric(0), point.y = numeric(0), point.name = character(), stringsAsFactors = F)
   for (i in 1:length(ls)){

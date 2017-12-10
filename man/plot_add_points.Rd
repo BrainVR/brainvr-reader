@@ -4,12 +4,12 @@
 \alias{plot_add_points}
 \title{Adds specified points to the given plot}
 \usage{
-plot_add_points(plot, ls)
+plot_add_points(plt, ls)
 }
 \arguments{
-\item{plot}{already created ggplot}
-
 \item{ls}{list with XY vectors. eg. (list(start = c(0, 0), end = C(10, 5)))}
+
+\item{plot}{already created ggplot}
 }
 \value{
 modified plot
