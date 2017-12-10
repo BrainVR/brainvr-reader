@@ -49,12 +49,10 @@ mirror_axes <- function(obj){
     print("Couldn't mirror positions in expeirment log. Have you preprocessed it correctly? Quitting.")
     return(obj)
   }
-
   obj$data$player_log <- mirrored_player
   obj$data$experiment_log$positions <- mirrored_positions
   return(obj)
 }
-
 
 #' Resizes the map to fit the new constraints. 
 #' 
@@ -68,10 +66,6 @@ mirror_axes <- function(obj){
 #' @export
 #' 
 resize_layout <- function(obj, multiplier){
-  # translate player log
-  resized_player <- resize_positions_df(obj$data$player_log, offset)
-  if(is.null(translated_player)){
-    print("Couldn't translate player log. Have you preprocessed it correctly? Quitting.")
-    return(obj)
-  }
+  obj <- transform_object(obj, "resize", resize_positions_df, resize_positions_list, multiplier)
+  return(obj)
 }

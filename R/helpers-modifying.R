@@ -36,8 +36,7 @@ translate_positions_df <- function(df, offset){
 
 # RESIZING ----
 resize_positions_list <- function(ls_positions, multiplier){
- 
-  ls_resized <- apply_transformation(ls_positions, multiplier)
+  ls_resized <- apply_transformation(ls_positions, resize_positions_df, multiplier)
   return(ls_resized)
 }
 
@@ -49,7 +48,33 @@ resize_positions_df <- function(df, multiplier){
   return(df)
 }
 
-# HELPERS ----
+# DRY HELPERS ----
+# procedure = string with name, only for reporting
+# list function
+transform_object <- function(obj, procedure, df_function, list_function, value){
+  if(missing(value)){
+     transformed_player <- df_function(obj$data$player_log)
+  } else {
+    transformed_player <- df_function(obj$data$player_log, value)
+  }
+  if(is.null(transformed_player)){
+    print(paste0("Couldn't ", procedure," positions in player log. Have you preprocessed it correctly? Quitting."))
+    return(obj)
+  }
+  if(missing(value)){
+    transformed_positions <- list_function(obj$data$experiment_log$positions)
+  } else {
+    transformed_positions <- list_function(obj$data$experiment_log$positions, value)
+  }
+  if(is.null(transformed_positions)){
+    print(paste0("Couldn't ", procedure, " positions in expeirment log. Have you preprocessed it correctly? Quitting."))
+    return(obj)
+  }
+  obj$data$player_log <- transformed_player
+  obj$data$experiment_log$positions <- transformed_positions
+  return(obj)
+}
+
 apply_transformation <- function(ls_positions, fun, value){
   ls_transformed <- list()
   listNames <- names(ls_positions)
