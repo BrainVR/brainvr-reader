@@ -12,3 +12,11 @@ pth <- make_trial_image(obj, trialId)
 dt_player <- get_player_log_trial(obj, trialId)
 rot <- ggplot(dt_player, aes(Time, Rotation.Virtualizer)) + geom_line()
 ggarrange(pth, rot,ncol = 1, nrow = 2)
+
+
+obj$map_limits <- list(x = c(-2, 105), y = c(0, 100))
+plt <- create_plot(obj)
+dt <- get_player_log_trial(obj, trialId)
+plt <- plot_add_player_path(plt, dt)
+## adds start and end
+plt <- plot_add_points()

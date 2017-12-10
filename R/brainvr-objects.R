@@ -10,6 +10,7 @@ UnityObject <- function(){
   obj$experiment_name <- ""
   obj$session <- NA
   obj$timestamp <- NA
+  obj$map_limits <- NULL
   obj$data <- list()
   obj$data$experiment_info <- NA
   obj$data$player_log <- NA

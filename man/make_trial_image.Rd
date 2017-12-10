@@ -8,10 +8,6 @@ make_trial_image(obj, trialId)
 }
 \arguments{
 \item{trialId}{}
-
-\item{dt_position}{}
-
-\item{test}{}
 }
 \description{
 Title

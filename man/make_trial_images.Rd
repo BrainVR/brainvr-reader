@@ -7,13 +7,9 @@
 make_trial_images(obj, columns = 5, indices = c())
 }
 \arguments{
-\item{columns}{}
+\item{obj}{}
 
 \item{indices}{}
-
-\item{dt_position}{}
-
-\item{test}{}
 }
 \description{
 Title
