@@ -41,7 +41,7 @@ load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NUL
   #preprocesses player log
   #checks if there is everything we need and if not, recomputes the stuff
   
-  test_logs <- open_experiment_logs(folder)
+  test_logs <- open_experiment_logs(folder, exp_timestamp)
   
   obj <- objectFun()
   obj$participant_id <- experiment_info$header$Participant
@@ -127,7 +127,7 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
     print(paste0("Could not find any test logs in ", directory))
-    next
+    return(NULL)
   }
   for(i in 1: length(logs)){
     log <- logs[i]
