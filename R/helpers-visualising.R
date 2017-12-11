@@ -61,3 +61,22 @@ save_plot <- function(plt, name){
   plot(plt)
   dev.off()
 }
+
+create_direction_line <- function(position, angle, len){
+  vec <- c(position, position + vector_from_angle(angle) * len)
+  df <- data.frame(x = vec[1], y = vec[2], xend = vec[3], yend = vec[4])
+  return(df)
+}
+
+
+create_direction_line_df <- function(df){
+  #TODO - redo to apply
+  df$xend <- 0
+  df$yend <- 0
+  for(i in 1:nrow(df)){
+    df_i <- df[i, ]
+    df[i, c("xend", "yend")] <- df_i[, c("x", "y")] + vector_from_angle(df_i$angle) * df_i$length
+  }
+  return(df)
+}
+

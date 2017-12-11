@@ -2,7 +2,7 @@
 #' 
 #' @param trialId 
 #'
-#' @return
+#' @return ggplot objectg
 #' @export
 #' @import ggplot2 
 make_trial_image <- function (obj, trialId){
@@ -84,4 +84,40 @@ plot_add_points <- function(plt, ls){
   plt <- plt + geom_point(data = df, aes(point.x, point.y),size = 4, color = "blue") + 
     geom_text(data = df, aes(point.x, point.y, label = point.name))
   return(plt)
+}
+
+
+#' Adds arrow pointing from a point in a specified angle
+#'
+#' @param position_df data.frame. Needs to have columns x, y, angle, length, type
+#' @param plt PLot to which to add the arrow
+#' @return built ggplot2
+#'
+#' @example 
+#' plt <- plot_add_direction(plt, 
+#' 
+#' @export
+plot_add_direction <- function(plt, position, angle, len){
+  ARROW_DEF <- arrow(length = unit(0.25, "cm"))
+  arrow_line <- create_direction_line(position, angle, len)
+  plt <- plt + geom_segment(data = arrow_line, aes(x = x, y = y, xend = xend, yend = yend), 
+                            size = 1, arrow = ARROW_DEF)
+}
+
+#' Adds arrow pointing from a point in a specified angle
+#'
+#' @param position_df data.frame. Needs to have columns x, y, angle, length, type
+#' @param plt PLot to which to add the arrow
+#' @return built ggplot2
+#'
+#' @example 
+#' direction_df <- data.frame(x = c(0, 0), y = (0:1), angle = c(45, 90), length = c(1, 2), type = c("first", "second"))
+#' plt <- ggplot()
+#' plt <- plot_add_directions(plt, direction_df)
+#' @export
+plot_add_directions <- function(plt, direction_df){
+  ARROW_DEF <- arrow(length = unit(0.25, "cm"))
+  arrow_df <- create_direction_line_df(direction_df)
+  plt <- plt + geom_segment(data = arrow_df, aes(x = x, y = y, xend = xend, yend = yend, color = type), 
+    size = 1, arrow = ARROW_DEF)
 }

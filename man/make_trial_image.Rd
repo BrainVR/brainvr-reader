@@ -9,6 +9,9 @@ make_trial_image(obj, trialId)
 \arguments{
 \item{trialId}{}
 }
+\value{
+ggplot objectg
+}
 \description{
 Title
 }
