@@ -14,7 +14,7 @@ add_angle_difference <- function(player_log, axis = "x"){
     return()
   }
   axis_angle_diffs <- c(0, diff(axis_angles))
-  axis_angle_diffs <- angle_to_difference(axis_angle_diffs)
+  axis_angle_diffs <- navr::angle_to_180(axis_angle_diffs)
   
   player_log[, (new_col_name):= axis_angle_diffs]
   return(player_log)
@@ -22,10 +22,7 @@ add_angle_difference <- function(player_log, axis = "x"){
 
 #calculates the distance walked between each two points of the position table and returns the table
 add_distance_moved <- function(player_log){
-  for (i in 2:nrow(player_log)){
-    player_log[c(i - 1, i), distance := euclid_distance(.(Position.x, Position.z)[1], 
-                                                        .(Position.x, Position.z)[2])]
-  }
+  player_log[, distance := navr::euclid_distance_between_rows(data.frame(Position.x, Position.z))]
   player_log[, cumulative_distance := cumsum(distance)]
   return(player_log)
 }

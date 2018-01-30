@@ -9,10 +9,13 @@ Description: This package comes with functions to load, preprocess
   if you have trouble reading it.
 License: MIT
 LazyData: true
+Remotes: 
+  hejtmy/navr
 Depends:
   R (>= 3.1.0),
   data.table
 Imports:
+  navr,
   stringr,
   jsonlite,
   data.table,

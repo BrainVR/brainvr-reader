@@ -13,7 +13,7 @@ mirror_positions_df <- function(df){
   df_colnames <- colnames(df)
   rotation_cols <- df_colnames[grep("Rotation", df_colnames)]
   for (column in rotation_cols){
-    df[, (column):= angle_to_360(df[, (get(column) - 180)])]
+    df[, (column):= navr::angle_to_360(df[, (get(column) - 180)])]
   }
   return(df)
 }
