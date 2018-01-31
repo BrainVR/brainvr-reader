@@ -4,7 +4,7 @@
 #' Preprocesses player log by reference and returs if it was changed for saving purposes
 #' @param player_log loaded DATA.TABLE player log
 #' @param type what type of log we have - depending on the brainvr-unity-framework type of player controller used? Possible types are: "rigidbody", "virtualizer"
-#' @return boolean if changed. Default false
+#' @return preprocessed player log
 #' @export
 
 ## TODO - change so that the log is not passed by reference
@@ -13,53 +13,41 @@ preprocess_player_log <- function(player_log, type = "rigidbody"){
     print("Cannot continue withouth stringr package. Please install it")
     return(F)
   }
-  changed <- F
   ## Converting position
-  if (!is_column_present(player_log, "Position.X")){
-    player_log <- vector3_to_columns(player_log, "Position")
-    changed <- T
-  }
+  player_log <- vector3_to_columns(player_log, "Position")
   ## Adding distance from position
-  if (!is_column_present(player_log, "cumulative_distance")){
-    player_log <- add_distance_moved(player_log)
-    changed <- T
-  }
+  player_log <- add_distance_moved(player_log)
   ## Adds rotation difference
-  if (!is_column_present(player_log, "angle_diff_x")){
-    player_log <- navr::add_angle_difference(player_log, player_log$x, "x")
-    changed <- T
-  }
-  if(type == "rigidbody") changed <- rigidbody_preprocess(player_log, changed)
-  if(type == "virtualizer") changed <- virtualizer_preprocess(player_log, changed)
-  if (changed) print("Log modified") else print("Log ok")
-  return(changed) 
+  player_log <- navr::add_angle_difference(player_log, player_log$x, "x")
+  if(type == "rigidbody") player_log <- rigidbody_preprocess(player_log)
+  if(type == "virtualizer") player_log <- virtualizer_preprocess(player_log)
+  return(player_log) 
 }
 
-rigidbody_preprocess <- function(player_log, changed){
-  return(changed)
+rigidbody_preprocess <- function(player_log){
+  return(player_log)
 }
 
-virtualizer_preprocess <- function(player_log, changed){
-  changed <- F
+virtualizer_preprocess <- function(player_log){
   ## Adding angle differences
-  if (!is_column_present(player_log, "angle_diff_y")){
-    player_log <- navr::add_angle_difference(player_log, player_log$y, "y")
-    changed <- T
-  }
+  player_log <- navr::add_angle_difference(player_log, player_log$y, "y")
   ## Adding angle differences
-  if (!is_column_present(player_log, "angle_diff_virtualizer")){
-    player_log <- navr::add_angle_difference(player_log, player_log$virtualizer, "virtualizer")
-    changed <- T
-  }
-  if (!is_column_present(player_log, "angle_diff_cotroller.x")){
-    player_log <- navr::add_angle_difference(player_log, player_log$controller.x, "controller.x")
-    changed <- T
-  }
-  if (!is_column_present(player_log, "angle_diff_controller.y")){
-    player_log <- navr::add_angle_difference(player_log, player_log$controller.y, "controller.y")
-    changed <- T
-  }
-  return(changed)
+  player_log <- navr::add_angle_difference(player_log, player_log$virtualizer, "virtualizer")
+  player_log <- navr::add_angle_difference(player_log, player_log$controller.x, "controller.x")
+  player_log <- navr::add_angle_difference(player_log, player_log$controller.y, "controller.y")
+  return(player_log)
+}
+
+#' Returns if the player log has been preprocessed 
+#'
+#' @param player_log 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+is_player_preprocessed <- function(player_log){
+  return(is_column_present(player_log, "Position.x"))
 }
 
 #' Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs

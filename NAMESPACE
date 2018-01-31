@@ -3,6 +3,7 @@
 export(UnityObject)
 export(get_player_log_trial)
 export(get_trial_timewindow)
+export(is_player_preprocessed)
 export(load_experiment)
 export(load_experiment_log)
 export(load_experiments)
