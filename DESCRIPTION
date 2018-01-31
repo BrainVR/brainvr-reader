@@ -1,7 +1,7 @@
 Package: brainvr.R
 Title: Loading, preprocessing and visualising logs from brainvr framework based app
 Version: 0.1.1
-Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.ocm",
+Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.com",
                   role = c("aut", "cre"))
 Description: This package comes with functions to load, preprocess
   and visualise data coming from the brainvr framework based unity app. It is being 
@@ -9,7 +9,7 @@ Description: This package comes with functions to load, preprocess
   if you have trouble reading it.
 License: MIT
 LazyData: true
-Remotes: 
+Remotes:
   hejtmy/navr
 Depends:
   R (>= 3.1.0),
