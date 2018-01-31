@@ -16,12 +16,12 @@ preprocess_player_log <- function(player_log, type = "rigidbody"){
   changed <- F
   ## Converting position
   if (!is_column_present(player_log, "Position.X")){
-    playerLog <- vector3_to_columns(player_log, "Position")
+    player_log <- vector3_to_columns(player_log, "Position")
     changed <- T
   }
   ## Adding distance from position
   if (!is_column_present(player_log, "cumulative_distance")){
-    playerLog <- add_distance_moved(player_log)
+    player_log <- add_distance_moved(player_log)
     changed <- T
   }
   ## Adds rotation difference

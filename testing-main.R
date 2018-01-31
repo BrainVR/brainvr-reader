@@ -17,6 +17,6 @@ ggarrange(pth, rot,ncol = 1, nrow = 2)
 
 obj$map_limits <- list(x = c(-2, 105), y = c(0, 100))
 
-## pointing ----
+## Pointing ----
 sop_dir <- "D:/GoogleDrive/Davis/Data/pilot/neo1/"
 sop <- load_experiment(sop_dir, exp_timestamp = '18-07-09-03-12-2017')
