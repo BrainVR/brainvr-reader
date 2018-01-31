@@ -23,7 +23,7 @@ get_trial_pointing <- function(obj, trialId, target_pos = NULL){
     ls$time <- point_situation$Time
     ls$chosen <- point_situation$Rotation.X
     if (!is.null(target_pos)){
-      ls$target <- angle_from_positions(player_pos, target_pos)
+      ls$target <- navr::angle_from_positions(player_pos, target_pos)
     }
   }
   return(ls)

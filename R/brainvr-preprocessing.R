@@ -8,26 +8,25 @@
 #' @export
 
 ## TODO - change so that the log is not passed by reference
-preprocess_player_log = function(player_log, type = "rigidbody"){
+preprocess_player_log <- function(player_log, type = "rigidbody"){
   if(!requireNamespace("stringr", quietly = T)){
     print("Cannot continue withouth stringr package. Please install it")
     return(F)
   }
-  
   changed <- F
   ## Converting position
-  if (!is_column_present(player_log, "Position.x")){
+  if (!is_column_present(player_log, "Position.X")){
     playerLog <- vector3_to_columns(player_log, "Position")
     changed <- T
   }
   ## Adding distance from position
   if (!is_column_present(player_log, "cumulative_distance")){
-    playerLog <- add_distance_moved (player_log)
+    playerLog <- add_distance_moved(player_log)
     changed <- T
   }
   ## Adds rotation difference
   if (!is_column_present(player_log, "angle_diff_x")){
-    player_log <- add_angle_difference(player_log, "x")
+    player_log <- navr::add_angle_difference(player_log, player_log$x, "x")
     changed <- T
   }
   if(type == "rigidbody") changed <- rigidbody_preprocess(player_log, changed)
@@ -44,20 +43,20 @@ virtualizer_preprocess <- function(player_log, changed){
   changed <- F
   ## Adding angle differences
   if (!is_column_present(player_log, "angle_diff_y")){
-    player_log <- add_angle_difference(player_log, "y")
+    player_log <- navr::add_angle_difference(player_log, player_log$y, "y")
     changed <- T
   }
   ## Adding angle differences
   if (!is_column_present(player_log, "angle_diff_virtualizer")){
-    player_log <- add_angle_difference(player_log, "virtualizer")
+    player_log <- navr::add_angle_difference(player_log, player_log$virtualizer, "virtualizer")
     changed <- T
   }
   if (!is_column_present(player_log, "angle_diff_cotroller.x")){
-    player_log <- add_angle_difference(player_log, "controller.x")
+    player_log <- navr::add_angle_difference(player_log, player_log$controller.x, "controller.x")
     changed <- T
   }
   if (!is_column_present(player_log, "angle_diff_controller.y")){
-    player_log <- add_angle_difference(player_log, "controller.y")
+    player_log <- navr::add_angle_difference(player_log, player_log$controller.y, "controller.y")
     changed <- T
   }
   return(changed)

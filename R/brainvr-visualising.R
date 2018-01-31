@@ -8,7 +8,7 @@
 make_trial_image <- function (obj, trialId){
   plot <- ggplot2::ggplot()
   dt_player <- get_player_log_trial(obj, trialId)
-  plot <- navr::plot_add_path(plot, dt_player)
+  plot <- navr::plot_add_path(plot, dt_player$Position.x, dt_player$Position.z)
   return(plot)
 }
 
