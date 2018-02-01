@@ -8,7 +8,7 @@ If target poistion is passed, also returnes what should have been the correct po
 get_trial_pointing(obj, trialId, target_pos = NULL)
 }
 \arguments{
-\item{obj}{UnityObject}
+\item{obj}{BrainvrObject}
 
 \item{target_pos}{vector 2 of target position}
 }

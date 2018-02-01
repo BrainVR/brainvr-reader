@@ -21,13 +21,13 @@ load_experiments <- function(folder, objectFun){
   return(ls)
 }
 
-#' Loads files form a folder into UnityObject
+#' Loads files form a folder into BrainvrObject
 #' @param folder path to the folder respective to the working directory
-#' @param obj created UnityObject to fill in data. If none passed, new one gets created
-#' @returns UnityObject object
+#' @param obj created BrainvrObject to fill in data. If none passed, new one gets created
+#' @returns BrainvrObject object
 #' @example 
 #' @export
-load_experiment <- function(folder, objectFun = UnityObject, exp_timestamp = NULL){
+load_experiment <- function(folder, objectFun = BrainvrObject, exp_timestamp = NULL){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_info <- open_experiment_info(folder, log_timestamp = exp_timestamp, returnSingle = T)

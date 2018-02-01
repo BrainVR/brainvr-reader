@@ -1,9 +1,9 @@
 #' Moves all positions to correspond to the new 0, 0 coordinate
 #' 
-#' Operates on given UnityObject, as it needs to fix not only player log, but potential goal positions in the object as well
-#' @param obj UnityObject with player log and positions data to be translated
+#' Operates on given BrainvrObject, as it needs to fix not only player log, but potential goal positions in the object as well
+#' @param obj BrainvrObject with player log and positions data to be translated
 #' @param offset New X, Z and Y vector. Needs to be a int vector of lenght 3 (X, Y, Z). 
-#' @returns UnityObject
+#' @returns BrainvrObject
 #' @example 
 #' obj <- translate_position(obj, (3, 0, -6))
 #' 
@@ -16,7 +16,7 @@ translate_positions <- function(obj, offset){
 #' Mirrors X and Y to negative and recomputes rotation
 #' 
 #' @param obj
-#' @return UnityObject with mirrored axes and rotation
+#' @return BrainvrObject with mirrored axes and rotation
 #' @example 
 #' obj <- mirror_axes(obj)
 #' 
@@ -30,7 +30,7 @@ mirror_axes <- function(obj){
 #' Resizes the map to fit the new constraints. 
 #' 
 #' @param multiplier Conversion of a single unit to a new metric
-#' @param obj UnityObject
+#' @param obj BrainvrObject
 #' @return ModifiedUnity object
 #' 
 #' @example 
@@ -40,5 +40,36 @@ mirror_axes <- function(obj){
 #' 
 resize_layout <- function(obj, multiplier){
   obj <- transform_object(obj, "resize", resize_positions_df, resize_positions_list, multiplier)
+  return(obj)
+}
+
+#' Loads goal positions to the Brainvr object
+#'
+#' @param obj Brainvr object
+#' @param df data.frame with goal positions. Goal row must correspond to goal order  
+#'
+#' @return
+#' @export
+#'
+#' @examples
+add_goal_positions.brainvr <- function(obj, df){
+  #VALIDATIONS
+  obj$goal_positions <- df
+  return(obj)
+}
+
+#' Adds goal order vector to determine in what order goals came
+#'
+#' @param obj Brainvr object
+#' @param order vector of goal order. eg. (1, 3, 5, 1) 
+#'
+#' @return Brainvr object with added field
+#' @export
+#'
+#' @examples 
+add_goal_order.brainvr <- function(obj, order){
+  #validate numebr of goals
+  #validate if numbers
+  obj$goal_order <- order
   return(obj)
 }

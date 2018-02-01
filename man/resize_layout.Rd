@@ -7,7 +7,7 @@
 resize_layout(obj, multiplier)
 }
 \arguments{
-\item{obj}{UnityObject}
+\item{obj}{BrainvrObject}
 
 \item{multiplier}{Conversion of a single unit to a new metric}
 }

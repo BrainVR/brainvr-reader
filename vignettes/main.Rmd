@@ -26,8 +26,10 @@ obj <- load_experiment(dir_path)
 ```
 #Preprocessing and saving dta
 ```{r}
-changed <- preprocess_player_log(obj$data$player_log)
-if(changed) save_preprocessed_player(dir_path, obj$data$player_log, obj$timestamp)
+if(!is_player_preprocessed(obj$data$player_log)){
+  obj$data$player_log <- preprocess_player_log(obj$data$player_log)
+  save_preprocessed_player(dir_path, obj$data$player_log, obj$timestamp)
+}
 ```
 
 The next time you are loading the log, you will load the processed automatically
@@ -50,6 +52,6 @@ Plotting player path
 
 ```{r}
 #set constraints
-obj$map_size <- c()
-make_trial_image(obj, 1)
+obj$map_limits <- list(x = c(-5, 105), y = c(-5, 105))
+plot_trial_path(obj, 1)
 ```

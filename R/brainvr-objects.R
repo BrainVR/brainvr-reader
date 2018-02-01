@@ -4,7 +4,7 @@
 #' @export 
 #'
 #' @examples
-UnityObject <- function(){
+BrainvrObject <- function(){
   obj <- list()
   obj$participant_id <- ""
   obj$experiment_name <- ""
@@ -16,5 +16,6 @@ UnityObject <- function(){
   obj$data$player_log <- NA
   obj$data$experiment_log <- NA
   obj$data$results_log <- NA
+  class(obj) <- append(class(obj),"brainvr")
   return(obj)
 }
