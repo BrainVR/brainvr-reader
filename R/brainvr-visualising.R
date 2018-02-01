@@ -16,15 +16,17 @@ make_trial_image <- function (obj, trialId){
   return(plt)
 }
 
-#' Title
-#' 
-#' @param trialId
+#' Plots brainvr object path
 #'
-#' @return ggplot objectg
+#' @param obj 
+#' @param trialId 
+#'
+#' @return
 #' @export
-#' @import ggplot2 
-plot_trial_path <- function (obj, trialId){
-  return(make_trial_image)
+#'
+#' @examples
+plot_trial_path.brainvr <- function(obj, trialId){
+  return(make_trial_image(obj, trialId))
 }
 
 #' Title
