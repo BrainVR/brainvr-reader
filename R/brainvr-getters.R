@@ -21,7 +21,7 @@ get_log.brainvr <- function(obj){
 #'
 #' @examples
 get_log_timewindow.brainvr <- function(obj, start, end){
-  log <- dt_player[Time > timewindow$start & Time < timewindow$finish, ]
+  log <- obj$data$player_log[Time > start & Time < end, ]
   return(log)
 }
 
@@ -34,7 +34,7 @@ get_log_timewindow.brainvr <- function(obj, start, end){
 #' @export
 get_trial_log.brainvr <- function(obj, trialId) {
   timewindow <- get_trial_times.brainvr(obj, trialId)
-  return(get_player_log_timewindow(obj$data$player_log, timewindow$start, timewindow$finish))
+  return(get_log_timewindow.brainvr(obj, timewindow$start, timewindow$finish))
 }
 
 #' Gets start and finish times of trial
@@ -92,6 +92,7 @@ get_trial_event_indices <- function(test, event){
   indices <- unique(which(test$data$Sender == "Trial" & test$data$Event == event))
   return(indices + 1)
 }
+
 get_walked_distnace_timewindow <- function(dt_position, timeWindow){
   dt_position <- get_log_timewindow.brainvr(dt_position, timeWindow$start, timeWindow$finish)
   if (dt_position[, .N] < 2) {

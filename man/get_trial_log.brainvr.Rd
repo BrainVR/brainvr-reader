@@ -4,7 +4,7 @@
 \alias{get_trial_log.brainvr}
 \title{Returns data.table with player log for a particular trial}
 \usage{
-get_trial_log.brainvr(obj, trialId)
+\method{get_trial_log}{brainvr}(obj, trialId)
 }
 \value{
 player log for particulat trial

@@ -4,7 +4,7 @@
 \alias{get_trial_times.brainvr}
 \title{Gets start and finish times of trial}
 \usage{
-get_trial_times.brainvr(obj, trialId)
+\method{get_trial_times}{brainvr}(obj, trialId)
 }
 \value{
 list with waitingToStart, start and finish

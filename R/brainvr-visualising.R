@@ -19,6 +19,8 @@ plot_trial_path.brainvr <- function(obj, trialId){
 #'
 #' @return ggplot objectg
 #' @import ggplot2 
+#' @keywords internal
+#' @noRd
 brainvr.plot_trial_path <- function (obj, trialId){
   plt <- navr::create_plot()
   if(!is.null(obj$map_limits)){
@@ -36,6 +38,8 @@ brainvr.plot_trial_path <- function (obj, trialId){
 #' @param indices 
 #'
 #' @return
+#' @keywords internal
+#' @noRd
 brainvr.plot_trials_paths <- function(obj, columns = 5, indices = c()){
   if(!requireNamespace("grid", quietly = T)){
     stop("Cannot continue without grid")

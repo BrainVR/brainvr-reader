@@ -42,7 +42,7 @@ virtualizer_preprocess <- function(player_log){
 #'
 #' @param player_log 
 #'
-#' @return
+#' @return boolean if the Player log looks to be preprocessed
 #' @export
 #'
 #' @examples

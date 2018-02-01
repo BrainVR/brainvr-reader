@@ -4,7 +4,7 @@
 \alias{get_log_timewindow.brainvr}
 \title{Returns log between designated times}
 \usage{
-get_log_timewindow.brainvr(obj, start, end)
+\method{get_log_timewindow}{brainvr}(obj, start, end)
 }
 \arguments{
 \item{obj}{}

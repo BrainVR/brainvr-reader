@@ -12,7 +12,7 @@ obj <- mirror_axes(obj)
 obj <- resize_layout(obj, 0.01)
 
 trialId <- 2
-pth <- make_trial_image(obj, trialId)
+pth <- plot_trial_path(obj, trialId)
 dt_player <- get_trial_log(obj, trialId)
 rot <- ggplot(dt_player, aes(Time, Rotation.Virtualizer)) + geom_line()
 ggarrange(pth, rot,ncol = 1, nrow = 2)

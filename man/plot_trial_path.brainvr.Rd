@@ -4,7 +4,7 @@
 \alias{plot_trial_path.brainvr}
 \title{Plots trial path}
 \usage{
-plot_trial_path.brainvr(obj, trialId)
+\method{plot_trial_path}{brainvr}(obj, trialId)
 }
 \arguments{
 \item{obj}{}

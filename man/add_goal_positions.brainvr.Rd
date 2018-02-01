@@ -4,7 +4,7 @@
 \alias{add_goal_positions.brainvr}
 \title{Loads goal positions to the Brainvr object}
 \usage{
-add_goal_positions.brainvr(obj, df)
+\method{add_goal_positions}{brainvr}(obj, df)
 }
 \arguments{
 \item{obj}{Brainvr object}

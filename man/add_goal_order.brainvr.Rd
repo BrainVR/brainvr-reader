@@ -4,7 +4,7 @@
 \alias{add_goal_order.brainvr}
 \title{Adds goal order vector to determine in what order goals came}
 \usage{
-add_goal_order.brainvr(obj, order)
+\method{add_goal_order}{brainvr}(obj, order)
 }
 \arguments{
 \item{obj}{Brainvr object}
