@@ -10,7 +10,7 @@ get_trial_event_indices <- function(test, event){
 #' 
 get_trial_pointing <- function(obj, trialId, target_pos = NULL){
   ls <- list()
-  quest_log <- get_player_log_trial(obj, trialId)
+  quest_log <- get_trial_log.brainvr(obj, trialId)
   point_situation <- quest_log[Input == "Point", ]
   ls$target <- NA
   if(nrow(point_situation) < 1){
@@ -75,7 +75,7 @@ get_walked_distnace_timewindow <- function(dt_position, timeWindow){
 #' 
 #' @export
 
-get_player_log_trial <- function(obj, trialId) {
+get_trial_log.brainvr <- function(obj, trialId) {
   timewindow <- get_trial_timewindow(obj, trialId)
   return(get_player_log_timewindow(obj$data$player_log, timewindow))
 }

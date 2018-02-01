@@ -1,7 +1,7 @@
 server <- function(input, output, session){
   
   trialPlayer <- reactive({
-    dt_trial <- get_player_log_trial(obj, input$sliderTrial)
+    dt_trial <- get_trial_log(obj, input$sliderTrial)
     log_nrow <<- nrow(dt_trial)
     trial_end <<- dt_trial$Time[nrow(dt_trial)]
     #set time slider to 0 (it will actually fall to min)

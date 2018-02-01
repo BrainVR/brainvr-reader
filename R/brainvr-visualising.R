@@ -24,7 +24,7 @@ brainvr.plot_trial_path <- function (obj, trialId){
   if(!is.null(obj$map_limits)){
     plt <- plt + xlim(obj$map_limits$x)+ ylim(obj$map_limits$y)
   }
-  dt_player <- get_player_log_trial(obj, trialId)
+  dt_player <- get_trial_log.brainvr(obj, trialId)
   plt <- navr::plot_add_path(plt, dt_player$Position.x, dt_player$Position.z)
   return(plt)
 }
