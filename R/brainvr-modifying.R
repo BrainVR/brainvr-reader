@@ -43,16 +43,15 @@ resize_layout <- function(obj, multiplier){
   return(obj)
 }
 
-
-#' Title
+#' Loads goal positions to the Brainvr object
 #'
-#' @param obj 
-#' @param df_positions 
+#' @param obj Brainvr object
+#' @param df data.frame with goal positions. Goal row must correspond to goal order  
 #'
 #' @return
 #' @export
 #'
 #' @examples
-add_goal_positions <- function(obj, df_positions){
-  
+add_goal_positions.brainvr <- function(obj, df){
+  return(obj)
 }

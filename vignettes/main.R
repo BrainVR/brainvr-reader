@@ -25,4 +25,4 @@ obj <- mirror_axes(obj)
 ## ------------------------------------------------------------------------
 #set constraints
 obj$map_limits <- list(x = c(-5, 105), y = c(-5, 105))
-make_trial_image(obj, 1)
+plot_trial_path(obj, 1)

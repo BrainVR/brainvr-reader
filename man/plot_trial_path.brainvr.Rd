@@ -2,7 +2,7 @@
 % Please edit documentation in R/brainvr-visualising.R
 \name{plot_trial_path.brainvr}
 \alias{plot_trial_path.brainvr}
-\title{Plots brainvr object path}
+\title{Plots trial path}
 \usage{
 plot_trial_path.brainvr(obj, trialId)
 }
@@ -12,5 +12,5 @@ plot_trial_path.brainvr(obj, trialId)
 \item{trialId}{}
 }
 \description{
-Plots brainvr object path
+Plots trial path
 }
