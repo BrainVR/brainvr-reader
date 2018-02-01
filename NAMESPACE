@@ -2,8 +2,10 @@
 
 export(BrainvrObject)
 export(add_goal_positions.brainvr)
+export(get_log.brainvr)
+export(get_log_timewindow.brainvr)
 export(get_trial_log.brainvr)
-export(get_trial_timewindow)
+export(get_trial_times.brainvr)
 export(is_player_preprocessed)
 export(load_experiment)
 export(load_experiment_log)
