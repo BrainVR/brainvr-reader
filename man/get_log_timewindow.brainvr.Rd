@@ -2,7 +2,7 @@
 % Please edit documentation in R/brainvr-getters.R
 \name{get_log_timewindow.brainvr}
 \alias{get_log_timewindow.brainvr}
-\title{Title}
+\title{Returns log between designated times}
 \usage{
 get_log_timewindow.brainvr(obj, start, end)
 }
@@ -14,5 +14,5 @@ get_log_timewindow.brainvr(obj, start, end)
 \item{end}{}
 }
 \description{
-Title
+Returns log between designated times
 }

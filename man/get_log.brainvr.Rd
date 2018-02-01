@@ -2,7 +2,7 @@
 % Please edit documentation in R/brainvr-getters.R
 \name{get_log.brainvr}
 \alias{get_log.brainvr}
-\title{Title}
+\title{Returns entire player log}
 \usage{
 get_log.brainvr(obj)
 }
@@ -10,5 +10,5 @@ get_log.brainvr(obj)
 \item{obj}{}
 }
 \description{
-Title
+Returns entire player log
 }

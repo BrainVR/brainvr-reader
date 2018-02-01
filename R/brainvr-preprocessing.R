@@ -18,7 +18,7 @@ preprocess_player_log <- function(player_log, type = "rigidbody"){
   ## Adding distance from position
   player_log <- add_distance_moved(player_log)
   ## Adds rotation difference
-  player_log <- navr::add_angle_difference(player_log, player_log$x, "x")
+  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.X, "x")
   if(type == "rigidbody") player_log <- rigidbody_preprocess(player_log)
   if(type == "virtualizer") player_log <- virtualizer_preprocess(player_log)
   return(player_log) 
@@ -30,11 +30,11 @@ rigidbody_preprocess <- function(player_log){
 
 virtualizer_preprocess <- function(player_log){
   ## Adding angle differences
-  player_log <- navr::add_angle_difference(player_log, player_log$y, "y")
+  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Y, "y")
   ## Adding angle differences
-  player_log <- navr::add_angle_difference(player_log, player_log$virtualizer, "virtualizer")
-  player_log <- navr::add_angle_difference(player_log, player_log$controller.x, "controller.x")
-  player_log <- navr::add_angle_difference(player_log, player_log$controller.y, "controller.y")
+  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Virtualizer, "virtualizer")
+  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Controller.x, "controller_x")
+  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Controller.y, "controller_y")
   return(player_log)
 }
 
@@ -72,6 +72,6 @@ save_preprocessed_player <- function(directory, player_log, exp_timestamp = NULL
     preprocessed_filename <- gsub(".txt","_preprocessed.txt", filename)
   }
   print(paste0("Saving processed player log as", preprocessed_filename))
-  write.table(player_log, preprocessed_filename, sep = ";", 
+  write.table(format(player_log, digits = 4), preprocessed_filename, sep = ";", 
               dec = ".", quote = F, row.names = F)
 }

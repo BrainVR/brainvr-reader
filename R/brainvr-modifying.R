@@ -53,5 +53,23 @@ resize_layout <- function(obj, multiplier){
 #'
 #' @examples
 add_goal_positions.brainvr <- function(obj, df){
+  #VALIDATIONS
+  obj$goal_positions <- df
+  return(obj)
+}
+
+#' Adds goal order vector to determine in what order goals came
+#'
+#' @param obj Brainvr object
+#' @param order vector of goal order. eg. (1, 3, 5, 1) 
+#'
+#' @return Brainvr object with added field
+#' @export
+#'
+#' @examples 
+add_goal_order.brainvr <- function(obj, order){
+  #validate numebr of goals
+  #validate if numbers
+  obj$goal_order <- order
   return(obj)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/brainvr-getters.R
 \name{get_trial_log.brainvr}
 \alias{get_trial_log.brainvr}
-\title{Returns data.table with player log for particular trial}
+\title{Returns data.table with player log for a particular trial}
 \usage{
 get_trial_log.brainvr(obj, trialId)
 }
@@ -10,5 +10,5 @@ get_trial_log.brainvr(obj, trialId)
 player log for particulat trial
 }
 \description{
-Returns data.table with player log for particular trial
+Returns data.table with player log for a particular trial
 }

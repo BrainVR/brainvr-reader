@@ -1,4 +1,4 @@
-#' Title
+#' Returns entire player log
 #'
 #' @param obj 
 #'
@@ -10,7 +10,7 @@ get_log.brainvr <- function(obj){
   return(obj$data$player_log)
 }
 
-#' Title
+#' Returns log between designated times
 #'
 #' @param obj 
 #' @param start 
@@ -25,7 +25,7 @@ get_log_timewindow.brainvr <- function(obj, start, end){
   return(log)
 }
 
-#' Returns data.table with player log for particular trial
+#' Returns data.table with player log for a particular trial
 #'
 #' @param obj
 #' @param 
