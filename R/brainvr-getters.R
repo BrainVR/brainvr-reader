@@ -5,7 +5,7 @@ get_trial_event_indices <- function(test, event){
 
 #' Returns pointing direction during given trial. If there are more than two pointings, selects the first one
 #' If target poistion is passed, also returnes what should have been the correct pointing angle
-#' @param obj UnityObject
+#' @param obj BrainvrObject
 #' @param target_pos vector 2 of target position
 #' 
 get_trial_pointing <- function(obj, trialId, target_pos = NULL){

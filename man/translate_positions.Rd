@@ -7,10 +7,10 @@
 translate_positions(obj, offset)
 }
 \arguments{
-\item{obj}{UnityObject with player log and positions data to be translated}
+\item{obj}{BrainvrObject with player log and positions data to be translated}
 
 \item{offset}{New X, Z and Y vector. Needs to be a int vector of lenght 3 (X, Y, Z).}
 }
 \description{
-Operates on given UnityObject, as it needs to fix not only player log, but potential goal positions in the object as well
+Operates on given BrainvrObject, as it needs to fix not only player log, but potential goal positions in the object as well
 }

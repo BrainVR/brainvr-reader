@@ -2,15 +2,15 @@
 % Please edit documentation in R/brainvr-loading.R
 \name{load_experiment}
 \alias{load_experiment}
-\title{Loads files form a folder into UnityObject}
+\title{Loads files form a folder into BrainvrObject}
 \usage{
-load_experiment(folder, objectFun = UnityObject, exp_timestamp = NULL)
+load_experiment(folder, objectFun = BrainvrObject, exp_timestamp = NULL)
 }
 \arguments{
 \item{folder}{path to the folder respective to the working directory}
 
-\item{obj}{created UnityObject to fill in data. If none passed, new one gets created}
+\item{obj}{created BrainvrObject to fill in data. If none passed, new one gets created}
 }
 \description{
-Loads files form a folder into UnityObject
+Loads files form a folder into BrainvrObject
 }

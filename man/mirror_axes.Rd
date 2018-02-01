@@ -7,7 +7,7 @@
 mirror_axes(obj)
 }
 \value{
-UnityObject with mirrored axes and rotation
+BrainvrObject with mirrored axes and rotation
 }
 \description{
 Mirrors X and Y to negative and recomputes rotation
