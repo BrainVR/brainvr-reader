@@ -1,3 +1,4 @@
+
 #' Title
 #' 
 #' @param trialId 
@@ -6,10 +7,24 @@
 #' @export
 #' @import ggplot2 
 make_trial_image <- function (obj, trialId){
-  plot <- ggplot2::ggplot()
+  plt <- navr::create_plot()
+  if(!is.null(obj$map_limits)){
+    plt <- plt + xlim(obj$map_limits$x)+ ylim(obj$map_limits$y)
+  }
   dt_player <- get_player_log_trial(obj, trialId)
-  plot <- navr::plot_add_path(plot, dt_player$Position.x, dt_player$Position.z)
-  return(plot)
+  plt <- navr::plot_add_path(plt, dt_player$Position.x, dt_player$Position.z)
+  return(plt)
+}
+
+#' Title
+#' 
+#' @param trialId
+#'
+#' @return ggplot objectg
+#' @export
+#' @import ggplot2 
+plot_trial_path <- function (obj, trialId){
+  return(make_trial_image)
 }
 
 #' Title

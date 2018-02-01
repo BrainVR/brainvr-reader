@@ -42,3 +42,17 @@ resize_layout <- function(obj, multiplier){
   obj <- transform_object(obj, "resize", resize_positions_df, resize_positions_list, multiplier)
   return(obj)
 }
+
+
+#' Title
+#'
+#' @param obj 
+#' @param df_positions 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+add_goal_positions <- function(obj, df_positions){
+  
+}

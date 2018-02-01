@@ -14,7 +14,7 @@ preprocess_player_log(player_log, type = "rigidbody")
 \item{player_log}{loaded DATA.TABLE player log}
 }
 \value{
-boolean if changed. Default false
+preprocessed player log
 }
 \description{
 preprocesses player log and returns if it changed. Passes by referennce
