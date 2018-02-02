@@ -36,10 +36,3 @@ position_to_vector <- function(list){
   }
   return(list)
 }
-
-get_goal_position <- function(test, i_goal, onlyXY = F){
-  goal_position <- test$positionSettings$GoalPositions[i_goal, ]
-  if (onlyXY){
-    return(c(goal_position$Position.x, goal_position$Position.z))
-  } else return(goal_position)
-}

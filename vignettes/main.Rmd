@@ -44,12 +44,11 @@ IN case we need a new offset, we can do that as well
 ```{r}
 obj <- translate_positions(obj, c(33.5, 0, 47.75))
 obj <- mirror_axes(obj)
-
 ```
+
+
 # Visualising
-
 Plotting player path
-
 ```{r}
 #set constraints
 obj$map_limits <- list(x = c(-5, 105), y = c(-5, 105))

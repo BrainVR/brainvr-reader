@@ -9,7 +9,7 @@
 #' 
 #' @export
 translate_positions <- function(obj, offset){
-  obj <- transform_object(obj, "mirror", translate_positions_df, translate_positions_list, offset)
+  obj <- transform_object(obj, "translate", translate_positions_df, translate_positions_list, offset)
   return(obj)
 }
 
@@ -44,14 +44,16 @@ resize_layout <- function(obj, multiplier){
 }
 
 #' Loads goal positions to the Brainvr object
-#'
+#' 
+#' Current brainvr experiement already have this in the positions settings files. 
+#' Might reting how this entire thing works in the future
 #' @param obj Brainvr object
 #' @param df data.frame with goal positions. Goal row must correspond to goal order  
 #'
 #' @return
-#' @export
 #'
 #' @examples
+#' @noRd
 add_goal_positions.brainvr <- function(obj, df){
   #VALIDATIONS
   obj$goal_positions <- df
@@ -60,13 +62,16 @@ add_goal_positions.brainvr <- function(obj, df){
 
 #' Adds goal order vector to determine in what order goals came
 #'
+#' Current brainvr experiement already have this in the experiment settings files. 
+#' Might reting how this entire thing works in the future
 #' @param obj Brainvr object
 #' @param order vector of goal order. eg. (1, 3, 5, 1) 
 #'
 #' @return Brainvr object with added field
 #' @export
 #'
-#' @examples 
+#' @examples
+#' @noRd
 add_goal_order.brainvr <- function(obj, order){
   #validate numebr of goals
   #validate if numbers

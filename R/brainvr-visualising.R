@@ -51,3 +51,21 @@ brainvr.plot_trials_paths <- function(obj, columns = 5, indices = c()){
   }
   navr::multiplot(plots, cols = columns)
 }
+
+
+#' Title
+#'
+#' @param plt 
+#' @param obj 
+#' @param trialId 
+#'
+#' @return
+#'
+#' @examples
+#' @noRd
+brainvr.plot_add_trial_start_goal <- function(plt, obj, trialId){
+  ls <- list(goal = get_goal_position.brainvr(obj, trialId), start = get_start_position(obj, trialId))
+  if(is.null(ls$goal)) return(plt)
+  plt <- navr::plot_add_points(plt, ls, color = "green")
+  return(plt)
+}

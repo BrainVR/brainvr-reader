@@ -62,11 +62,28 @@ get_trial_times.brainvr <- function(obj, trialId){
   return(ls)
 }
 
+
+#' Returns position of goal at particular index
+#'
+#' @param obj brainvr object
+#' @param index Goal index
+#' @param onlyXY if only horizontal coordinates shoud be returned
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_goal_position.brainvr <- function(obj, index, onlyXY = T){
+  pos <- obj$data$experiment_log$positions$GoalPositions[index, ]
+  if(onlyXY) return(c(pos$Position.x, pos$Position.z))
+  return(pos)
+}
+
 #' Returns pointing direction during given trial. If there are more than two pointings, selects the first one
-#' If target poistion is passed, also returnes what should have been the correct pointing angle
+#' If target position is passed, also returnes what should have been the correct pointing angle
 #' @param obj BrainvrObject
 #' @param target_pos vector 2 of target position
-#' 
+#' @noRd
 get_trial_pointing <- function(obj, trialId, target_pos = NULL){
   ls <- list()
   quest_log <- get_trial_log.brainvr(obj, trialId)
@@ -106,8 +123,18 @@ get_walked_distnace_timewindow <- function(dt_position, timeWindow){
   return(walkedDistance)
 }
 
-was_force_finished <- function(test, trialID){
-  return(nrow(filter(test$data, Sender == "Trial" & 
-                       Index == (trialID - 1) & 
-                       Event == "ForceFinished")) > 1)
+#' REturns if the trial has been force finished
+#'
+#' @param obj 
+#' @param trialID 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+was_trial_force_finished <- function(obj, trialId){
+  return(nrow(filter(obj$data$experiment_log$data, 
+                      Sender == "Trial" & 
+                      Index == (trialId - 1) & 
+                      Event == "ForceFinished")) > 1)
 }

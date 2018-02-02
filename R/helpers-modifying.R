@@ -51,6 +51,19 @@ resize_positions_df <- function(df, multiplier){
 # DRY HELPERS ----
 # procedure = string with name, only for reporting
 # list function
+
+#' Title
+#'
+#' @param obj Brainvr Object
+#' @param procedure string name of the procedure
+#' @param df_function function to apply to data frames
+#' @param list_function function to apply to lists
+#' @param value value used to transform - usually numeric vector, defines scale, offset etc.
+#'
+#' @return
+#'
+#' @examples
+#' @noRd
 transform_object <- function(obj, procedure, df_function, list_function, value){
   if(missing(value)){
      transformed_player <- df_function(obj$data$player_log)
