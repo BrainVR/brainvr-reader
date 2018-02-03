@@ -13,6 +13,22 @@ plot_trial_path.brainvr <- function(obj, trialId){
   if(length(trialId > 1)) return(brainvr.plot_trials_paths(obj, indices = trialId))
 }
 
+#' Checks if object has map limits variable and adds plot limits if so
+#'
+#' @param plt existing plot
+#' @param obj Brainvr object
+#'
+#' @return
+#' @export
+#'
+#' @examples
+add_limits <- function(plt, obj){
+  if(!is.null(obj$map_limits)){
+    plt <- plt + xlim(obj$map_limits$x)+ ylim(obj$map_limits$y)
+  }
+  return(plt)
+}
+
 #' Plots trial path
 #' 
 #' @param trialId 
@@ -23,9 +39,7 @@ plot_trial_path.brainvr <- function(obj, trialId){
 #' @noRd
 brainvr.plot_trial_path <- function (obj, trialId){
   plt <- navr::create_plot()
-  if(!is.null(obj$map_limits)){
-    plt <- plt + xlim(obj$map_limits$x)+ ylim(obj$map_limits$y)
-  }
+  plt <- add_limits(plt, obj)
   dt_player <- get_trial_log.brainvr(obj, trialId)
   plt <- navr::plot_add_path(plt, dt_player$Position.x, dt_player$Position.z)
   return(plt)
@@ -51,7 +65,6 @@ brainvr.plot_trials_paths <- function(obj, columns = 5, indices = c()){
   }
   navr::multiplot(plots, cols = columns)
 }
-
 
 #' Title
 #'

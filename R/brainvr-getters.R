@@ -48,7 +48,6 @@ get_trial_times.brainvr <- function(obj, trialId){
   df_experiment <- obj$data$experiment_log$data
   #correction for c# indexing
   trialId <- trialId - 1
-  
   ls <- list()
   df_trial <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Index == trialId, ]
   ls$WaitingToStart <-  df_trial[df_trial$Event == "WaitingToStart", "Time"][1]
@@ -62,56 +61,13 @@ get_trial_times.brainvr <- function(obj, trialId){
   return(ls)
 }
 
-
-#' Returns position of goal at particular index
-#'
-#' @param obj brainvr object
-#' @param index Goal index
-#' @param onlyXY if only horizontal coordinates shoud be returned
-#'
-#' @return
-#' @export
-#'
-#' @examples
-get_goal_position.brainvr <- function(obj, index, onlyXY = T){
-  pos <- obj$data$experiment_log$positions$GoalPositions[index, ]
-  if(onlyXY) return(c(pos$Position.x, pos$Position.z))
-  return(pos)
-}
-
-#' Returns pointing direction during given trial. If there are more than two pointings, selects the first one
-#' If target position is passed, also returnes what should have been the correct pointing angle
-#' @param obj BrainvrObject
-#' @param target_pos vector 2 of target position
-#' @noRd
-get_trial_pointing <- function(obj, trialId, target_pos = NULL){
-  ls <- list()
-  quest_log <- get_trial_log.brainvr(obj, trialId)
-  point_situation <- quest_log[Input == "Point", ]
-  ls$target <- NA
-  if(nrow(point_situation) < 1){
-    print(paste0("Warning", "get_trial_pointing", "no point event found"))
-    ls$time <- NA
-    ls$chosen <- NA
-  } else { 
-    point_situation = point_situation[1]
-    player_pos <- c(point_situation$Position.x, point_situation$Position.z)
-    ls$time <- point_situation$Time
-    ls$chosen <- point_situation$Rotation.X
-    if (!is.null(target_pos)){
-      ls$target <- navr::angle_from_positions(player_pos, target_pos)
-    }
-  }
-  return(ls)
-}
-
 get_trial_event_indices <- function(test, event){
   indices <- unique(which(test$data$Sender == "Trial" & test$data$Event == event))
   return(indices + 1)
 }
 
-get_walked_distnace_timewindow <- function(dt_position, timeWindow){
-  dt_position <- get_log_timewindow.brainvr(dt_position, timeWindow$start, timeWindow$finish)
+get_walked_distnace_timewindow <- function(dt_position, timeweindow){
+  dt_position <- get_log_timewindow.brainvr(dt_position, timeweindow$start, timeweindow$finish)
   if (dt_position[, .N] < 2) {
     print("The player log doesn't cover given timewindows")
     walkedDistance <- as.numeric(NA)
