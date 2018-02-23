@@ -3,12 +3,11 @@
 
 #' Preprocesses player log by reference and returs if it was changed for saving purposes
 #' @param player_log loaded DATA.TABLE player log
-#' @param type what type of log we have - depending on the brainvr-unity-framework type of player controller used? Possible types are: "rigidbody", "virtualizer"
 #' @return preprocessed player log
 #' @export
 
 ## TODO - change so that the log is not passed by reference
-preprocess_player_log <- function(player_log, type = "rigidbody"){
+preprocess_player_log <- function(player_log){
   if(!requireNamespace("stringr", quietly = T)){
     print("Cannot continue withouth stringr package. Please install it")
     return(F)
@@ -17,25 +16,8 @@ preprocess_player_log <- function(player_log, type = "rigidbody"){
   player_log <- vector3_to_columns(player_log, "Position")
   ## Adding distance from position
   player_log <- add_distance_moved(player_log)
-  ## Adds rotation difference
-  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.X, "x")
-  if(type == "rigidbody") player_log <- rigidbody_preprocess(player_log)
-  if(type == "virtualizer") player_log <- virtualizer_preprocess(player_log)
+  player_log <- add_angle_differences(player_log)
   return(player_log) 
-}
-
-rigidbody_preprocess <- function(player_log){
-  return(player_log)
-}
-
-virtualizer_preprocess <- function(player_log){
-  ## Adding angle differences
-  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Y, "y")
-  ## Adding angle differences
-  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Virtualizer, "virtualizer")
-  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Controller.x, "controller_x")
-  player_log <- navr::add_angle_difference(player_log, player_log$Rotation.Controller.y, "controller_y")
-  return(player_log)
 }
 
 #' Returns if the player log has been preprocessed 

@@ -5,6 +5,17 @@ add_distance_moved <- function(player_log){
   return(player_log)
 }
 
+add_angle_differences <- function(player_log){
+  cols <- colnames(player_log)
+  for(i in grep("Rotation", cols)){
+    colname <- cols[i]
+    new_name <- gsub("Rotation.", "", colname)
+    new_name <- tolower(gsub("[.]", "_", new_name))
+    player_log <- navr::add_angle_difference(player_log, player_log[[colname]], new_name)
+  }
+  return(player_log)
+}
+
 is_column_present <- function(table, name){
   return(name %in% names(table))
 }

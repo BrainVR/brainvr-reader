@@ -15,6 +15,7 @@ mirror_positions_df <- function(df){
   for (column in rotation_cols){
     df[, (column):= navr::angle_to_360(df[, (get(column) - 180)])]
   }
+  df <- add_angle_differences(df)
   return(df)
 }
 
@@ -45,6 +46,8 @@ resize_positions_df <- function(df, multiplier){
   df$Position.x <- df$Position.x * multiplier
   df$Position.y <- df$Position.y * multiplier
   df$Position.z <- df$Position.z * multiplier
+  # the calulated distances need to be recalculated
+  df <- add_distance_moved(df)
   return(df)
 }
 

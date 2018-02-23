@@ -4,12 +4,10 @@
 \alias{preprocess_player_log}
 \title{preprocesses player log and returns if it changed. Passes by referennce}
 \usage{
-preprocess_player_log(player_log, type = "rigidbody")
+preprocess_player_log(player_log)
 }
 \arguments{
 \item{player_log}{Preprocesses player log by reference and returs if it was changed for saving purposes}
-
-\item{type}{what type of log we have - depending on the brainvr-unity-framework type of player controller used? Possible types are: "rigidbody", "virtualizer"}
 
 \item{player_log}{loaded DATA.TABLE player log}
 }
