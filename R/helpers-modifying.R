@@ -47,7 +47,8 @@ resize_positions_df <- function(df, multiplier){
   df$Position.y <- df$Position.y * multiplier
   df$Position.z <- df$Position.z * multiplier
   # the calulated distances need to be recalculated
-  df <- add_distance_moved(df)
+  # BUT this is tricky, because we only want to do that for player log, not for other tables
+  if(!is.null(df$Time)) df <- add_distance_moved(df)
   return(df)
 }
 
