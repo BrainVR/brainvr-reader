@@ -16,6 +16,6 @@ BrainvrObject <- function(){
   obj$data$player_log <- NA
   obj$data$experiment_log <- NA
   obj$data$results_log <- NA
-  class(obj) <- append(class(obj),"brainvr")
+  class(obj) <- append(class(obj), "brainvr")
   return(obj)
 }

@@ -34,7 +34,7 @@ get_log_timewindow.brainvr <- function(obj, start, end){
 #' @export
 get_trial_log.brainvr <- function(obj, trialId) {
   timewindow <- get_trial_times.brainvr(obj, trialId)
-  return(get_log_timewindow.brainvr(obj, timewindow$start, timewindow$finish))
+  return(get_log_timewindow.brainvr(obj, timewindow$start, timewindow$end))
 }
 
 #' Gets start and finish times of trial
@@ -54,11 +54,38 @@ get_trial_times.brainvr <- function(obj, trialId){
   ls$start <- df_trial[df_trial$Event == "Running", "Time"][1]
   #selects only hte first element - its because fome of hte old logs had potential two finished tiems 
   #if the experiment or trial was force finished before closed (finished effectively twice)
-  ls$finish <- df_trial[df_trial$Event == "Finished", "Time"][1]
+  ls$end <- df_trial[df_trial$Event == "Finished", "Time"][1]
   #replaces missing values with NAs
   newValues <- sapply(ls, function(x) if(length(x)== 0) {x <- as.numeric(NA)} else {x <- x})
   ls <- as.list(newValues)
   return(ls)
+}
+
+#' Returns how long the trial took and removes potential pauses in the log
+#'
+#' @param obj BrainVr object with preprocessed player log
+#' @param trialId 
+#' @param pause_limit minimum time to be considered pause
+#' @param path_limit maximum distance to be considered not moving
+#' @param without_pauses Defaults to true
+#'
+#' @return 
+#' @export
+#'
+#' @examples
+get_trial_duration.brainvr <- function(obj, trialId, without_pauses = T, pause_limit = 10, path_limit = 2){
+  times <- get_trial_times.brainvr(obj, trialId)
+  log <- get_trial_log.brainvr(obj, trialId)
+  freq <- round(pause_limit/mean(diff(log$Time[1:100]))) #how many rows is the pause
+  if(without_pauses){
+    distance_in_limit <- navr::rolling_sum(log$distance, freq)
+    is_stationary <- distance_in_limit < path_limit
+    pause_time <- sum(is_stationary * 1/freq)
+    dur <- times$end - times$start - pause_time
+  } else {
+    dur <- times$end - times$start
+  }
+  return(dur)
 }
 
 get_trial_event_indices <- function(test, event){
