@@ -5,7 +5,7 @@
 \title{Returns how long the trial took and removes potential pauses in the log}
 \usage{
 \method{get_trial_duration}{brainvr}(obj, trialId, without_pauses = T,
-  pause_limit = 10, path_limit = 2)
+  pause_limit = 5, path_limit = 1)
 }
 \arguments{
 \item{obj}{BrainVr object with preprocessed player log}
@@ -14,9 +14,9 @@
 
 \item{without_pauses}{Defaults to true}
 
-\item{pause_limit}{minimum time to be considered pause}
+\item{pause_limit}{minimum time to be considered pause. Defaults to 5}
 
-\item{path_limit}{maximum distance to be considered not moving}
+\item{path_limit}{maximum distance to be considered not moving. Defaults to 1}
 }
 \description{
 Returns how long the trial took and removes potential pauses in the log

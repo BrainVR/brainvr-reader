@@ -65,25 +65,25 @@ get_trial_times.brainvr <- function(obj, trialId){
 #'
 #' @param obj BrainVr object with preprocessed player log
 #' @param trialId 
-#' @param pause_limit minimum time to be considered pause
-#' @param path_limit maximum distance to be considered not moving
+#' @param pause_limit minimum time to be considered pause. Defaults to 5
+#' @param path_limit maximum distance to be considered not moving. Defaults to 1
 #' @param without_pauses Defaults to true
 #'
 #' @return 
 #' @export
 #'
 #' @examples
-get_trial_duration.brainvr <- function(obj, trialId, without_pauses = T, pause_limit = 10, path_limit = 2){
+get_trial_duration.brainvr <- function(obj, trialId, without_pauses = T, pause_limit = 5, path_limit = 1){
   times <- get_trial_times.brainvr(obj, trialId)
-  log <- get_trial_log.brainvr(obj, trialId)
-  freq <- round(pause_limit/mean(diff(log$Time[1:100]))) #how many rows is the pause
+  dur <- times$end - times$start
   if(without_pauses){
+    log <- get_trial_log.brainvr(obj, trialId)
+    freq <- round(pause_limit/mean(diff(log$Time[1:100]))) #how many rows is the pause
     distance_in_limit <- navr::rolling_sum(log$distance, freq)
+    if(is.null(distance_in_limit)) return(dur) #trial shorter than pause
     is_stationary <- distance_in_limit < path_limit
     pause_time <- sum(is_stationary * 1/freq)
-    dur <- times$end - times$start - pause_time
-  } else {
-    dur <- times$end - times$start
+    dur <- dur - pause_time
   }
   return(dur)
 }
