@@ -88,6 +88,20 @@ get_trial_duration.brainvr <- function(obj, trialId, without_pauses = T, pause_l
   return(dur)
 }
 
+#' Returns walked distance in a particular trial
+#'
+#' @param obj 
+#' @param trialId 
+#'
+#' @return 
+#' @export
+#'
+#' @examples
+get_trial_distance.brainvr <- function(obj, trialId){
+  log <- get_trial_log.brainvr(obj$walk, trialId)
+  return(diff(range(log$cumulative_distance)))
+}
+
 get_trial_event_indices <- function(test, event){
   indices <- unique(which(test$data$Sender == "Trial" & test$data$Event == event))
   return(indices + 1)
