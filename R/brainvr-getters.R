@@ -98,7 +98,7 @@ get_trial_duration.brainvr <- function(obj, trialId, without_pauses = T, pause_l
 #'
 #' @examples
 get_trial_distance.brainvr <- function(obj, trialId){
-  log <- get_trial_log.brainvr(obj$walk, trialId)
+  log <- get_trial_log.brainvr(obj, trialId)
   return(diff(range(log$cumulative_distance)))
 }
 
