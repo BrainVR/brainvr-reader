@@ -52,6 +52,7 @@ load_experiment <- function(folder, objectFun = BrainvrObject, exp_timestamp = N
   obj$data$experiment_log <- test_logs[[1]]
   obj$experiment_name <- obj$data$experiment_log$name
   #obj$data$results_log <- results_log
+  
   return (obj)
 }
 
