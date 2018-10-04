@@ -4,7 +4,8 @@
 \alias{open_experiment_info}
 \title{Searches the directory for experiment log files. Returs single one if multiple are found}
 \usage{
-open_experiment_info(directory, log_timestamp = NULL, returnSingle = FALSE)
+open_experiment_info(directory, log_timestamp = NULL,
+  returnSingle = FALSE)
 }
 \arguments{
 \item{directory}{path to the directory where to search}

@@ -4,7 +4,8 @@
 \alias{load_experiment}
 \title{Loads files form a folder into BrainvrObject}
 \usage{
-load_experiment(folder, objectFun = BrainvrObject, exp_timestamp = NULL)
+load_experiment(folder, objectFun = BrainvrObject,
+  exp_timestamp = NULL)
 }
 \arguments{
 \item{folder}{path to the folder respective to the working directory}

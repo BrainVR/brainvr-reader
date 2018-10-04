@@ -1,12 +1,8 @@
-#' preprocesses player log and returns if it changed. Passes by referennce
-#' @param player_log 
-
-#' Preprocesses player log by reference and returs if it was changed for saving purposes
+#' Preprocesses player log and returns it
 #' @param player_log loaded DATA.TABLE player log
 #' @return preprocessed player log
 #' @export
 
-## TODO - change so that the log is not passed by reference
 preprocess_player_log <- function(player_log){
   if(!requireNamespace("stringr", quietly = T)){
     print("Cannot continue withouth stringr package. Please install it")

@@ -2,18 +2,16 @@
 % Please edit documentation in R/brainvr-preprocessing.R
 \name{preprocess_player_log}
 \alias{preprocess_player_log}
-\title{preprocesses player log and returns if it changed. Passes by referennce}
+\title{Preprocesses player log and returns it}
 \usage{
 preprocess_player_log(player_log)
 }
 \arguments{
-\item{player_log}{Preprocesses player log by reference and returs if it was changed for saving purposes}
-
 \item{player_log}{loaded DATA.TABLE player log}
 }
 \value{
 preprocessed player log
 }
 \description{
-preprocesses player log and returns if it changed. Passes by referennce
+Preprocesses player log and returns it
 }

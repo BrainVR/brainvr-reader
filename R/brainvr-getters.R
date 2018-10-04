@@ -10,6 +10,10 @@ get_log.brainvr <- function(obj){
   return(obj$data$player_log)
 }
 
+get_experiment_log <- function(obj){
+  return(obj$data$experiment_log$data)
+}
+
 #' Returns log between designated times
 #'
 #' @param obj 
@@ -45,7 +49,7 @@ get_trial_log.brainvr <- function(obj, trialId) {
 #' 
 #' @export
 get_trial_times.brainvr <- function(obj, trialId){
-  df_experiment <- obj$data$experiment_log$data
+  df_experiment <- get_experiment_log(obj)
   #correction for c# indexing
   trialId <- trialId - 1
   ls <- list()
@@ -118,6 +122,20 @@ get_walked_distnace_timewindow <- function(dt_position, timeweindow){
     walkedDistance <- end - start
   }
   return(walkedDistance)
+}
+
+#' Returns which trials were finished
+#'
+#' @param obj Brainvr object
+#'
+#' @return indices of finished trials
+#' @export
+#'
+#' @examples 
+get_finished_trials <- function(obj){
+  df_experiment <- get_experiment_log(obj)
+  indices <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Event == "Finished", "Index"]
+  return(indices)
 }
 
 #' REturns if the trial has been force finished
