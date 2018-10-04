@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Searches a directory for a player log. Returns player log data.table — open_player_log • brainvr.R</title>
+<title>Smooths positions and recalculates distances — smooth_positions.brainvr • brainvr.R</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Searches a directory for a player log. Returns player log data.table — open_player_log" />
+<meta property="og:title" content="Smooths positions and recalculates distances — smooth_positions.brainvr" />
 
-<meta property="og:description" content="Searches a directory for a player log. Returns player log data.table" />
+<meta property="og:description" content="Smooths positions and recalculates distances" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,39 +104,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Searches a directory for a player log. Returns player log data.table</h1>
+    <h1>Smooths positions and recalculates distances</h1>
     
-    <div class="hidden name"><code>open_player_log.Rd</code></div>
+    <div class="hidden name"><code>smooth_positions.brainvr.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Searches a directory for a player log. Returns player log data.table</p>
+    <p>Smooths positions and recalculates distances</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>open_player_log</span>(<span class='no'>directory</span>, <span class='kw'>log_timestamp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>override</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>smooth_positions.brainvr</span>(<span class='no'>obj</span>, <span class='no'>type</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>directory</th>
-      <td><p>where the log should be located</p></td>
+      <th>obj</th>
+      <td><p>Brainvr object</p></td>
     </tr>
     <tr>
-      <th>log_timestamp</th>
-      <td><p>provides timestamp of a log to load</p></td>
+      <th>type</th>
+      <td><p>median, spline</p></td>
     </tr>
     <tr>
-      <th>override</th>
-      <td><p>if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present</p></td>
+      <th>...</th>
+      <td><p>optional parameters for the smoothing. VIZ. navr::smooth_positions_df</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.table with the loaded player log or NULL.</p>
+    <p>Brainvr object with smoothed positions</p>
     
 
   </div>

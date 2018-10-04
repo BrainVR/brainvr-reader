@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">brainvr.R</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">brainvr.R</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -77,6 +90,7 @@
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -84,174 +98,181 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.1.1</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_goal_order.brainvr.html">add_goal_order</a></code> </p>
-          </td>
-          <td><p>Adds goal order vector to determine in what order goals came</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_goal_positions.brainvr.html">add_goal_positions</a></code> </p>
-          </td>
-          <td><p>Loads goal positions to the Brainvr object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="BrainvrObject.html">BrainvrObject</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="export_player_log.html">export_player_log</a></code> </p>
-          </td>
-          <td><p>Exports preprocessed player log</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_log.brainvr.html">get_log</a></code> </p>
-          </td>
-          <td><p>Returns entire player log</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_log_timewindow.brainvr.html">get_log_timewindow</a></code> </p>
-          </td>
-          <td><p>Returns log between designated times</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_trial_log.brainvr.html">get_trial_log</a></code> </p>
-          </td>
-          <td><p>Returns data.table with player log for a particular trial</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_trial_pointing.html">get_trial_pointing</a></code> </p>
-          </td>
-          <td><p>Returns pointing direction during given trial. If there are more than two pointings, selects the first one
-If target poistion is passed, also returnes what should have been the correct pointing angle</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_trial_times.brainvr.html">get_trial_times</a></code> </p>
-          </td>
-          <td><p>Gets start and finish times of trial</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="is_player_preprocessed.html">is_player_preprocessed</a></code> </p>
-          </td>
-          <td><p>Returns if the player log has been preprocessed</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_experiment.html">load_experiment</a></code> </p>
-          </td>
-          <td><p>Loads files form a folder into BrainvrObject</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_experiment_info.html">load_experiment_info</a></code> </p>
-          </td>
-          <td><p>Loads particular info file into a list</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_experiment_log.html">load_experiment_log</a></code> </p>
-          </td>
-          <td><p>Loads expeirment log into a predefined list</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_experiments.html">load_experiments</a></code> </p>
-          </td>
-          <td><p>Goes through the folder and loads every experiment info into separate object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mirror_axes.html">mirror_axes</a></code> </p>
-          </td>
-          <td><p>Mirrors X and Y to negative and recomputes rotation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="open_experiment_info.html">open_experiment_info</a></code> </p>
-          </td>
-          <td><p>Searches the directory for experiment log files. Returs single one if multiple are found</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="open_experiment_logs.html">open_experiment_logs</a></code> </p>
-          </td>
-          <td><p>Iterates over all _test_ files in a folder asnd saves them one by one to a return list</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="open_player_log.html">open_player_log</a></code> </p>
-          </td>
-          <td><p>Searches a directory for a player log. Returns player log data.table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_trial_path.brainvr.html">plot_trial_path</a></code> </p>
-          </td>
-          <td><p>Plots trial path</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="preprocess_player_log.html">preprocess_player_log</a></code> </p>
-          </td>
-          <td><p>preprocesses player log and returns if it changed. Passes by referennce</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="resize_layout.html">resize_layout</a></code> </p>
-          </td>
-          <td><p>Resizes the map to fit the new constraints.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_preprocessed_player.html">save_preprocessed_player</a></code> </p>
-          </td>
-          <td><p>Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="add_limits.html">add_limits()</a></code> </p>
+        </td>
+        <td><p>Checks if object has map limits variable and adds plot limits if so</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="BrainvrObject.html">BrainvrObject()</a></code> </p>
+        </td>
+        <td><p>Title</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="export_player_log.html">export_player_log()</a></code> </p>
+        </td>
+        <td><p>Exports preprocessed player log</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_log.brainvr.html">get_log(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Returns entire player log</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_log_timewindow.brainvr.html">get_log_timewindow(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Returns log between designated times</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_trial_distance.brainvr.html">get_trial_distance(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Returns walked distance in a particular trial</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_trial_duration.brainvr.html">get_trial_duration(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Returns how long the trial took and removes potential pauses in the log</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_trial_log.brainvr.html">get_trial_log(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Returns data.table with player log for a particular trial</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_trial_times.brainvr.html">get_trial_times(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Gets start and finish times of trial</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_player_preprocessed.html">is_player_preprocessed()</a></code> </p>
+        </td>
+        <td><p>Returns if the player log has been preprocessed</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_experiment.html">load_experiment()</a></code> </p>
+        </td>
+        <td><p>Loads files form a folder into BrainvrObject</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_experiments.html">load_experiments()</a></code> </p>
+        </td>
+        <td><p>Goes through the folder and loads every experiment info into separate object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_experiment_info.html">load_experiment_info()</a></code> </p>
+        </td>
+        <td><p>Loads particular info file into a list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="load_experiment_log.html">load_experiment_log()</a></code> </p>
+        </td>
+        <td><p>Loads expeirment log into a predefined list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mirror_axes.html">mirror_axes()</a></code> </p>
+        </td>
+        <td><p>Mirrors X and Y to negative and recomputes rotation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_experiment_info.html">open_experiment_info()</a></code> </p>
+        </td>
+        <td><p>Searches the directory for experiment log files. Returs single one if multiple are found</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_experiment_logs.html">open_experiment_logs()</a></code> </p>
+        </td>
+        <td><p>Iterates over all _test_ files in a folder asnd saves them one by one to a return list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_player_log.html">open_player_log()</a></code> </p>
+        </td>
+        <td><p>Searches a directory for a player log. Returns player log data.table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_trial_path.brainvr.html">plot_trial_path(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plots trial path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="preprocess_player_log.html">preprocess_player_log()</a></code> </p>
+        </td>
+        <td><p>preprocesses player log and returns if it changed. Passes by referennce</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="resize_layout.html">resize_layout()</a></code> </p>
+        </td>
+        <td><p>Resizes the map to fit the new constraints.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="save_preprocessed_player.html">save_preprocessed_player()</a></code> </p>
+        </td>
+        <td><p>Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
 If there are multiple player logs in the folder,takes the name from the first available</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="translate_positions.html">translate_positions</a></code> </p>
-          </td>
-          <td><p>Moves all positions to correspond to the new 0, 0 coordinate</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="smooth_positions.brainvr.html">smooth_positions.brainvr()</a></code> </p>
+        </td>
+        <td><p>Smooths positions and recalculates distances</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="translate_positions.html">translate_positions()</a></code> </p>
+        </td>
+        <td><p>Moves all positions to correspond to the new 0, 0 coordinate</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="was_trial_force_finished.html">was_trial_force_finished()</a></code> </p>
+        </td>
+        <td><p>REturns if the trial has been force finished</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -274,5 +295,8 @@ If there are multiple player logs in the folder,takes the name from the first av
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
