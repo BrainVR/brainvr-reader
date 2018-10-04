@@ -10,8 +10,28 @@ get_log.brainvr <- function(obj){
   return(obj$data$player_log)
 }
 
+#' Returns experiment log data
+#'
+#' @param obj Brainvr object
+#'
+#' @return Dataframe with all experiment events
+#' @export
+#'
+#' @examples
 get_experiment_log <- function(obj){
   return(obj$data$experiment_log$data)
+}
+
+#' Returns experiment settings in a list
+#'
+#' @param obj Brainvr Object
+#'
+#' @return List with saved experiment settings
+#' @export
+#'
+#' @examples
+get_experiment_settings <- function(obj){
+  return(obj$data$experiment_log$settings)
 }
 
 #' Returns log between designated times
