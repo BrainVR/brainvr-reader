@@ -91,7 +91,7 @@
 dir_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"brainvr.R"</span>)
 obj &lt;-<span class="st"> </span><span class="kw">load_experiment</span>(dir_path)
 <span class="co">#&gt; [1] "Returning only one experiment log."</span>
-<span class="co">#&gt; [1] "Loading unprocessed player log_player_.*17-41-52-03-12-2017"</span></code></pre></div>
+<span class="co">#&gt; [1] "Loading preprocessed player log_player_.*17-41-52-03-12-2017"</span></code></pre></div>
 </div>
 <div id="preprocessing-and-saving-dta" class="section level1">
 <h1 class="hasAnchor">
@@ -99,8 +99,7 @@ obj &lt;-<span class="st"> </span><span class="kw">load_experiment</span>(dir_pa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="op">!</span><span class="kw">is_player_preprocessed</span>(obj<span class="op">$</span>data<span class="op">$</span>player_log)){
   obj<span class="op">$</span>data<span class="op">$</span>player_log &lt;-<span class="st"> </span><span class="kw">preprocess_player_log</span>(obj<span class="op">$</span>data<span class="op">$</span>player_log)
   <span class="kw">save_preprocessed_player</span>(dir_path, obj<span class="op">$</span>data<span class="op">$</span>player_log, obj<span class="op">$</span>timestamp)
-}
-<span class="co">#&gt; [1] "Saving processed player log asC:/Program Files/R/R-3.5.1/library/brainvr.R/extdata/NEO_player_17-41-52-03-12-2017_preprocessed.txt"</span></code></pre></div>
+}</code></pre></div>
 <p>The next time you are loading the log, you will load the processed automatically</p>
 <p>Loading processed player log</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">obj &lt;-<span class="st"> </span><span class="kw">load_experiment</span>(dir_path)
