@@ -4,10 +4,10 @@
 \alias{preprocess_player_log}
 \title{Preprocesses player log and returns it}
 \usage{
-preprocess_player_log(player_log)
+preprocess_player_log(navr_object)
 }
 \arguments{
-\item{player_log}{loaded DATA.TABLE player log}
+\item{navr_object}{loaded NavrObject}
 }
 \value{
 preprocessed player log

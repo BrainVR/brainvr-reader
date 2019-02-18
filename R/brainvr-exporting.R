@@ -6,12 +6,12 @@
 #' 
 #' 
 #' DOESN'T WORK ... need to fix all the getters
-export_player_log = function(playerLog, id, path = getwd()){
-  playerLog[, Position := NULL]
-  filePath = paste(path, "/", id, "_player.log", sep = "")
-  colnames(playerLog) = c("Time", "RotationX", "RotationY", "FPS", "Input", "PositionX", 
+export_position_log <- function(log, id, path = getwd()){
+  log[, Position := NULL]
+  filePath <- paste(path, "/", id, "_player.log", sep = "")
+  colnames(log) <- c("Time", "RotationX", "RotationY", "FPS", "Input", "PositionX", 
                           "PositionY", "PositionZ", "distance", "cummulativeDistance", "angleDiff")
-  write.table(playerLog, filePath, sep = ";", quote = F, row.names = F)
+  write.table(log, filePath, sep = ";", quote = F, row.names = F)
 }
 
 collect_events <- function(test, dt_player){

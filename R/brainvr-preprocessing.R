@@ -1,19 +1,13 @@
 #' Preprocesses player log and returns it
-#' @param player_log loaded DATA.TABLE player log
+#' @param navr_object loaded NavrObject
 #' @return preprocessed player log
 #' @export
-
-preprocess_player_log <- function(player_log){
-  if(!requireNamespace("stringr", quietly = T)){
-    print("Cannot continue withouth stringr package. Please install it")
-    return(F)
-  }
-  ## Converting position
-  player_log <- vector3_to_columns(player_log, "Position")
+preprocess_player_log <- function(navr_object){
   ## Adding distance from position
-  player_log <- add_distance_moved(player_log)
-  player_log <- add_angle_differences(player_log)
-  return(player_log) 
+  navr_object <- navr::add_distances(navr_object)
+  ## TODO - make it work again
+  #player_log <- add_angle_differences(player_log)
+  return(navr_object) 
 }
 
 #' Returns if the player log has been preprocessed 
@@ -25,7 +19,7 @@ preprocess_player_log <- function(player_log){
 #'
 #' @examples
 is_player_preprocessed <- function(player_log){
-  return(is_column_present(player_log, "Position.x"))
+  return(is_column_present(player_log, "position_x"))
 }
 
 #' Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
@@ -36,7 +30,7 @@ is_player_preprocessed <- function(player_log){
 #' @return 
 #' 
 #' @export
-save_preprocessed_player <- function(directory, player_log, exp_timestamp = NULL, orig_filename = NULL){
+save_preprocessed_player <- function(directory, exp_timestamp = NULL, log, orig_filename = NULL){
   if(is.null(orig_filename)) {
     ptr <- create_log_search_pattern("player", exp_timestamp)
     logs <- list.files(directory, pattern = ptr, full.names = T)
@@ -50,6 +44,6 @@ save_preprocessed_player <- function(directory, player_log, exp_timestamp = NULL
     preprocessed_filename <- gsub(".txt","_preprocessed.txt", filename)
   }
   print(paste0("Saving processed player log as", preprocessed_filename))
-  write.table(format(player_log, digits = 4), preprocessed_filename, sep = ";", 
+  write.table(format(log, digits = 4), preprocessed_filename, sep = ";", 
               dec = ".", quote = F, row.names = F)
 }

@@ -69,6 +69,9 @@ resize_positions_df <- function(df, multiplier){
 #' @examples
 #' @noRd
 transform_object <- function(obj, procedure, df_function, list_function, value){
+  UseMethod('transform_object')
+}
+transform_object.brainvr <- function(obj, procedure, df_function, list_function, value){
   if(missing(value)){
      transformed_player <- df_function(obj$data$player_log)
   } else {

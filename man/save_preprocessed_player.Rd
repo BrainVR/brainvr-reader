@@ -5,15 +5,15 @@
 \title{Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
 If there are multiple player logs in the folder,takes the name from the first available}
 \usage{
-save_preprocessed_player(directory, player_log, exp_timestamp = NULL,
+save_preprocessed_player(directory, exp_timestamp = NULL, log,
   orig_filename = NULL)
 }
 \arguments{
 \item{directory}{Where shoudl i save the file. Should end with a slash!}
 
-\item{player_log}{table to be saved}
-
 \item{orig_filename}{what is the name of the original file}
+
+\item{player_log}{table to be saved}
 }
 \value{
 

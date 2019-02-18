@@ -4,10 +4,6 @@ library(brainvr.R)
 
 dir_path <- "inst/extdata/"
 obj <- load_experiment(dir_path, exp_timestamp = '17-41-52-03-12-2017')
-if(!is_player_preprocessed(obj$data$player_log)){
-  obj$data$player_log <- preprocess_player_log(obj$data$player_log, type = "virtualizer")
-  save_preprocessed_player(dir_path, obj$data$player_log, obj$timestamp)
-}
 obj <- translate_positions(obj, c(33.5, 0, 47.75))
 obj <- mirror_axes(obj)
 obj <- resize_layout(obj, 0.01)
@@ -28,8 +24,6 @@ sop <- load_experiment(sop_dir, exp_timestamp = '18-07-09-03-12-2017')
 obj <- add_goal_positions(obj, obj$data$experiment_log$positions$GoalPositions)
 obj <- add_goal_order(obj, obj$data$experiment_log$settings$GoalOrder + 1)
 
-dir_path <- "D:/OneDrive/Vyzkum/Davis/Transfer/Data/tw1_27-01-2018/tw1_player_13-57-51-27-01-2018.txt"
-obj <- load_experiment(dir_path, exp_timestamp = '13-57-51-27-01-2018')
 
 for(i in 1:12){
   print(get_trial_duration(obj,i))

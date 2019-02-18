@@ -1,10 +1,8 @@
 #' Goes through the folder and loads every experiment info into separate object 
 #' @param folder where to look
-#' @param objectFun what function to create the object that will hold the info
 #' @return list of objecs
 #' @export 
-
-load_experiments <- function(folder, objectFun){
+load_experiments <- function(folder){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_infos <- open_experiment_info(folder)
@@ -15,7 +13,7 @@ load_experiments <- function(folder, objectFun){
   ls <- list()
   i <- 1 
   for(info in experiment_infos){
-    ls[[i]] <- load_experiment(folder, objectFun, exp_timestamp = info$header$Timestamp)
+    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp)
     i <- i + 1
   }
   return(ls)
@@ -23,11 +21,10 @@ load_experiments <- function(folder, objectFun){
 
 #' Loads files form a folder into BrainvrObject
 #' @param folder path to the folder respective to the working directory
-#' @param obj created BrainvrObject to fill in data. If none passed, new one gets created
 #' @returns BrainvrObject object
 #' @example 
 #' @export
-load_experiment <- function(folder, objectFun = BrainvrObject, exp_timestamp = NULL){
+load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_info <- open_experiment_info(folder, log_timestamp = exp_timestamp, returnSingle = T)
@@ -36,18 +33,18 @@ load_experiment <- function(folder, objectFun = BrainvrObject, exp_timestamp = N
   #if multiple logs or no logs, quit
   if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
-  player_log <- open_player_log(folder, log_timestamp = exp_timestamp, override = FALSE)
-  if(is.null(player_log)) stop("Player log not found")
+  navr_object <- open_player_log(folder, log_timestamp = exp_timestamp, override = override)
+  if(is.null(navr_object)) stop("Player log not found")
   #preprocesses player log
   #checks if there is everything we need and if not, recomputes the stuff
   
   test_logs <- open_experiment_logs(folder, exp_timestamp)
   
-  obj <- objectFun()
+  obj <- BrainvrObject()
   obj$participant_id <- experiment_info$header$Participant
   obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
-  obj$data$player_log <- player_log
+  obj$data$position <- navr_object
   ##TODO - redo this part
   obj$data$experiment_log <- test_logs[[1]]
   obj$experiment_name <- obj$data$experiment_log$name
@@ -72,8 +69,6 @@ load_experiment_info <- function(filepath){
 #' 
 #' @param filepath path tot he expeirment log
 #' @return list with loaded settings files and data
-#' @export
-
 load_experiment_log <- function(filepath){
   ls <- list()
   #reads into a text file at first
@@ -144,52 +139,60 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
 #' @param override if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present
 #' @return data.table with the loaded player log or NULL.
 #' @import data.table
-open_player_log <- function(directory, log_timestamp = NULL, override = F){
-  ptr <- create_log_search_pattern("player", log_timestamp)
-  logs <- list.files(directory, pattern = ptr, full.names = T)
-  if(length(logs) < 1){
-    print(paste0("Could not find the file for player log in ", directory))
-    return(NULL)
-  }
-  log_columns_types <- c(Time = "numeric", Position = "numeric", Rotation.X = "numeric", 
-                         Rotation.Y = "numeric", FPS = "numeric", Input = "character")
-  preprocessed_log_column_types <- c(log_columns_types, Position.x = "numeric", Position.y = "numeric", Position.z = "numeric", 
-                                     distance = "numeric", cumulative_distance = "numeric", angle_diff_x = "numeric")
-  if (length(logs) > 1){
-    #check if there is a preprocessed player file
-    preprocessed_index <- grep("*_preprocessed", logs)
-    if(length(preprocessed_index) > 0){
-      if(override){
-        print(paste0("Removing preprocessed log", ptr))
-        file.remove(logs[preprocessed_index])
-      } else {
-        print(paste0("Loading preprocessed player log", ptr))
-        log <- logs[preprocessed_index]
-        return(fread(log, header = T, sep = ";", dec = ".", stringsAsFactors = F, 
-                     colClasses = preprocessed_log_column_types))
-      }
-    } else{
-      print("There is more player logs with appropriate timestamp in the same folder. Have you named and stored everything appropriately?")
-      return(NULL)
-    }
-  } else {
-    if(length(logs) > 1){
-      print(paste0("Multiple player logs in ", directory))
-      return(NULL)
-    } 
-    log <- logs[1]
-  }
-  print(paste0("Loading unprocessed player log", ptr))
-  #reads into a text file at first
-  text <- readLines(log, warn = F)
+open_player_log <- function(directory, log_timestamp = NULL, override = F, save = T){
+  ls_log_path <- find_player_path(directory, log_timestamp)
   
-  bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end
+  if(length(ls_log_path$path) == 0) return(NULL)
+  if(length(ls_log_path$path_preprocessed) > 0){
+    if(override){
+      print(paste0("Removing preprocessed log", ls_log_path$path_preprocessed))
+      file.remove(ls_log_path$path_preprocessed)
+    } else {
+      print(paste0("Loading preprocessed player log", ls_log_path$path_preprocessed))
+      #TODO - remove data.table
+      navr_object <- navr::NavrObject()
+      navr_object$data <- fread(ls_log_path$path_preprocessed, header = T, sep = ";", dec = ".", stringsAsFactors = F)
+      return(navr_object)
+    }
+  }
+  #log_columns_types <- c(Time = "numeric", Position = "numeric", Rotation.X = "numeric", 
+  #                       Rotation.Y = "numeric", FPS = "numeric", Input = "character")
+  #preprocessed_log_column_types <- c(log_columns_types, position_x = "numeric", position_y = "numeric", position_z = "numeric", 
+  #                                   distance = "numeric", cumulative_distance = "numeric", angle_diff_x = "numeric")
+  print(paste0("Loading unprocessed player log", ls_log_path$path))
+  text <- readLines(ls_log_path$path, warn = F) #TODO - chagne so it doesn't read text so friggin much :(
+  bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end #get beginning of the log
   #reads the data without the header file
-  pos_tab <- fread(log, header = T, sep = ";", dec=".", skip = bottomHeaderIndex, 
-                   stringsAsFactors = F, colClasses = log_columns_types)
+  #TODO - remove data.table
+  df_position <- fread(ls_log_path$path, header = T, sep = ";", dec=".", skip = bottomHeaderIndex, stringsAsFactors = F)
   #deletes the last column - it's there for the easier logging from unity 
   # - its here because of how preprocessing works
-  pos_tab[, ncol(pos_tab) := NULL]
-  
-  return(pos_tab)
+  df_position[, ncol(df_position) := NULL]
+  df_position <- prepare_navr_log(df_position)
+  navr_object <- navr::NavrObject()
+  navr_object$data <- df_position
+  navr_object <- preprocess_player_log(navr_object)
+  ### SAVES
+  if(save) save_preprocessed_player(directory, log_timestamp, navr_object$data)
+  return(navr_object)
+}
+
+find_player_path <- function(directory, log_timestamp = NULL){
+  ls <- list(path="", preprocessed_path="")
+  ptr <- create_log_search_pattern("player", log_timestamp)
+  logs <- list.files(directory, pattern = ptr, full.names = T)
+  if(length(logs) == 0)   print(paste0("Could not find the file for player log in ", directory))
+  if(length(logs) > 2) print(paste0("Multiple player logs in ", directory))
+  if(length(logs) == 1) ls$path <- logs[1]
+  if(length(logs) == 2){
+    #check if there is a preprocessed player file
+    preprocessed_index <- grep("*_preprocessed", logs)
+    if(length(preprocessed_index) == 1){
+      ls$preprocessed_path <- logs[preprocessed_index]
+      ls$path <- logs[-preprocessed_index]
+    } else{
+      print("There is more player logs with appropriate timestamp in the same folder. Have you named and stored everything appropriately?")
+    }
+  }
+  return(ls)
 }

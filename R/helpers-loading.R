@@ -13,6 +13,8 @@ create_separator <- function(string){
   return(ls)
 }
 
+### TODO
+### Can massively speed it up if only reads part of the text or do it line by line
 get_indicies_between = function(text, string){
   ls <- list()
   ls$beginning <- which(grepl(create_separator(string)$beginning, text))

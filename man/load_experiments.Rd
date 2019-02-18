@@ -4,12 +4,10 @@
 \alias{load_experiments}
 \title{Goes through the folder and loads every experiment info into separate object}
 \usage{
-load_experiments(folder, objectFun)
+load_experiments(folder)
 }
 \arguments{
 \item{folder}{where to look}
-
-\item{objectFun}{what function to create the object that will hold the info}
 }
 \value{
 list of objecs

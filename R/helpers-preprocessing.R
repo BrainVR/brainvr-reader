@@ -1,10 +1,19 @@
-#calculates the distance walked between each two points of the position table and returns the table
-add_distance_moved <- function(player_log){
-  player_log[, distance := navr::euclid_distance_between_rows(data.frame(Position.x, Position.z))]
-  player_log[, cumulative_distance := cumsum(distance)]
-  return(player_log)
+prepare_navr_log <- function(position_log){
+  #renames timestamp
+  # TODO - more elegant solution
+  rename_column(position_log, "Time", "timestamp")
+  rename_column(position_log, "Rotation.X", "rotation_x")
+  rename_column(position_log, "Rotation.Y", "rotation_y")
+  if(!requireNamespace("stringr", quietly = T)){
+    print("Cannot continue withouth stringr package. Please install it")
+    return(F)
+  }
+  ## Converting position
+  position_log <- vector3_to_columns(position_log)
+  #TODO - remove data.table
+  position_log[, Position:= NULL]
+  return(position_log)
 }
-
 add_angle_differences <- function(player_log){
   cols <- colnames(player_log)
   for(i in grep("Rotation", cols)){
@@ -18,6 +27,10 @@ add_angle_differences <- function(player_log){
 
 is_column_present <- function(table, name){
   return(name %in% names(table))
+}
+
+rename_column <- function(df, old_column, new_column){
+  colnames(df)[colnames(df)==old_column] <- new_column
 }
 
 json_to_list <- function(text){
