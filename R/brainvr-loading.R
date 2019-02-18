@@ -178,7 +178,7 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
 }
 
 find_player_path <- function(directory, log_timestamp = NULL){
-  ls <- list(path="", preprocessed_path="")
+  ls <- list(path="", path_preprocessed="")
   ptr <- create_log_search_pattern("player", log_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) == 0)   print(paste0("Could not find the file for player log in ", directory))
@@ -188,7 +188,7 @@ find_player_path <- function(directory, log_timestamp = NULL){
     #check if there is a preprocessed player file
     preprocessed_index <- grep("*_preprocessed", logs)
     if(length(preprocessed_index) == 1){
-      ls$preprocessed_path <- logs[preprocessed_index]
+      ls$path_preprocessed <- logs[preprocessed_index]
       ls$path <- logs[-preprocessed_index]
     } else{
       print("There is more player logs with appropriate timestamp in the same folder. Have you named and stored everything appropriately?")
