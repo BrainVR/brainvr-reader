@@ -6,10 +6,7 @@ load_experiments <- function(folder){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_infos <- open_experiment_info(folder)
-  
   if(is.null(experiment_infos)) stop("Experiment info not found")
-  
-  # else
   ls <- list()
   i <- 1 
   for(info in experiment_infos){
@@ -45,11 +42,8 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
   obj$data$position <- navr_object
-  ##TODO - redo this part
   obj$data$experiment_log <- test_logs[[1]]
   obj$experiment_name <- obj$data$experiment_log$name
-  #obj$data$results_log <- results_log
-  
   return (obj)
 }
 
@@ -155,16 +149,13 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
       return(navr_object)
     }
   }
-  #log_columns_types <- c(Time = "numeric", Position = "numeric", Rotation.X = "numeric", 
-  #                       Rotation.Y = "numeric", FPS = "numeric", Input = "character")
-  #preprocessed_log_column_types <- c(log_columns_types, position_x = "numeric", position_y = "numeric", position_z = "numeric", 
-  #                                   distance = "numeric", cumulative_distance = "numeric", angle_diff_x = "numeric")
   print(paste0("Loading unprocessed player log", ls_log_path$path))
   text <- readLines(ls_log_path$path, warn = F) #TODO - chagne so it doesn't read text so friggin much :(
   bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end #get beginning of the log
   #reads the data without the header file
   #TODO - remove data.table
-  df_position <- fread(ls_log_path$path, header = T, sep = ";", dec=".", skip = bottomHeaderIndex, stringsAsFactors = F)
+  df_position <- fread(ls_log_path$path, header = T, sep = ";", dec=".", 
+                       skip = bottomHeaderIndex, stringsAsFactors = F)
   #deletes the last column - it's there for the easier logging from unity 
   # - its here because of how preprocessing works
   df_position[, ncol(df_position) := NULL]
@@ -172,7 +163,6 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
   navr_object <- navr::NavrObject()
   navr_object$data <- df_position
   navr_object <- preprocess_player_log(navr_object)
-  ### SAVES
   if(save) save_preprocessed_player(directory, log_timestamp, navr_object$data)
   return(navr_object)
 }
