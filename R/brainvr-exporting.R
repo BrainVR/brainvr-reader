@@ -9,7 +9,7 @@
 export_position_log <- function(log, id, path = getwd()){
   log[, Position := NULL]
   filePath <- paste(path, "/", id, "_player.log", sep = "")
-  colnames(log) <- c("Time", "RotationX", "RotationY", "FPS", "Input", "PositionX", 
+  colnames(log) <- c("timstamp", "RotationX", "RotationY", "FPS", "Input", "PositionX", 
                           "PositionY", "PositionZ", "distance", "cummulativeDistance", "angleDiff")
   write.table(log, filePath, sep = ";", quote = F, row.names = F)
 }

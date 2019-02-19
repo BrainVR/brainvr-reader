@@ -9,7 +9,6 @@ library(brainvr.R)
 dir_path <- system.file("extdata", package = "brainvr.R")
 obj <- load_experiment(dir_path)
 
-
 ## ------------------------------------------------------------------------
 obj <- load_experiment(dir_path)
 

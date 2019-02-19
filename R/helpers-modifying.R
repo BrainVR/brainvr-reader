@@ -69,14 +69,15 @@ resize_positions_df <- function(df, multiplier){
 #'
 #' @examples
 #' @noRd
+#TODO - move to NAVR
 transform_object <- function(obj, procedure, df_function, list_function, value){
   UseMethod('transform_object')
 }
 transform_object.brainvr <- function(obj, procedure, df_function, list_function, value){
   if(missing(value)){
-     transformed_player <- df_function(obj$data$player_log)
+     transformed_player <- df_function(obj$data$position$data)
   } else {
-    transformed_player <- df_function(obj$data$player_log, value)
+    transformed_player <- df_function(obj$data$position$data, value)
   }
   if(is.null(transformed_player)){
     print(paste0("Couldn't ", procedure," positions in player log. Have you preprocessed it correctly? Quitting."))

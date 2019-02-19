@@ -100,7 +100,7 @@ open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle =
     ls[[i]] <- load_experiment_info(logs[i])
     ls[[i]]$filename <- logs[i]
   }
-  if (length(ls) == 1 || returnSingle){
+  if(length(ls) == 1 || returnSingle){
     print("Returning only one experiment log.")
     ls <- ls[[1]]
   }
@@ -136,8 +136,8 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
 open_player_log <- function(directory, log_timestamp = NULL, override = F, save = T){
   ls_log_path <- find_player_path(directory, log_timestamp)
   
-  if(length(ls_log_path$path) == 0) return(NULL)
-  if(length(ls_log_path$path_preprocessed) > 0){
+  if(nchar(ls_log_path$path) == 0) return(NULL)
+  if(nchar(ls_log_path$path_preprocessed) > 0){
     if(override){
       print(paste0("Removing preprocessed log", ls_log_path$path_preprocessed))
       file.remove(ls_log_path$path_preprocessed)
@@ -160,8 +160,7 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
   # - its here because of how preprocessing works
   df_position[, ncol(df_position) := NULL]
   df_position <- prepare_navr_log(df_position)
-  navr_object <- navr::NavrObject()
-  navr_object$data <- df_position
+  navr_object <- navr::load_position_data(navr::NavrObject(), df_position)
   navr_object <- preprocess_player_log(navr_object)
   if(save) save_preprocessed_player(directory, log_timestamp, navr_object$data)
   return(navr_object)

@@ -25,13 +25,6 @@ dir_path <- system.file("extdata", package = "brainvr.R")
 obj <- load_experiment(dir_path)
 ```
 
-The next time you are loading the log, you will load the processed automatically
-
-Loading processed player log
-```{r}
-obj <- load_experiment(dir_path)
-```
-
 # Recentering map
 IN case we need a new offset, we can do that as well
 ```{r}
@@ -44,6 +37,5 @@ obj <- mirror_axes(obj)
 Plotting player path
 ```{r}
 #set constraints
-obj$map_limits <- list(x = c(-5, 105), y = c(-5, 105))
-plot_trial_path(obj, 1)
+obj$data$position$area_boundaries <- list(x = c(-5, 105), y = c(-5, 105))
 ```

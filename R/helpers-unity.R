@@ -1,5 +1,9 @@
 #turns vector columns in string "(x, y, z)" into three columns(position_x, position_y, position_z) and returns the table
 vector3_to_columns <- function(df_position){
+  if(!requireNamespace("stringr", quietly = T)){
+    print("Cannot continue withouth stringr package. Please install it")
+    return(F)
+  }
   xyz <- c("x", "y", "z")
   #TODO - remvoe the data.table
   values_split <- strsplit(substring(df_position[, get("Position")], 2, nchar(df_position[, get("Position")]) - 1), ",")
