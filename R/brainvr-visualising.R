@@ -20,7 +20,7 @@ plot_trial_path.brainvr <- function(obj, iTrial){
 
 #' Plots trial path
 #' 
-#' @param trialId 
+#' @param iTrial 
 #'
 #' @return ggplot objectg
 #' @import ggplot2 

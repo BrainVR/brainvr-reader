@@ -52,17 +52,34 @@ get_experiment_settings.brainvr <- function(obj){
 #' @param start 
 #' @param end 
 #'
-#' @return
+#' @return navr object with preprocessed times
 #' @export
 #'
 #' @examples
-get_log_timewindow <- function(obj, start, end){
-  UseMethod("get_log_timewindow")
+get_position_timewindow <- function(obj, start, end){
+  UseMethod("get_position_timewindow")
 }
 #' @export
-get_log_timewindow.brainvr <- function(obj, start, end){
-  log <- navr::filter_times(obj$data$position, c(start, end))
-  return(log)
+get_position_timewindow.brainvr <- function(obj, start, end){
+  navr_obj <- navr::filter_times(obj$data$position, c(start, end))
+  return(navr_obj)
+}
+
+#' Returns navr_object with data for a particular trial
+#'
+#' @param obj brainvr
+#' @param 
+#' @return navr object
+#' 
+#' @export
+get_trial_position <- function(obj, iTrial){
+  UseMethod("get_trial_position")
+}
+#' @export
+get_trial_position.brainvr <- function(obj, iTrial) {
+  timewindow <- get_trial_times.brainvr(obj, iTrial)
+  navr_obj <- get_position_timewindow.brainvr(obj, timewindow$start, timewindow$end)
+  return(navr_obj)
 }
 
 #' Returns data.table with player log for a particular trial
@@ -77,8 +94,8 @@ get_trial_log <- function(obj, iTrial){
 }
 #' @export
 get_trial_log.brainvr <- function(obj, iTrial) {
-  timewindow <- get_trial_times.brainvr(obj, iTrial)
-  return(get_log_timewindow.brainvr(obj, timewindow$start, timewindow$end))
+  navr_obj <- get_trial_position.brainvr(obj, iTrial)
+  return(navr_obj$data)
 }
 
 #' Gets start and finish times of trial
@@ -130,7 +147,7 @@ get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = T, pause_li
   dur <- times$end - times$start
   if(without_pauses){
     log <- get_trial_log.brainvr(obj, iTrial)
-    freq <- round(pause_limit/mean(diff(log$Time[1:100]))) #how many rows is the pause
+    freq <- round(pause_limit/mean(diff(log$timestamp[1:100]))) #how many rows is the pause
     distance_in_limit <- navr::rolling_sum(log$distance, freq)
     if(is.null(distance_in_limit)) return(dur) #trial shorter than pause
     is_stationary <- distance_in_limit < path_limit
@@ -154,8 +171,8 @@ get_trial_distance <- function(obj, iTrial){
 }
 #' @export
 get_trial_distance.brainvr <- function(obj, iTrial){
-  log <- get_trial_log.brainvr(obj, trialId)
-  return(diff(range(log$cumulative_distance)))
+  log <- get_trial_log.brainvr(obj, iTrial)
+  return(diff(range(log$distance_total)))
 }
 
 get_trial_event_indices <- function(test, event){
@@ -163,17 +180,17 @@ get_trial_event_indices <- function(test, event){
   return(indices + 1)
 }
 
-get_walked_distnace_timewindow <- function(dt_position, timeweindow){
-  dt_position <- get_log_timewindow.brainvr(dt_position, timeweindow$start, timeweindow$finish)
+get_walked_distnace_timewindow <- function(obj, timeweindow){
+  #TODO - fix
+  pos <- get_position_timewindow.brainvr(obj, timeweindow$start, timeweindow$finish)
+  dt_position <- pos$data
   if (dt_position[, .N] < 2) {
     print("The player log doesn't cover given timewindows")
-    walkedDistance <- as.numeric(NA)
+    walked_distance <- as.numeric(NA)
   } else {
-    start <- head(dt_position, 1)$cumulative_distance
-    end <- tail(dt_position, 1)$cumulative_distance
-    walkedDistance <- end - start
+    walked_distance <- diff(range(dt_position$distance_total))
   }
-  return(walkedDistance)
+  return(walked_distance)
 }
 
 #' Returns which trials were finished
