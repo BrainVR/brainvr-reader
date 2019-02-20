@@ -1,5 +1,6 @@
 context("Loading")
 
 test_that("Loading from a folder",{
-  expect_silent(load_experiment("inst/ext/"))
+  obj_loaded <- load_experiment("../../inst/extdata/")
+  expect_s3_class(obj_loaded, "brainvr")
 })
