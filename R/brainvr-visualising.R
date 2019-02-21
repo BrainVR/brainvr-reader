@@ -13,9 +13,9 @@ plot_trial_path <- function(obj, iTrial){
 }
 #' @export
 plot_trial_path.brainvr <- function(obj, iTrial){
-  if(length(trialId == 1)) return(brainvr.plot_trial_path(obj, iTrial))
+  if(length(iTrial == 1)) return(brainvr.plot_trial_path(obj, iTrial))
   #calculate numbe of columns
-  if(length(trialId > 1)) return(brainvr.plot_trials_paths(obj, indices = iTrial))
+  if(length(iTrial > 1)) return(brainvr.plot_trials_paths(obj, indices = iTrial))
 }
 
 #' Plots trial path

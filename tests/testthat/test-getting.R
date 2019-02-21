@@ -14,7 +14,7 @@ test_that("Can get trial parts",{
 })
 
 test_that("Can get trial times", {
-  expect_type(et_trial_times(obj, 1), "list")
+  expect_type(get_trial_times(obj, 1), "list")
 })
 
 test_that("Can get trial overviews stats",{
@@ -28,5 +28,5 @@ test_that("Can get distance summary stats",{
 })
 
 test_that("Can get time summary stats", {
-  expect_equal(round(get_trial_duration(obj, 2)), 93)
+  expect_equal(round(get_trial_duration(obj, 2)), 94)
 })
