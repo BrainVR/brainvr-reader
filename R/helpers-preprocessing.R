@@ -4,6 +4,9 @@ prepare_navr_log <- function(position_log){
   #TODO - remove data.table
   position_log[, Position:= NULL]
   position_log <- navr::prepare_column_names(position_log)
+  #' SUPER IMPORTANT - renames Unity Z to Y and vice versa, because NAVR calculates
+  #' speeds from x and y not x and z
+  position_log <- switch_y_and_z(position_log)
   return(position_log)
 }
 
@@ -30,4 +33,11 @@ replace_strings <- function(vec, strings, replacements){
     vec[vec == strings[i]] <- replacements[i]
   }
   return(vec)
+}
+switch_y_and_z <- function(dt_log){
+  dt_log <- dt_log[, position_temp := position_z]
+  dt_log <- dt_log[, position_z := position_y]
+  dt_log <- dt_log[, position_y := position_temp]
+  dt_log <- dt_log[, position_temp := NULL]
+  return(dt_log)
 }
