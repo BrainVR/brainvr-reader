@@ -6,6 +6,8 @@ preprocess_player_log <- function(navr_object){
   ## Adding distance from position
   navr_object <- navr::add_distances(navr_object)
   navr_object <- navr::add_angle_differences(navr_object)
+  navr_object <- navr::add_time_columns(navr_object)
+  navr_object <- navr::add_speeds(navr_object)
   return(navr_object) 
 }
 
