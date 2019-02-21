@@ -4,10 +4,12 @@
 \alias{load_experiments}
 \title{Goes through the folder and loads every experiment info into separate object}
 \usage{
-load_experiments(folder)
+load_experiments(folder, override = F)
 }
 \arguments{
 \item{folder}{where to look}
+
+\item{override}{if TRUE, deletes and recomputes preprocessed player. defaults to FALSE}
 }
 \value{
 list of objecs

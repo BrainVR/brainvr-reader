@@ -1,8 +1,11 @@
 #' Goes through the folder and loads every experiment info into separate object 
+#'
+#' @param override if TRUE, deletes and recomputes preprocessed player. defaults to FALSE
 #' @param folder where to look
+#'
 #' @return list of objecs
 #' @export 
-load_experiments <- function(folder){
+load_experiments <- function(folder, override=F){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_infos <- open_experiment_info(folder)
@@ -10,7 +13,7 @@ load_experiments <- function(folder){
   ls <- list()
   i <- 1 
   for(info in experiment_infos){
-    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp)
+    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp, override=override)
     i <- i + 1
   }
   return(ls)
