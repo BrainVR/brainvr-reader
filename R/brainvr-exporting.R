@@ -15,8 +15,8 @@ export_position_log <- function(log, id, path = getwd()){
 }
 
 collect_events <- function(test, dt_player){
-  iFinished <- get_trial_event_indices(test, "Finished")
-  trialIDs <- iFinished[!(iFinished %in% get_trial_event_indices(test, "ForceFinished"))]
+  iFinished <- get_trial_with_event_indices(test, "Finished")
+  trialIDs <- iFinished[!(iFinished %in% get_trial_with_event_indices(test, "ForceFinished"))]
   
   df_trials <- test$data[test$data$Index %in% (trialIDs - 1) & test$data$Sender == "Trial", ]
   

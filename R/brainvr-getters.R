@@ -175,14 +175,40 @@ get_trial_distance.brainvr <- function(obj, iTrial){
   return(diff(range(log$distance_total)))
 }
 
-get_trial_event_indices <- function(test, event){
-  indices <- unique(which(test$data$Sender == "Trial" & test$data$Event == event))
-  return(indices + 1)
+
+#' Returns times of certain events happening in particular trials
+#'
+#' @param obj 
+#' @param iTrial vector or trial indices
+#'
+#' @return times of certain events
+#' @export
+#'
+#' @examples
+get_trial_event_times <- function(obj, iTrial, event_name = ""){
+  UseMethod("get_trial_event_times")
+}
+#' @export
+get_trial_event_times.brainvr <- function(obj, iTrial, event_name = ""){
+  exp_log <- get_experiment_log(obj)
+  trial_log <- get_trial_events(exp_log, iTrial)
+  event_times <- get_times_events(trial_log, event_name)
+  return(event_times)
 }
 
-get_walked_distnace_timewindow <- function(obj, timeweindow){
+
+#' Returns walked distance in given timewindow
+#'
+#' @param obj brainvr object
+#' @param timeweindow 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_walked_distnace_timewindow <- function(obj, start, end){
   #TODO - fix
-  pos <- get_position_timewindow.brainvr(obj, timeweindow$start, timeweindow$finish)
+  pos <- get_position_timewindow.brainvr(obj, start, end)
   dt_position <- pos$data
   if (dt_position[, .N] < 2) {
     print("The player log doesn't cover given timewindows")

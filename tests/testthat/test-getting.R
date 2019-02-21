@@ -30,3 +30,7 @@ test_that("Can get distance summary stats",{
 test_that("Can get time summary stats", {
   expect_equal(round(get_trial_duration(obj, 2)), 94)
 })
+
+test_that("Can get trial times", {
+  expect_equal(round(get_trial_event_times(brainvr_object, 1, "WaitingToStart")), 63780)
+})
