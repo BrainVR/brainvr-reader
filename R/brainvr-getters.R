@@ -179,7 +179,7 @@ get_trial_distance.brainvr <- function(obj, iTrial){
 #' Returns times of certain events happening in particular trials
 #'
 #' @param obj 
-#' @param iTrial vector or trial indices
+#' @param iTrial vector or trial indices starting with 1
 #'
 #' @return times of certain events
 #' @export

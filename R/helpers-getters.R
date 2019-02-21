@@ -3,8 +3,8 @@ get_trial_with_event_indices <- function(test, event){
   return(indices + 1)
 }
 
-get_trial_events <- function(exp_log, iTrial){
-  events_log <- exp_log[exp_log$Sender == "Trial" & exp_log$Index == iTrial,]
+get_trial_events <- function(exp_log, iTrials){
+  events_log <- exp_log[exp_log$Sender == "Trial" & (exp_log$Index %in% (iTrials-1)),]
   return(events_log)
 }
 
