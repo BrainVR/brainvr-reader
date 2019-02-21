@@ -27,12 +27,9 @@ plot_trial_path.brainvr <- function(obj, iTrial){
 #' @keywords internal
 #' @noRd
 brainvr.plot_trial_path <- function (obj, iTrial){
-  plt <- navr::create_plot()
-  navr_obj <- obj$data$position
+  navr_obj <- get_trial_position(obj, iTrial)
+  plt <- navr::plot_path(navr_obj)
   plt <- navr::plot_add_limits(plt, navr_obj)
-  #filter navr object
-  dt_player <- get_trial_log.brainvr(obj, iTrial)
-  plt <- navr::plot_add_path(plt, dt_player$position_x, dt_player$position_z)
   return(plt)
 }
 
