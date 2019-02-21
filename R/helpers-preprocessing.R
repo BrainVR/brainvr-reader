@@ -1,19 +1,13 @@
-#calculates the distance walked between each two points of the position table and returns the table
-add_distance_moved <- function(player_log){
-  player_log[, distance := navr::euclid_distance_between_rows(data.frame(Position.x, Position.z))]
-  player_log[, cumulative_distance := cumsum(distance)]
-  return(player_log)
-}
-
-add_angle_differences <- function(player_log){
-  cols <- colnames(player_log)
-  for(i in grep("Rotation", cols)){
-    colname <- cols[i]
-    new_name <- gsub("Rotation.", "", colname)
-    new_name <- tolower(gsub("[.]", "_", new_name))
-    player_log <- navr::add_angle_difference(player_log, player_log[[colname]], new_name)
-  }
-  return(player_log)
+prepare_navr_log <- function(position_log){
+  ## Converting position
+  position_log <- vector3_to_columns(position_log)
+  #TODO - remove data.table
+  position_log[, Position:= NULL]
+  position_log <- navr::prepare_column_names(position_log)
+  #' SUPER IMPORTANT - renames Unity Z to Y and vice versa, because NAVR calculates
+  #' speeds from x and y not x and z
+  position_log <- switch_y_and_z(position_log)
+  return(position_log)
 }
 
 is_column_present <- function(table, name){
@@ -39,4 +33,11 @@ replace_strings <- function(vec, strings, replacements){
     vec[vec == strings[i]] <- replacements[i]
   }
   return(vec)
+}
+switch_y_and_z <- function(dt_log){
+  dt_log <- dt_log[, position_temp := position_z]
+  dt_log <- dt_log[, position_z := position_y]
+  dt_log <- dt_log[, position_y := position_temp]
+  dt_log <- dt_log[, position_temp := NULL]
+  return(dt_log)
 }

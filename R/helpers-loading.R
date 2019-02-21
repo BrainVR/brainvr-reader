@@ -13,6 +13,8 @@ create_separator <- function(string){
   return(ls)
 }
 
+### TODO
+### Can massively speed it up if only reads part of the text or do it line by line
 get_indicies_between = function(text, string){
   ls <- list()
   ls$beginning <- which(grepl(create_separator(string)$beginning, text))
@@ -27,7 +29,7 @@ get_json_between <- function(text, string){
 
 get_text_between <- function(text, string){
   indices <- get_indicies_between(text, string)
-  if (length(indices$beginning) != 1 || length(indices$end) != 1) return (NULL)
+  if(length(indices$beginning) != 1 || length(indices$end) != 1) return (NULL)
   text <- text[(indices$beginning + 1):(indices$end - 1)]
   return(text)
 }

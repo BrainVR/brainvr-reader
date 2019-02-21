@@ -5,8 +5,7 @@ Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.com",
                   role = c("aut", "cre"))
 Description: This package comes with functions to load, preprocess
   and visualise data coming from the brainvr framework based unity app. It is being 
-  keep in sync with the framework newest data formatting. Check version
-  if you have trouble reading it.
+  keep in sync with the framework newest data formatting.
 License: MIT
 LazyData: true
 Remotes:
@@ -25,5 +24,5 @@ Suggests:
   testthat,
   knitr,
   rmarkdown
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -4,12 +4,12 @@
 \alias{was_trial_force_finished}
 \title{REturns if the trial has been force finished}
 \usage{
-was_trial_force_finished(obj, trialId)
+was_trial_force_finished(obj, iTrial)
 }
 \arguments{
 \item{obj}{}
 
-\item{trialID}{}
+\item{iTrial}{}
 }
 \description{
 REturns if the trial has been force finished

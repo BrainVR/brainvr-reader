@@ -54,6 +54,10 @@ resize_layout <- function(obj, multiplier){
 #'
 #' @examples
 #' @noRd
+add_goal_positions <- function(obj, df){
+  UseMethod("add_goal_positions")
+}
+#' @export
 add_goal_positions.brainvr <- function(obj, df){
   #VALIDATIONS
   obj$goal_positions <- df
@@ -72,6 +76,10 @@ add_goal_positions.brainvr <- function(obj, df){
 #'
 #' @examples
 #' @noRd
+add_goal_order <- function(obj, order){
+  UseMethod("add_goal_order")
+}
+#' @export
 add_goal_order.brainvr <- function(obj, order){
   #validate numebr of goals
   #validate if numbers
@@ -90,7 +98,7 @@ add_goal_order.brainvr <- function(obj, order){
 #'
 #' @examples
 smooth_positions.brainvr <- function(obj, type, ...){
-  obj$data$player_log <- navr::smooth_positions_df(obj$data$player_log, "Position.x", "Position.z", type, ...)
-  obj$data$player_log <- add_distance_moved(obj$data$player_log)
+  obj$data$position <- navr::smooth_positions_df(obj$data$position, type, ...)
+  obj$data$position <- navr::add_distances(obj$data$position)
   return(obj)
 }

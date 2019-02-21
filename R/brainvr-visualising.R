@@ -7,41 +7,29 @@
 #' @export
 #'
 #' @examples
-plot_trial_path.brainvr <- function(obj, trialId){
-  if(length(trialId == 1)) return(brainvr.plot_trial_path(obj, trialId))
-  #calculate numbe of columns
-  if(length(trialId > 1)) return(brainvr.plot_trials_paths(obj, indices = trialId))
+#' 
+plot_trial_path <- function(obj, iTrial){
+  UseMethod("plot_trial_path")
 }
-
-#' Checks if object has map limits variable and adds plot limits if so
-#'
-#' @param plt existing plot
-#' @param obj Brainvr object
-#'
-#' @return
 #' @export
-#'
-#' @examples
-add_limits <- function(plt, obj){
-  if(!is.null(obj$map_limits)){
-    plt <- plt + xlim(obj$map_limits$x)+ ylim(obj$map_limits$y)
-  }
-  return(plt)
+plot_trial_path.brainvr <- function(obj, iTrial){
+  if(length(iTrial == 1)) return(brainvr.plot_trial_path(obj, iTrial))
+  #calculate numbe of columns
+  if(length(iTrial > 1)) return(brainvr.plot_trials_paths(obj, indices = iTrial))
 }
 
 #' Plots trial path
 #' 
-#' @param trialId 
+#' @param iTrial 
 #'
 #' @return ggplot objectg
 #' @import ggplot2 
 #' @keywords internal
 #' @noRd
-brainvr.plot_trial_path <- function (obj, trialId){
-  plt <- navr::create_plot()
-  plt <- add_limits(plt, obj)
-  dt_player <- get_trial_log.brainvr(obj, trialId)
-  plt <- navr::plot_add_path(plt, dt_player$Position.x, dt_player$Position.z)
+brainvr.plot_trial_path <- function (obj, iTrial){
+  navr_obj <- get_trial_position(obj, iTrial)
+  plt <- navr::plot_path(navr_obj)
+  plt <- navr::plot_add_limits(plt, navr_obj)
   return(plt)
 }
 

@@ -4,10 +4,11 @@ mirror_positions_list <- function(ls_positions){
   return(ls_mirrored)
 }
 
+# TODO - move to navr
 mirror_positions_df <- function(df){
   if(!is_valid_positions_df(df)) return(NULL)
-  df$Position.x <- -df$Position.x
-  df$Position.z <- -df$Position.z
+  df$position_x <- -df$position_x
+  df$position_z <- -df$position_z
   ## flips all rotations in dt_player 
   ## all player logs should be data.table, otehrwise this breaks
   df_colnames <- colnames(df)
@@ -25,13 +26,13 @@ translate_positions_list <- function(ls_positions, offset){
   ls_translated <- apply_transformation(ls_positions, translate_positions_df, offset)
   return(ls_translated)
 }
-
+# TODO - move to navr
 translate_positions_df <- function(df, offset){
   if(!is_valid_positions_df(df)) return(NULL)
   if(!is_valid_offset(offset)) return(NULL)
-  df$Position.x <- df$Position.x + offset[1]
-  df$Position.y <- df$Position.y + offset[2]
-  df$Position.z <- df$Position.z + offset[3]
+  df$position_x <- df$position_x + offset[1]
+  df$position_y <- df$position_y + offset[2]
+  df$position_z <- df$position_z + offset[3]
   return(df)
 }
 
@@ -40,15 +41,15 @@ resize_positions_list <- function(ls_positions, multiplier){
   ls_resized <- apply_transformation(ls_positions, resize_positions_df, multiplier)
   return(ls_resized)
 }
-
+# TODO - move to navr
 resize_positions_df <- function(df, multiplier){
   if(!is_valid_positions_df(df)) return(NULL)
-  df$Position.x <- df$Position.x * multiplier
-  df$Position.y <- df$Position.y * multiplier
-  df$Position.z <- df$Position.z * multiplier
+  df$position_x <- df$position_x * multiplier
+  df$position_y <- df$position_y * multiplier
+  df$position_z <- df$position_z * multiplier
   # the calulated distances need to be recalculated
   # BUT this is tricky, because we only want to do that for player log, not for other tables
-  if(!is.null(df$Time)) df <- add_distance_moved(df)
+  if(!is.null(df$timestamp)) df <- add_distance_moved(df)
   return(df)
 }
 
@@ -68,11 +69,15 @@ resize_positions_df <- function(df, multiplier){
 #'
 #' @examples
 #' @noRd
+#TODO - move to NAVR
 transform_object <- function(obj, procedure, df_function, list_function, value){
+  UseMethod('transform_object')
+}
+transform_object.brainvr <- function(obj, procedure, df_function, list_function, value){
   if(missing(value)){
-     transformed_player <- df_function(obj$data$player_log)
+     transformed_player <- df_function(obj$data$position$data)
   } else {
-    transformed_player <- df_function(obj$data$player_log, value)
+    transformed_player <- df_function(obj$data$position$data, value)
   }
   if(is.null(transformed_player)){
     print(paste0("Couldn't ", procedure," positions in player log. Have you preprocessed it correctly? Quitting."))

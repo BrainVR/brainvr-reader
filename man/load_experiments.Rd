@@ -4,12 +4,12 @@
 \alias{load_experiments}
 \title{Goes through the folder and loads every experiment info into separate object}
 \usage{
-load_experiments(folder, objectFun)
+load_experiments(folder, override = F)
 }
 \arguments{
 \item{folder}{where to look}
 
-\item{objectFun}{what function to create the object that will hold the info}
+\item{override}{if TRUE, deletes and recomputes preprocessed player. defaults to FALSE}
 }
 \value{
 list of objecs

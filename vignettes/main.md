@@ -1,6 +1,6 @@
 ---
 title: "Brainvr.R showcase of loading and preprocessing"
-author: "Lukáš hejtmy Hejtmánek"
+author: "Luk?? hejtmy Hejtm?nek"
 date: "2018-02-07"
 output: rmarkdown::html_vignette
 vignette: >
@@ -21,15 +21,6 @@ dir_path <- system.file("extdata", package = "brainvr.R")
 obj <- load_experiment(dir_path)
 #> [1] "Returning only one experiment log."
 #> [1] "Loading unprocessed player log_player_.*17-41-52-03-12-2017"
-```
-#Preprocessing and saving dta
-
-```r
-if(!is_player_preprocessed(obj$data$player_log)){
-  obj$data$player_log <- preprocess_player_log(obj$data$player_log)
-  save_preprocessed_player(dir_path, obj$data$player_log, obj$timestamp)
-}
-#> [1] "Saving processed player log asC:/Projects/R/brainvr-reader/inst/extdata/NEO_player_17-41-52-03-12-2017_preprocessed.txt"
 ```
 
 The next time you are loading the log, you will load the processed automatically
