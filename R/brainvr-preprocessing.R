@@ -19,7 +19,7 @@ preprocess_player_log <- function(navr_object){
 #' @return 
 #' 
 #' @export
-save_preprocessed_player <- function(directory, exp_timestamp = NULL, log, orig_filename = NULL, precision=2){
+save_preprocessed_player <- function(directory, exp_timestamp = NULL, log, orig_filename = NULL, precision=4){
   if(is.null(orig_filename)) {
     ptr <- create_log_search_pattern("player", exp_timestamp)
     logs <- list.files(directory, pattern = ptr, full.names = T)
@@ -32,6 +32,6 @@ save_preprocessed_player <- function(directory, exp_timestamp = NULL, log, orig_
     preprocessed_filename <- gsub(".txt","_preprocessed.txt", filename)
   }
   print(paste0("Saving processed player log as", preprocessed_filename))
-  write.table(format(log, digits=precision, nsmall=precision), preprocessed_filename, sep = ";", 
+  write.table(format(log, digits=precision, nsmall=precision, trim=T), preprocessed_filename, sep = ";", 
               dec = ".", quote = F, row.names = F)
 }
