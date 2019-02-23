@@ -51,8 +51,11 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
 }
 
 #' Loads particular info file into a list
+#'
 #' @param filepath path to the file
+#'
 #' @return list object 
+#' @export
 load_experiment_info <- function(filepath){
   ls <- list()
   #reads into a text file at first
@@ -91,6 +94,7 @@ load_experiment_log <- function(filepath){
 #' Searches the directory for experiment log files. Returs single one if multiple are found
 #' @param directory path to the directory where to search
 #' @return list with a single loaded info log
+#' @export
 open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle = FALSE){
   ls <- list()
   ptr <- create_log_search_pattern("ExperimentInfo", log_timestamp)
@@ -114,6 +118,7 @@ open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle =
 #' @param directory directory where the file is located
 #' @param exp_timestamp time of the 
 #' @return 
+#' @export
 open_experiment_logs <- function(directory, exp_timestamp = NULL){
   ls <- list()
   ptr <- create_log_search_pattern("test", exp_timestamp)
@@ -129,12 +134,14 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
   return(ls)
 }
 
+
 #' Searches a directory for a player log. Returns player log data.table
 #'
 #' @param directory where the log should be located
 #' @param log_timestamp provides timestamp of a log to load
 #' @param override if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present
 #' @return data.table with the loaded player log or NULL.
+#' @export
 #' @import data.table
 open_player_log <- function(directory, log_timestamp = NULL, override = F, save = T){
   ls_log_path <- find_player_path(directory, log_timestamp)

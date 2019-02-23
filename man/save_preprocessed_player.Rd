@@ -6,7 +6,7 @@
 If there are multiple player logs in the folder,takes the name from the first available}
 \usage{
 save_preprocessed_player(directory, exp_timestamp = NULL, log,
-  orig_filename = NULL, precision = 2)
+  orig_filename = NULL, precision = 4)
 }
 \arguments{
 \item{directory}{Where shoudl i save the file. Should end with a slash!}
