@@ -128,12 +128,12 @@ load_experiment_log <- function(filepath){
   ls$positions = position_to_vector(ls$positions)
   
   ls$data <- read.table(filepath, header = T, sep = ";", 
-                        stringsAsFactors = F, skip = bottomHeaderIndex)
+                        stringsAsFactors = F, skip = bottomHeaderIndex,
+                        encoding="UTF-8")
   #deleting the last column - always empty
-  ls$data[ncol(ls$data)] <- NULL
+  ls$data[,ncol(ls$data)] <- NULL
   return(ls)
 }
-
 
 #TODO - finish this
 open_result_log <- function(directory, exp_timestamp = NULL){
@@ -159,7 +159,8 @@ load_result_log <- function(filepath){
   ls$positions = position_to_vector(ls$positions)
   
   ls$data <- read.table(filepath, header = T, sep = ";", 
-                        stringsAsFactors = F, skip = bottomHeaderIndex)
+                        stringsAsFactors = F, skip = bottomHeaderIndex,
+                        encoding="UTF-8")
   #deleting the last column - always empty
   ls$data[ncol(ls$data)] <- NULL
   return(ls)
@@ -185,7 +186,9 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
       print(paste0("Loading preprocessed player log", ls_log_path$path_preprocessed))
       #TODO - remove data.table
       navr_object <- navr::NavrObject()
-      navr_object$data <- fread(ls_log_path$path_preprocessed, header = T, sep = ";", dec = ".", stringsAsFactors = F)
+      navr_object$data <- fread(ls_log_path$path_preprocessed, header = T, 
+                                sep = ";", dec = ".", stringsAsFactors = F,
+                                encoding = "UTF-8")
       return(navr_object)
     }
   }
