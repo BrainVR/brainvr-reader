@@ -50,47 +50,6 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   return (obj)
 }
 
-#' Loads particular info file into a list
-#'
-#' @param filepath path to the file
-#'
-#' @return list object 
-#' @export
-load_experiment_info <- function(filepath){
-  ls <- list()
-  #reads into a text file at first
-  text <- readLines(filepath, warn = F)
-  ls$header <- get_json_between(text, "SESSION HEADER")
-  ls$Experiment <- get_json_between(text, "EXPERIMENT INFO")
-  return(ls)     
-}
-
-#' Loads expeirment log into a predefined list
-#' 
-#' @param filepath path tot he expeirment log
-#' @return list with loaded settings files and data
-load_experiment_log <- function(filepath){
-  ls <- list()
-  #reads into a text file at first
-  
-  text <- readLines(filepath, warn = F)
-  #needs to be before resaving text
-  bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
-  
-  text <- get_text_between(text, "TEST HEADER")
-  ls$name <- experiment_name_from_filename(filepath)
-  ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
-  ls$positions <- get_json_between(text, "POSITIONS")
-  
-  ls$positions = position_to_vector(ls$positions)
-  
-  ls$data <- read.table(filepath, header = T, sep = ";", 
-                        stringsAsFactors = F, skip = bottomHeaderIndex)
-  #deleting the last column - always empty
-  ls$data[ncol(ls$data)] <- NULL
-  return(ls)
-}
-
 #' Searches the directory for experiment log files. Returs single one if multiple are found
 #' @param directory path to the directory where to search
 #' @return list with a single loaded info log
@@ -114,6 +73,21 @@ open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle =
   return(ls)
 }
 
+#' Loads particular info file into a list
+#'
+#' @param filepath path to the file
+#'
+#' @return list object 
+#' @export
+load_experiment_info <- function(filepath){
+  ls <- list()
+  #reads into a text file at first
+  text <- readLines(filepath, warn = F)
+  ls$header <- get_json_between(text, "SESSION HEADER")
+  ls$Experiment <- get_json_between(text, "EXPERIMENT INFO")
+  return(ls)     
+}
+
 #' Iterates over all _test_ files in a folder asnd saves them one by one to a return list
 #' @param directory directory where the file is located
 #' @param exp_timestamp time of the 
@@ -133,6 +107,33 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
   }
   return(ls)
 }
+
+#' Loads expeirment log into a predefined list
+#' 
+#' @param filepath path tot he expeirment log
+#' @return list with loaded settings files and data
+#' @export
+load_experiment_log <- function(filepath){
+  ls <- list()
+  #reads into a text file at first
+  text <- readLines(filepath, warn = F)
+  #needs to be before resaving text
+  bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
+  
+  text <- get_text_between(text, "TEST HEADER")
+  ls$name <- experiment_name_from_filename(filepath)
+  ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
+  ls$positions <- get_json_between(text, "POSITIONS")
+  
+  ls$positions = position_to_vector(ls$positions)
+  
+  ls$data <- read.table(filepath, header = T, sep = ";", 
+                        stringsAsFactors = F, skip = bottomHeaderIndex)
+  #deleting the last column - always empty
+  ls$data[ncol(ls$data)] <- NULL
+  return(ls)
+}
+
 
 #TODO - finish this
 open_result_log <- function(directory, exp_timestamp = NULL){
