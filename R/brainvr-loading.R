@@ -134,6 +134,35 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL){
   return(ls)
 }
 
+#TODO - finish this
+open_result_log <- function(directory, exp_timestamp = NULL){
+  ptr <- create_log_search_pattern("results", exp_timestamp)
+  logs <- list.files(directory, pattern = ptr, full.names = T)
+  if(length(logs) < 1){
+    warning(paste0("Could not find any test logs in ", directory))
+    return(NULL)
+  }
+  if(length(logs) > 1){
+    warning(paste0("There are multiple results log in the ", directory, " with timestamp ", exp_timstamp))
+    return(NULL)
+  }
+  ls_results <- load_experiment_log(log)
+  return(ls_results)
+}
+
+#TODO - finish this
+load_result_log <- function(filepath){
+  ls <- list()
+  text <- readLines(filepath, warn = F)
+  bottomHeaderIndex <- get_indicies_between(text, "DATA")$end
+  ls$positions = position_to_vector(ls$positions)
+  
+  ls$data <- read.table(filepath, header = T, sep = ";", 
+                        stringsAsFactors = F, skip = bottomHeaderIndex)
+  #deleting the last column - always empty
+  ls$data[ncol(ls$data)] <- NULL
+  return(ls)
+}
 
 #' Searches a directory for a player log. Returns player log data.table
 #'
