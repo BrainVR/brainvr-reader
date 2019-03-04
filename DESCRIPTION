@@ -21,8 +21,9 @@ Imports:
   data.table,
   ggplot2
 Suggests: 
-  testthat,
-  knitr,
-  rmarkdown
+    testthat,
+    knitr,
+    rmarkdown,
+    covr
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
