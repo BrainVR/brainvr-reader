@@ -8,7 +8,7 @@
 load_experiments <- function(folder, override=F){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
-  experiment_infos <- open_experiment_info(folder)
+  experiment_infos <- open_experiment_infos(folder)
   if(is.null(experiment_infos)) stop("Experiment info not found")
   ls <- list()
   i <- 1 
@@ -26,10 +26,9 @@ load_experiments <- function(folder, override=F){
 #' @export
 load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if (is.null(folder)) stop("no folder set")
-  #open experiment_logs to see how many do we have
-  experiment_info <- open_experiment_info(folder, log_timestamp = exp_timestamp, returnSingle = T)
-  
+  experiment_info <- open_experiment_infos(folder, log_timestamp = exp_timestamp)
   if(is.null(experiment_info)) stop("Experiment info not found")
+  if(length(experiment_info) > 1) stop("There is more info files of given timestamp. Did you mean to call load_experiments instead?")
   #if multiple logs or no logs, quit
   if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
@@ -39,7 +38,6 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   #checks if there is everything we need and if not, recomputes the stuff
   
   test_logs <- open_experiment_logs(folder, exp_timestamp)
-  
   obj <- BrainvrObject()
   obj$participant_id <- experiment_info$header$Participant
   obj$timestamp <- exp_timestamp
@@ -51,10 +49,13 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
 }
 
 #' Searches the directory for experiment log files. Returs single one if multiple are found
+#'
+#' @param log_timestamp 
 #' @param directory path to the directory where to search
+#'
 #' @return list with a single loaded info log
 #' @export
-open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle = FALSE){
+open_experiment_infos <- function(directory, log_timestamp = NULL){
   ls <- list()
   ptr <- create_log_search_pattern("ExperimentInfo", log_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
@@ -65,10 +66,6 @@ open_experiment_info <- function(directory, log_timestamp = NULL, returnSingle =
   for(i in 1:length(logs)){
     ls[[i]] <- load_experiment_info(logs[i])
     ls[[i]]$filename <- logs[i]
-  }
-  if(length(ls) == 1 || returnSingle){
-    print("Returning only one experiment log.")
-    ls <- ls[[1]]
   }
   return(ls)
 }
