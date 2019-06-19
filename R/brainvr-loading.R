@@ -36,15 +36,18 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if(is.null(navr_object)) stop("Player log not found")
   #preprocesses player log
   #checks if there is everything we need and if not, recomputes the stuff
-  
   test_logs <- open_experiment_logs(folder, exp_timestamp)
+  result_log <- open_result_log(folder, exp_timestamp)
   obj <- BrainvrObject()
   obj$participant_id <- experiment_info$header$Participant
   obj$timestamp <- exp_timestamp
   obj$data$experiment_info <- experiment_info
   obj$data$position <- navr_object
+  #TODO - this might be an issue
   obj$data$experiment_log <- test_logs[[1]]
+  obj$data$result_log <- result_log
   obj$experiment_name <- obj$data$experiment_log$name
+  
   return (obj)
 }
 
@@ -122,13 +125,13 @@ load_experiment_log <- function(filepath){
   ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
   ls$positions <- get_json_between(text, "POSITIONS")
   
-  ls$positions = position_to_vector(ls$positions)
+  ls$positions <- position_to_vector(ls$positions)
   
   ls$data <- read.table(filepath, header = T, sep = ";", 
                         stringsAsFactors = F, skip = bottomHeaderIndex,
                         encoding="UTF-8")
   #deleting the last column - always empty
-  ls$data[,ncol(ls$data)] <- NULL
+  ls$data[, ncol(ls$data)] <- NULL
   return(ls)
 }
 
@@ -144,7 +147,7 @@ open_result_log <- function(directory, exp_timestamp = NULL){
     warning(paste0("There are multiple results log in the ", directory, " with timestamp ", exp_timstamp))
     return(NULL)
   }
-  ls_results <- load_experiment_log(log)
+  ls_results <- load_experiment_log(logs[1])
   return(ls_results)
 }
 
@@ -173,7 +176,6 @@ load_result_log <- function(filepath){
 #' @import data.table
 open_player_log <- function(directory, log_timestamp = NULL, override = F, save = T){
   ls_log_path <- find_player_path(directory, log_timestamp)
-  
   if(nchar(ls_log_path$path) == 0) return(NULL)
   if(nchar(ls_log_path$path_preprocessed) > 0){
     if(override){
