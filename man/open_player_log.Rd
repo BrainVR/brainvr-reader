@@ -4,13 +4,13 @@
 \alias{open_player_log}
 \title{Searches a directory for a player log. Returns player log data.table}
 \usage{
-open_player_log(directory, log_timestamp = NULL, override = F,
+open_player_log(directory, exp_timestamp = NULL, override = F,
   save = T)
 }
 \arguments{
 \item{directory}{where the log should be located}
 
-\item{log_timestamp}{provides timestamp of a log to load}
+\item{exp_timestamp}{provides timestamp of a log to load}
 
 \item{override}{if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present}
 }

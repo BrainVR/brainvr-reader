@@ -1,10 +1,10 @@
 SEPARATOR_START <- "\\*\\*\\*"
 SEPARATOR_END <- "\\-\\-\\-"
 
-create_log_search_pattern <- function(log_name, log_timestamp){
+create_log_search_pattern <- function(log_name, exp_timestamp){
   ptr <- paste0("_", log_name, "_")
-  if(!is.null(log_timestamp)){
-    ptr <- paste0(ptr, ".*", log_timestamp)
+  if(!is.null(exp_timestamp)){
+    ptr <- paste0(ptr, ".*", exp_timestamp)
   }
   return(ptr)
 }

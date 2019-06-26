@@ -4,12 +4,12 @@
 \alias{open_experiment_infos}
 \title{Searches the directory for experiment log files. Returs single one if multiple are found}
 \usage{
-open_experiment_infos(directory, log_timestamp = NULL)
+open_experiment_infos(directory, exp_timestamp = NULL, flatten = T)
 }
 \arguments{
 \item{directory}{path to the directory where to search}
 
-\item{log_timestamp}{}
+\item{exp_timestamp}{}
 }
 \value{
 list with a single loaded info log

@@ -11,10 +11,9 @@ load_experiments <- function(folder, override=F){
   experiment_infos <- open_experiment_infos(folder)
   if(is.null(experiment_infos)) stop("Experiment info not found")
   ls <- list()
-  i <- 1 
-  for(info in experiment_infos){
+  for(i in 1:length(experiment_infos)){
+    info <- experiment_infos[[i]]
     ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp, override=override)
-    i <- i + 1
   }
   return(ls)
 }
@@ -27,17 +26,16 @@ load_experiments <- function(folder, override=F){
 load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if (is.null(folder)) stop("no folder set")
   #TODO - this should return only a single one per timestamp
-  experiment_info <- open_experiment_infos(folder, log_timestamp = exp_timestamp)
+  experiment_info <- open_experiment_infos(folder, exp_timestamp = exp_timestamp)
   if(is.null(experiment_info)) stop("Experiment info not found")
-  if(length(experiment_info) > 1) stop("There is more info files of given timestamp. Did you mean to call load_experiments instead?")
   #if multiple logs or no logs, quit
   if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
-  navr_object <- open_player_log(folder, log_timestamp = exp_timestamp, override = override)
+  navr_object <- open_player_log(folder, exp_timestamp = exp_timestamp, override = override)
   if(is.null(navr_object)) stop("Player log not found")
   #preprocesses player log
   #checks if there is everything we need and if not, recomputes the stuff
-  test_logs <- open_experiment_logs(folder, exp_timestamp)
+  test_log <- open_experiment_logs(folder, exp_timestamp, flatten = T)
   result_log <- open_result_log(folder, exp_timestamp)
   obj <- BrainvrObject()
   obj$participant_id <- experiment_info$header$Participant
@@ -45,7 +43,7 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   obj$data$experiment_info <- experiment_info
   obj$data$position <- navr_object
   #TODO - this might be an issue
-  obj$data$experiment_log <- test_logs[[1]]
+  obj$data$experiment_log <- test_log
   obj$data$results_log <- result_log
   obj$experiment_name <- obj$data$experiment_log$name
   
@@ -54,23 +52,13 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
 
 #' Searches the directory for experiment log files. Returs single one if multiple are found
 #'
-#' @param log_timestamp 
+#' @param exp_timestamp 
 #' @param directory path to the directory where to search
 #'
 #' @return list with a single loaded info log
 #' @export
-open_experiment_infos <- function(directory, log_timestamp = NULL){
-  ls <- list()
-  ptr <- create_log_search_pattern("ExperimentInfo", log_timestamp)
-  logs <- list.files(directory, pattern = ptr, full.names = T)
-  if(length(logs) < 1){
-    print("Could not find the file for experiment log")
-    return(NULL)
-  }
-  for(i in 1:length(logs)){
-    ls[[i]] <- load_experiment_info(logs[i])
-    ls[[i]]$filename <- logs[i]
-  }
+open_experiment_infos <- function(directory, exp_timestamp = NULL, flatten=T){
+  ls <- open_brainvr_logs(directory, "ExperimentInfo", func = load_experiment_info, exp_timestamp, flatten)
   return(ls)
 }
 
@@ -90,22 +78,15 @@ load_experiment_info <- function(filepath){
 }
 
 #' Iterates over all _test_ files in a folder asnd saves them one by one to a return list
+#'
 #' @param directory directory where the file is located
+#' @param flatten in case of only a single list is returned, unnests the list
 #' @param exp_timestamp time of the 
+#'
 #' @return 
 #' @export
-open_experiment_logs <- function(directory, exp_timestamp = NULL){
-  ls <- list()
-  ptr <- create_log_search_pattern("test", exp_timestamp)
-  logs <- list.files(directory, pattern = ptr, full.names = T)
-  if(length(logs) < 1){
-    print(paste0("Could not find any test logs in ", directory))
-    return(NULL)
-  }
-  for(i in 1: length(logs)){
-    log <- logs[i]
-    ls[[i]] <- load_experiment_log(log)
-  }
+open_experiment_logs <- function(directory, exp_timestamp = NULL, flatten = T){
+  ls <- open_brainvr_logs(directory, "test", load_experiment_log, exp_timestamp, flatten)
   return(ls)
 }
 
@@ -134,47 +115,81 @@ load_experiment_log <- function(filepath){
   return(ls)
 }
 
-#TODO - finish this
+#' Searches for results logs and returns loaded list. 
+#' 
+#' @description REsults log have a _results_ in their filename. In case your's doesn't, use load_result_log instead
+#'
+#' @param directory where to search
+#' @param exp_timestamp timestamp of a particular results log
+#'
+#' @return list with loaded result log
+#' @export
+#'
+#' @examples
 open_result_log <- function(directory, exp_timestamp = NULL){
-  ptr <- create_log_search_pattern("results", exp_timestamp)
-  logs <- list.files(directory, pattern = ptr, full.names = T)
-  if(length(logs) < 1){
-    warning(paste0("Could not find any result logs in ", directory))
-    return(NULL)
-  }
-  if(length(logs) > 1){
-    warning(paste0("There are multiple results log in the ", directory, " with timestamp ", exp_timstamp))
-    return(NULL)
-  }
-  ls <- load_header(logs[1])
+  logs <- find_brainvr_logs(directory, "results", exp_timestamp)
+  ls <- load_result_log(logs[1])
   return(ls)
 }
 
-#TODO - finish this
+#' Loads results log at a specific path
+#'
+#' @param filepath 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 load_result_log <- function(filepath){
-  ls <- list()
-  text <- readLines(filepath, warn = F)
-  bottomHeaderIndex <- get_indicies_between(text, "DATA")$end
-  ls$positions = position_to_vector(ls$positions)
-  
-  ls$data <- read.table(filepath, header = T, sep = ";", 
-                        stringsAsFactors = F, skip = bottomHeaderIndex,
-                        encoding="UTF-8")
-  #deleting the last column - always empty
-  ls$data[ncol(ls$data)] <- NULL
+  ls <- load_header(filepath)
   return(ls)
+}
+
+#' Generic loading of all the results, experiment and other logs
+#'
+#' @param directory 
+#' @param log_name 
+#' @param exp_timestamp 
+#' @param flatten 
+#'
+#' @return
+#'
+#' @examples
+open_brainvr_logs <- function(directory, log_name, func, exp_timestamp = NULL, flatten = T){
+  logs <- find_brainvr_logs(directory, log_name, exp_timestamp)
+  if(is.null(logs)) return(NULL)
+  ls <- list()
+  for(i in 1:length(logs)){
+    ls[[i]] <- func(logs[i])
+  }
+  if(flatten && (length(ls) == 1)) ls <- ls[[1]]
+  return(ls)
+}
+
+find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL){
+  ptr <- create_log_search_pattern(log_name, exp_timestamp)
+  logs <- list.files(directory, pattern = ptr, full.names = T)
+  if(length(logs) < 1){
+    warning(paste0("Could not find any ", log_name, " logs in ", directory))
+    return(NULL)
+  }
+  if(length(logs) > 1 & !is.null(exp_timestamp)){
+    warning(paste0("There are multiple ", log_name, " in the ", directory, " with timestamp ", exp_timstamp))
+    return(NULL)
+  }
+  else return(logs)
 }
 
 #' Searches a directory for a player log. Returns player log data.table
 #'
 #' @param directory where the log should be located
-#' @param log_timestamp provides timestamp of a log to load
+#' @param exp_timestamp provides timestamp of a log to load
 #' @param override if true, deletes processed player log and loads the unprocessed. if FALSE, load preprocessed log if present
 #' @return data.table with the loaded player log or NULL.
 #' @export
 #' @import data.table
-open_player_log <- function(directory, log_timestamp = NULL, override = F, save = T){
-  ls_log_path <- find_player_path(directory, log_timestamp)
+open_player_log <- function(directory, exp_timestamp = NULL, override = F, save = T){
+  ls_log_path <- find_player_path(directory, exp_timestamp)
   if(nchar(ls_log_path$path) == 0) return(NULL)
   if(nchar(ls_log_path$path_preprocessed) > 0){
     if(override){
@@ -203,13 +218,13 @@ open_player_log <- function(directory, log_timestamp = NULL, override = F, save 
   df_position <- prepare_navr_log(df_position)
   navr_object <- navr::load_position_data(navr::NavrObject(), df_position)
   navr_object <- preprocess_player_log(navr_object)
-  if(save) save_preprocessed_player(directory, log_timestamp, navr_object$data)
+  if(save) save_preprocessed_player(directory, exp_timestamp, navr_object$data)
   return(navr_object)
 }
 
-find_player_path <- function(directory, log_timestamp = NULL){
+find_player_path <- function(directory, exp_timestamp = NULL){
   ls <- list(path="", path_preprocessed="")
-  ptr <- create_log_search_pattern("player", log_timestamp)
+  ptr <- create_log_search_pattern("player", exp_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) == 0)   print(paste0("Could not find the file for player log in ", directory))
   if(length(logs) > 2) print(paste0("Multiple player logs in ", directory))
