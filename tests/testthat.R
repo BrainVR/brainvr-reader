@@ -1,4 +1,4 @@
 library(testthat)
-library(brainvr.R)
+library(brainvr.reader)
 
-test_check("brainvr.R")
+test_check("brainvr.reader")

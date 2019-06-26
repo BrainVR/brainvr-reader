@@ -1,0 +1,16 @@
+***SESSION HEADER***
+{
+  "Participant": "NEO",
+  "Timestamp": "17-41-52-03-12-2017"
+}
+---SESSION HEADER---
+***RESULTS***
+{
+  "ThingsInResults":111
+}
+***CUSTOM***
+{
+"ThingsInNestedResults":0
+}
+---CUSTOM---
+---RESULTS---

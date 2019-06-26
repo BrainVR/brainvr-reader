@@ -1,4 +1,4 @@
-Package: brainvr.R
+Package: brainvr.reader
 Title: Loading, preprocessing and visualising logs from brainvr framework based app
 Version: 0.1.1
 Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.com",

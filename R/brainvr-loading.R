@@ -26,6 +26,7 @@ load_experiments <- function(folder, override=F){
 #' @export
 load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if (is.null(folder)) stop("no folder set")
+  #TODO - this should return only a single one per timestamp
   experiment_info <- open_experiment_infos(folder, log_timestamp = exp_timestamp)
   if(is.null(experiment_info)) stop("Experiment info not found")
   if(length(experiment_info) > 1) stop("There is more info files of given timestamp. Did you mean to call load_experiments instead?")
@@ -45,7 +46,7 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   obj$data$position <- navr_object
   #TODO - this might be an issue
   obj$data$experiment_log <- test_logs[[1]]
-  obj$data$result_log <- result_log
+  obj$data$results_log <- result_log
   obj$experiment_name <- obj$data$experiment_log$name
   
   return (obj)
@@ -140,7 +141,7 @@ open_result_log <- function(directory, exp_timestamp = NULL){
   ptr <- create_log_search_pattern("results", exp_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
-    warning(paste0("Could not find any test logs in ", directory))
+    warning(paste0("Could not find any result logs in ", directory))
     return(NULL)
   }
   if(length(logs) > 1){

@@ -1,6 +1,6 @@
 library(ggpubr)
 library(ggplot2)
-library(brainvr.R)
+library(brainvr.reader)
 
 dir_path <- "inst/extdata/"
 obj <- load_experiment(dir_path, exp_timestamp = '17-41-52-03-12-2017', override = T)

@@ -1,4 +1,4 @@
-library(brainvr.R)
+library(brainvr.reader)
 library(ggplot2)
 obj <- load_experiment("../extdata/")
 obj <- mirror_axes(obj)

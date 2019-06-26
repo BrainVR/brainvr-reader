@@ -5,8 +5,8 @@ knitr::opts_chunk$set(
 )
 
 ## ------------------------------------------------------------------------
-library(brainvr.R)
-dir_path <- system.file("extdata", package = "brainvr.R")
+library(brainvr.reader)
+dir_path <- system.file("extdata", package = "brainvr.reader")
 obj <- load_experiment(dir_path)
 
 ## ------------------------------------------------------------------------
