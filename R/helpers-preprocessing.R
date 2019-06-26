@@ -19,9 +19,16 @@ json_to_list <- function(text){
     stop("needs jsonlite to continue")
   }
   if(is.null(text)) return(NULL)
-  if(length(text) == 0) return(NULL)
+  if(length(text) <= 1) return(NULL)
+  if(!is_json(text)) return(NULL)
   ls <- jsonlite::fromJSON(text)
   return(ls)
+}
+
+is_json <- function(text){
+  bool <- c()
+  bool <- c(bool, any(grepl("\\{", text))) #has braces
+  return(all(bool))
 }
 
 replace_strings <- function(vec, strings, replacements){

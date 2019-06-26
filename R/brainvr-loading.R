@@ -125,9 +125,7 @@ load_experiment_log <- function(filepath){
   ls$name <- experiment_name_from_filename(filepath)
   ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
   ls$positions <- get_json_between(text, "POSITIONS")
-  
   ls$positions <- position_to_vector(ls$positions)
-  
   ls$data <- read.table(filepath, header = T, sep = ";", 
                         stringsAsFactors = F, skip = bottomHeaderIndex,
                         encoding="UTF-8")
@@ -148,8 +146,8 @@ open_result_log <- function(directory, exp_timestamp = NULL){
     warning(paste0("There are multiple results log in the ", directory, " with timestamp ", exp_timstamp))
     return(NULL)
   }
-  ls_results <- load_experiment_log(logs[1])
-  return(ls_results)
+  ls <- load_header(logs[1])
+  return(ls)
 }
 
 #TODO - finish this
