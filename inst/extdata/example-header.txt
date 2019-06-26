@@ -4,13 +4,15 @@
   "Timestamp": "17-41-52-03-12-2017"
 }
 ---SESSION HEADER---
+***THINGS***
 ***RESULTS***
 {
-  "ThingsInResults":111
+  "ThingsInResults":"111"
 }
+---RESULTS---
 ***CUSTOM***
 {
-"ThingsInNestedResults":0
+"ThingsInNestedResults":"0"
 }
 ---CUSTOM---
----RESULTS---
+---THINGS---

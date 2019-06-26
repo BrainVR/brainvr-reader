@@ -1,3 +1,6 @@
+SEPARATOR_START <- "\\*\\*\\*"
+SEPARATOR_END <- "\\-\\-\\-"
+
 create_log_search_pattern <- function(log_name, log_timestamp){
   ptr <- paste0("_", log_name, "_")
   if(!is.null(log_timestamp)){
@@ -8,9 +11,55 @@ create_log_search_pattern <- function(log_name, log_timestamp){
 
 create_separator <- function(string){
   ls <- list()
-  ls$beginning <- paste("\\*\\*\\*\\", string, "\\*\\*\\*", sep = "")
-  ls$end <- paste("\\-\\-\\-", string, "\\-\\-\\-", sep = "")
+  ls$beginning <- paste0(SEPARATOR_START, string, SEPARATOR_START)
+  ls$end <- paste(SEPARATOR_END, string, SEPARATOR_END, sep = "")
   return(ls)
+}
+
+
+load_header <- function(filepath){
+  ls <- list()
+  text <- readLines(filepath, warn = F)
+  ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
+  i_start <- which(grepl(ptr, text))
+  ls <- list()
+  for(i in i_start){
+    section_name <- gsub(SEPARATOR_START, "", text[i])
+    #TODO issue in case we have nested values of the same name
+    if(section_was_serialised(ls, section_name)) next
+    ls[[section_name]] <- load_header_section(text, section_name)
+  }
+  return(ls)
+}
+
+load_header_section <- function(text, section_name){
+  ls <- list()
+  section_text <- get_text_between(text, section_name)
+  ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
+  i_subsections <- which(grepl(ptr, section_text))
+  if(length(i_subsections) > 0){
+    for(i in i_subsections){
+      section_name <- gsub(SEPARATOR_START, "", section_text[i])
+      #TODO issue in case we have nested values of the same name
+      if(section_was_serialised(ls, section_name)) next
+      ls[[section_name]] <- load_header_section(section_text, section_name)
+    }
+  } else {
+    ls <- get_json_between(text, section_name)
+  }
+  return(ls)
+}
+
+section_was_serialised <- function(ls, section_name){
+  all_names <- names(unlist(ls))
+  #removes the past parameter name
+  ptr <- "\\.(?:.(?!\\.))+$" #negative search from the last .
+  all_names <- gsub(ptr, "", all_names, perl = T)
+  return(any(grepl(section_name, all_names)))
+}
+
+get_bottom_header_index <- function(string){
+  
 }
 
 ### TODO
