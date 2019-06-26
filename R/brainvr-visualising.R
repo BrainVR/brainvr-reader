@@ -29,7 +29,7 @@ plot_trial_path.brainvr <- function(obj, iTrial){
 brainvr.plot_trial_path <- function (obj, iTrial){
   navr_obj <- get_trial_position(obj, iTrial)
   plt <- navr::plot_path(navr_obj)
-  plt <- navr::plot_add_limits(plt, navr_obj$area_boundaries)
+  plt <- plt + navr::geom_navr_limits(navr_obj)
   return(plt)
 }
 
