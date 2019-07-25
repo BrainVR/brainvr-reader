@@ -5,7 +5,7 @@
 \title{Returns how long the trial took and removes potential pauses in the log}
 \usage{
 get_trial_duration(obj, iTrial, without_pauses = T, pause_limit = 5,
-  path_limit = 1)
+  path_limit = 1, ...)
 }
 \arguments{
 \item{obj}{BrainVr object with preprocessed player log}

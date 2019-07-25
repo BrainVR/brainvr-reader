@@ -4,7 +4,7 @@
 \alias{get_position_timewindow}
 \title{Returns log between designated times}
 \usage{
-get_position_timewindow(obj, start, end)
+get_position_timewindow(obj, start, end, ...)
 }
 \arguments{
 \item{obj}{}

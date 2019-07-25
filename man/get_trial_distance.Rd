@@ -4,7 +4,7 @@
 \alias{get_trial_distance}
 \title{Returns walked distance in a particular trial}
 \usage{
-get_trial_distance(obj, iTrial)
+get_trial_distance(obj, iTrial, ...)
 }
 \arguments{
 \item{obj}{Brainvr object}

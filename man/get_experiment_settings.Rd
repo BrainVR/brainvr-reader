@@ -4,7 +4,7 @@
 \alias{get_experiment_settings}
 \title{Returns experiment settings in a list}
 \usage{
-get_experiment_settings(obj)
+get_experiment_settings(obj, ...)
 }
 \arguments{
 \item{obj}{Brainvr Object}

@@ -4,7 +4,7 @@
 \alias{get_trial_event_times}
 \title{Returns times of certain events happening in particular trials}
 \usage{
-get_trial_event_times(obj, iTrial, event_name = "")
+get_trial_event_times(obj, iTrial, event_name = "", ...)
 }
 \arguments{
 \item{obj}{}

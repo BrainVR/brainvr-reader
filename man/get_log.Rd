@@ -4,7 +4,7 @@
 \alias{get_log}
 \title{Returns entire player log}
 \usage{
-get_log(obj)
+get_log(obj, ...)
 }
 \arguments{
 \item{obj}{Brainvr object}

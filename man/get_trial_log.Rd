@@ -4,7 +4,7 @@
 \alias{get_trial_log}
 \title{Returns data.table with player log for a particular trial}
 \usage{
-get_trial_log(obj, iTrial)
+get_trial_log(obj, iTrial, ...)
 }
 \arguments{
 \item{obj}{}

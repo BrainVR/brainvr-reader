@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-get_log <- function(obj){
+get_log <- function(obj, ...){
   UseMethod("get_log")
 }
 #' @export
@@ -22,7 +22,7 @@ get_log.brainvr <- function(obj){
 #' @export
 #'
 #' @examples
-get_experiment_log <- function(obj){
+get_experiment_log <- function(obj, ...){
   UseMethod("get_experiment_log")
 }
 #' @export
@@ -38,7 +38,7 @@ get_experiment_log.brainvr <- function(obj){
 #' @export
 #'
 #' @examples
-get_experiment_settings <- function(obj){
+get_experiment_settings <- function(obj, ...){
   UseMethod("get_experiment_settings")
 }
 #' @export
@@ -56,7 +56,7 @@ get_experiment_settings.brainvr <- function(obj){
 #' @export
 #'
 #' @examples
-get_position_timewindow <- function(obj, start, end){
+get_position_timewindow <- function(obj, start, end, ...){
   UseMethod("get_position_timewindow")
 }
 #' @export
@@ -72,7 +72,7 @@ get_position_timewindow.brainvr <- function(obj, start, end){
 #' @return navr object
 #' 
 #' @export
-get_trial_position <- function(obj, iTrial){
+get_trial_position <- function(obj, iTrial, ...){
   UseMethod("get_trial_position")
 }
 #' @export
@@ -89,7 +89,7 @@ get_trial_position.brainvr <- function(obj, iTrial) {
 #' @return player log for particulat trial
 #' 
 #' @export
-get_trial_log <- function(obj, iTrial){
+get_trial_log <- function(obj, iTrial, ...){
   UseMethod("get_trial_log")
 }
 #' @export
@@ -105,7 +105,7 @@ get_trial_log.brainvr <- function(obj, iTrial) {
 #' @return list with waitingToStart, start and finish 
 #' 
 #' @export
-get_trial_times <- function(obj, iTrial){
+get_trial_times <- function(obj, iTrial, ...){
   UseMethod("get_trial_times")
 }
 #' @export
@@ -138,7 +138,7 @@ get_trial_times.brainvr <- function(obj, iTrial){
 #' @export
 #'
 #' @examples
-get_trial_duration <- function(obj, iTrial, without_pauses = T, pause_limit = 5, path_limit = 1){
+get_trial_duration <- function(obj, iTrial, without_pauses = T, pause_limit = 5, path_limit = 1, ...){
   UseMethod("get_trial_duration")
 }
 #' @export
@@ -166,7 +166,7 @@ get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = T, pause_li
 #' @export
 #'
 #' @examples
-get_trial_distance <- function(obj, iTrial){
+get_trial_distance <- function(obj, iTrial, ...){
   UseMethod("get_trial_distance")
 }
 #' @export
@@ -185,7 +185,7 @@ get_trial_distance.brainvr <- function(obj, iTrial){
 #' @export
 #'
 #' @examples
-get_trial_event_times <- function(obj, iTrial, event_name = ""){
+get_trial_event_times <- function(obj, iTrial, event_name = "", ...){
   UseMethod("get_trial_event_times")
 }
 #' @export
@@ -228,7 +228,7 @@ get_walked_distnace_timewindow <- function(obj, start, end){
 #'
 #' @examples
 #TODO - rename to better reflect the return variable
-get_finished_trials <- function(obj){
+get_finished_trials <- function(obj, ...){
   UseMethod("get_finished_trials")
 }
 #' @export

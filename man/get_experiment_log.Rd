@@ -4,7 +4,7 @@
 \alias{get_experiment_log}
 \title{Returns experiment log data}
 \usage{
-get_experiment_log(obj)
+get_experiment_log(obj, ...)
 }
 \arguments{
 \item{obj}{Brainvr object}

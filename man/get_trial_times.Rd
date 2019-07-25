@@ -4,7 +4,7 @@
 \alias{get_trial_times}
 \title{Gets start and finish times of trial}
 \usage{
-get_trial_times(obj, iTrial)
+get_trial_times(obj, iTrial, ...)
 }
 \value{
 list with waitingToStart, start and finish

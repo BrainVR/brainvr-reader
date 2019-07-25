@@ -4,7 +4,7 @@
 \alias{get_trial_position}
 \title{Returns navr_object with data for a particular trial}
 \usage{
-get_trial_position(obj, iTrial)
+get_trial_position(obj, iTrial, ...)
 }
 \arguments{
 \item{obj}{brainvr}
