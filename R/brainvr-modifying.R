@@ -54,7 +54,7 @@ resize_layout <- function(obj, multiplier){
 #'
 #' @examples
 #' @noRd
-add_goal_positions <- function(obj, df){
+add_goal_positions <- function(obj, df, ...){
   UseMethod("add_goal_positions")
 }
 #' @export
@@ -76,7 +76,7 @@ add_goal_positions.brainvr <- function(obj, df){
 #'
 #' @examples
 #' @noRd
-add_goal_order <- function(obj, order){
+add_goal_order <- function(obj, order, ...){
   UseMethod("add_goal_order")
 }
 #' @export

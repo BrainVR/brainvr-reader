@@ -4,7 +4,7 @@
 \alias{plot_trial_path}
 \title{Plots trial path}
 \usage{
-plot_trial_path(obj, iTrial)
+plot_trial_path(obj, iTrial, ...)
 }
 \arguments{
 \item{obj}{}

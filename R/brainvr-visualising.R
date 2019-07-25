@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' 
-plot_trial_path <- function(obj, iTrial){
+plot_trial_path <- function(obj, iTrial, ...){
   UseMethod("plot_trial_path")
 }
 #' @export
