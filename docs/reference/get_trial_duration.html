@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>REturns if the trial has been force finished — was_trial_force_finished • brainvr.reader</title>
+<title>Returns how long the trial took and removes potential pauses in the log — get_trial_duration • brainvr.reader</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="REturns if the trial has been force finished — was_trial_force_finished" />
+<meta property="og:title" content="Returns how long the trial took and removes potential pauses in the log — get_trial_duration" />
 
-<meta property="og:description" content="REturns if the trial has been force finished" />
+<meta property="og:description" content="Returns how long the trial took and removes potential pauses in the log" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,29 +106,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>REturns if the trial has been force finished</h1>
+    <h1>Returns how long the trial took and removes potential pauses in the log</h1>
     
-    <div class="hidden name"><code>was_trial_force_finished.Rd</code></div>
+    <div class="hidden name"><code>get_trial_duration.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>REturns if the trial has been force finished</p>
+    <p>Returns how long the trial took and removes potential pauses in the log</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>was_trial_force_finished</span>(<span class='no'>obj</span>, <span class='no'>iTrial</span>)</pre>
+    <pre class="usage"><span class='fu'>get_trial_duration</span>(<span class='no'>obj</span>, <span class='no'>iTrial</span>, <span class='kw'>without_pauses</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>pause_limit</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>path_limit</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td></td>
+      <td><p>BrainVr object with preprocessed player log</p></td>
     </tr>
     <tr>
       <th>iTrial</th>
-      <td></td>
+      <td><p>trial log (starting with 1)</p></td>
+    </tr>
+    <tr>
+      <th>without_pauses</th>
+      <td><p>Defaults to true</p></td>
+    </tr>
+    <tr>
+      <th>pause_limit</th>
+      <td><p>minimum time to be considered pause. Defaults to 5</p></td>
+    </tr>
+    <tr>
+      <th>path_limit</th>
+      <td><p>maximum distance to be considered not moving. Defaults to 1</p></td>
     </tr>
     </table>
     
