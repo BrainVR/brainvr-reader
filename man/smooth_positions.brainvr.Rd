@@ -4,7 +4,7 @@
 \alias{smooth_positions.brainvr}
 \title{Smooths positions and recalculates distances}
 \usage{
-smooth_positions.brainvr(obj, type, ...)
+\method{smooth_positions}{brainvr}(obj, type, ...)
 }
 \arguments{
 \item{obj}{Brainvr object}

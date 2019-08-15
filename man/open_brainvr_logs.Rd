@@ -5,7 +5,7 @@
 \title{Generic loading of all the results, experiment and other logs}
 \usage{
 open_brainvr_logs(directory, log_name, func, exp_timestamp = NULL,
-  flatten = T)
+  flatten = F)
 }
 \arguments{
 \item{directory}{}
@@ -14,7 +14,7 @@ open_brainvr_logs(directory, log_name, func, exp_timestamp = NULL,
 
 \item{exp_timestamp}{}
 
-\item{flatten}{}
+\item{flatten}{in case only a single file is found, should it be unnested? defaults to false}
 }
 \value{
 

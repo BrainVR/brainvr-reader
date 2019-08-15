@@ -4,14 +4,14 @@
 \alias{open_experiment_logs}
 \title{Iterates over all _test_ files in a folder asnd saves them one by one to a return list}
 \usage{
-open_experiment_logs(directory, exp_timestamp = NULL, flatten = T)
+open_experiment_logs(directory, exp_timestamp = NULL, flatten = F)
 }
 \arguments{
 \item{directory}{directory where the file is located}
 
 \item{exp_timestamp}{time of the}
 
-\item{flatten}{in case of only a single list is returned, unnests the list}
+\item{flatten}{in case of only a single list is returned, unnests the list. Beware, unnested list causes issues with opening experiments}
 }
 \description{
 Iterates over all _test_ files in a folder asnd saves them one by one to a return list
