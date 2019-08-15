@@ -1,11 +1,11 @@
 #' Goes through the folder and loads every experiment info into separate object 
 #'
 #' @param override if TRUE, deletes and recomputes preprocessed player. defaults to FALSE
-#' @param folder where to look
+#' @param folder where to look for brainvr files
 #'
 #' @return list of objecs
 #' @export 
-load_experiments <- function(folder, override=F){
+load_experiments <- function(folder, override = FALSE){
   if (is.null(folder)) stop("no folder set")
   #open experiment_logs to see how many do we have
   experiment_infos <- open_experiment_infos(folder)
@@ -13,7 +13,7 @@ load_experiments <- function(folder, override=F){
   ls <- list()
   for(i in 1:length(experiment_infos)){
     info <- experiment_infos[[i]]
-    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp, override=override)
+    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp, override = override)
   }
   return(ls)
 }
@@ -26,15 +26,15 @@ load_experiments <- function(folder, override=F){
 load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
   if (is.null(folder)) stop("no folder set")
   #TODO - this should return only a single one per timestamp
-  experiment_info <- open_experiment_infos(folder, exp_timestamp = exp_timestamp)
+  experiment_info <- open_experiment_infos(folder, exp_timestamp = exp_timestamp, flatten = T)
   if(is.null(experiment_info)) stop("Experiment info not found")
   #if multiple logs or no logs, quit
   if(is.null(exp_timestamp)) exp_timestamp <- experiment_info$header$Timestamp
   ## TODO separate preprocess adn opening
   navr_object <- open_player_log(folder, exp_timestamp = exp_timestamp, override = override)
   if(is.null(navr_object)) stop("Player log not found")
-  #preprocesses player log
-  #checks if there is everything we need and if not, recomputes the stuff
+  # preprocesses player log
+  # checks if there is everything we need and if not, recomputes the stuff
   test_log <- open_experiment_logs(folder, exp_timestamp, flatten = T)
   result_log <- open_result_log(folder, exp_timestamp)
   obj <- BrainvrObject()
@@ -57,7 +57,8 @@ load_experiment <- function(folder, exp_timestamp = NULL, override = FALSE){
 #'
 #' @return list with a single loaded info log
 #' @export
-open_experiment_infos <- function(directory, exp_timestamp = NULL, flatten=T){
+open_experiment_infos <- function(directory, exp_timestamp = NULL, flatten = F){
+  # We CANNOT flatten the experiment info because then it looks like there is more of them and it loads the experiment multiple times
   ls <- open_brainvr_logs(directory, "ExperimentInfo", func = load_experiment_info, exp_timestamp, flatten)
   return(ls)
 }
@@ -80,12 +81,12 @@ load_experiment_info <- function(filepath){
 #' Iterates over all _test_ files in a folder asnd saves them one by one to a return list
 #'
 #' @param directory directory where the file is located
-#' @param flatten in case of only a single list is returned, unnests the list
+#' @param flatten in case of only a single list is returned, unnests the list. Beware, unnested list causes issues with opening experiments
 #' @param exp_timestamp time of the 
 #'
 #' @return 
 #' @export
-open_experiment_logs <- function(directory, exp_timestamp = NULL, flatten = T){
+open_experiment_logs <- function(directory, exp_timestamp = NULL, flatten = F){
   ls <- open_brainvr_logs(directory, "test", load_experiment_log, exp_timestamp, flatten)
   return(ls)
 }
@@ -150,12 +151,12 @@ load_result_log <- function(filepath){
 #' @param directory 
 #' @param log_name 
 #' @param exp_timestamp 
-#' @param flatten 
+#' @param flatten in case only a single file is found, should it be unnested? defaults to false
 #'
 #' @return
 #'
 #' @examples
-open_brainvr_logs <- function(directory, log_name, func, exp_timestamp = NULL, flatten = T){
+open_brainvr_logs <- function(directory, log_name, func, exp_timestamp = NULL, flatten = F){
   logs <- find_brainvr_logs(directory, log_name, exp_timestamp)
   if(is.null(logs)) return(NULL)
   ls <- list()

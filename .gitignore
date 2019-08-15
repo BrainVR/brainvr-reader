@@ -28,3 +28,4 @@ inst/doc
 
 # Ignoring package specific thigns
 *_preprocessed*
+playground.R
