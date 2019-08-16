@@ -128,7 +128,7 @@ load_experiment_log <- function(filepath){
 #'
 #' @examples
 open_result_log <- function(directory, exp_timestamp = NULL){
-  logs <- find_brainvr_logs(directory, "results", exp_timestamp)
+  logs <- find_brainvr_logs(directory, "results", exp_timestamp, warning_missing = F)
   if(is.null(logs)) return(NULL)
   ls <- load_result_log(logs[1])
   return(ls)
@@ -168,11 +168,11 @@ open_brainvr_logs <- function(directory, log_name, func, exp_timestamp = NULL, f
   return(ls)
 }
 
-find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL){
+find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL, warning_missing = TRUE){
   ptr <- create_log_search_pattern(log_name, exp_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
-    warning(paste0("Could not find any ", log_name, " logs in ", directory))
+    if(warning_missing) warning(paste0("Could not find any ", log_name, " logs in ", directory))
     return(NULL)
   }
   if(length(logs) > 1 & !is.null(exp_timestamp)){
