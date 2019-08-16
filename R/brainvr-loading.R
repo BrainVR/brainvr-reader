@@ -129,6 +129,7 @@ load_experiment_log <- function(filepath){
 #' @examples
 open_result_log <- function(directory, exp_timestamp = NULL){
   logs <- find_brainvr_logs(directory, "results", exp_timestamp)
+  if(is.null(logs)) return(NULL)
   ls <- load_result_log(logs[1])
   return(ls)
 }
