@@ -1,7 +1,7 @@
 #' Plots trial path
 #'
-#' @param obj 
-#' @param trialId 
+#' @param obj BrainvrObject
+#' @param iTrial trial index (starting with 1)
 #'
 #' @return
 #' @export
@@ -20,9 +20,9 @@ plot_trial_path.brainvr <- function(obj, iTrial){
 
 #' Plots trial path
 #' 
-#' @param iTrial 
-#'
-#' @return ggplot objectg
+#' @param obj BrainvrObject
+#' @param iTrial trial index (starting with 1)
+#' @return ggplot object
 #' @import ggplot2 
 #' @keywords internal
 #' @noRd
@@ -35,7 +35,7 @@ brainvr.plot_trial_path <- function (obj, iTrial){
 
 #' PLots multiple paths
 #'
-#' @param obj 
+#' @param obj BrainvrObject
 #' @param columns
 #' @param indices 
 #'
@@ -54,10 +54,10 @@ brainvr.plot_trials_paths <- function(obj, columns = 5, indices = c()){
   navr::multiplot(plots, cols = columns)
 }
 
-#' Title
+#' Adds 
 #'
 #' @param plt 
-#' @param obj 
+#' @param obj BrainvrObject
 #' @param trialId 
 #'
 #' @return

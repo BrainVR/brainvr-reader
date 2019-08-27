@@ -7,9 +7,9 @@
 plot_trial_path(obj, iTrial, ...)
 }
 \arguments{
-\item{obj}{}
+\item{obj}{BrainvrObject}
 
-\item{trialId}{}
+\item{iTrial}{trial index (starting with 1)}
 }
 \description{
 Plots trial path

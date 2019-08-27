@@ -4,9 +4,10 @@
 #' @param obj BrainvrObject with player log and positions data to be translated
 #' @param offset New X, Z and Y vector. Needs to be a int vector of lenght 3 (X, Y, Z). 
 #' @returns BrainvrObject
-#' @example 
+#' @example
+#'\dontrun{
 #' obj <- translate_position(obj, (3, 0, -6))
-#' 
+#' }
 #' @export
 translate_positions <- function(obj, offset){
   obj <- transform_object(obj, "translate", translate_positions_df, translate_positions_list, offset)
@@ -17,11 +18,11 @@ translate_positions <- function(obj, offset){
 #' 
 #' @param obj
 #' @return BrainvrObject with mirrored axes and rotation
-#' @example 
+#' @example
+#'\dontrun{
 #' obj <- mirror_axes(obj)
-#' 
+#' }
 #' @export
-#' 
 mirror_axes <- function(obj){
   obj <- transform_object(obj, "mirror", mirror_positions_df, mirror_positions_list)
   return(obj)
@@ -33,9 +34,10 @@ mirror_axes <- function(obj){
 #' @param obj BrainvrObject
 #' @return ModifiedUnity object
 #' 
-#' @example 
+#' @example
+#'\dontrun{
 #' obj <- resize_layout(obj, 0.5) #makes it half as large
-#' 
+#' } 
 #' @export
 #' 
 resize_layout <- function(obj, multiplier){
@@ -89,14 +91,13 @@ add_goal_order.brainvr <- function(obj, order){
 
 #' Smooths positions and recalculates distances
 #'
-#' @param obj Brainvr object
+#' @param obj BrainvrObject
 #' @param type median, spline
 #' @param ... optional parameters for the smoothing. VIZ. navr::smooth_positions_df
 #'
 #' @return Brainvr object with smoothed positions
 #' @export
-#'
-#' @examples
+
 smooth_positions.brainvr <- function(obj, type, ...){
   obj$data$position <- navr::smooth_positions_df(obj$data$position, type, ...)
   obj$data$position <- navr::add_distances(obj$data$position)

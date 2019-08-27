@@ -1,4 +1,5 @@
-prepare_navr_log <- function(position_log){
+#' @noRd
+repare_navr_log <- function(position_log){
   ## Converting position
   position_log <- vector3_to_columns(position_log)
   #TODO - remove data.table

@@ -7,7 +7,7 @@
 \method{smooth_positions}{brainvr}(obj, type, ...)
 }
 \arguments{
-\item{obj}{Brainvr object}
+\item{obj}{BrainvrObject}
 
 \item{type}{median, spline}
 

@@ -1,0 +1,51 @@
+reference:
+- title: Objects
+  desc: Definitions of main objects
+  contents:
+  - '`BrainvrObject`'
+- title: Loading functions
+  desc: Functions to load brainvr-framework data
+  contents:
+  - '`load_experiment`'
+  - '`load_experiments`'
+  - '`load_experiment_info`'
+  - '`load_experiment_log`'
+  - '`load_result_log`'
+  - '`open_brainvr_logs`'
+  - '`open_experiment_infos`'
+  - '`open_experiment_logs`'
+  - '`open_player_log`'
+  - '`open_result_log`'
+- title: Getter functions
+  desc: Functions to access BrainvrObject properties (`get_log`) and calculated results (`get_trial_distance`)
+  contents:
+  - '`get_log`'
+  - '`get_trial_distance`'
+  - '`get_trial_duration`'
+  - '`get_trial_event_times`'
+  - '`get_trial_log`'
+  - '`get_trial_position`'
+  - '`get_trial_times`'
+  - '`get_position_timewindow`'
+  - '`get_distance_timewindow`'
+  - '`get_experiment_log`'
+  - '`get_experiment_settings`'
+  - '`get_finished_trials`'
+  - '`was_trial_force_finished`'
+- title: Preprocessing functions
+  - '`preprocess_player_log`'
+  - '`export_position_log`'
+  - '`smooth_positions.brainvr`'
+  - '`mirror_axes`'
+  - '`resize_layout`'
+  - '`translate_positions`'
+  - '`save_preprocessed_player`'
+- title: Visualisations
+  desc: Functions to visualise aspects fo the position. Mostly wrappers around [navr](https://github.io/hejtmy/navr) visualisation functions
+  contents:
+  - '`plot_trial_path`'
+
+
+
+
+
