@@ -10,7 +10,7 @@ get_trial_duration(obj, iTrial, without_pauses = T, pause_limit = 5,
 \arguments{
 \item{obj}{BrainVr object with preprocessed player log}
 
-\item{iTrial}{trial log (starting with 1)}
+\item{iTrial}{trial index (starting with 1)}
 
 \item{without_pauses}{Defaults to true}
 

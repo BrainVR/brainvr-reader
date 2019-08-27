@@ -9,6 +9,9 @@ get_log(obj, ...)
 \arguments{
 \item{obj}{Brainvr object}
 }
+\value{
+player log data.frame
+}
 \description{
 Returns entire player log
 }

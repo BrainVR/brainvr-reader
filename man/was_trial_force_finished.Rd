@@ -2,15 +2,15 @@
 % Please edit documentation in R/brainvr-getters.R
 \name{was_trial_force_finished}
 \alias{was_trial_force_finished}
-\title{REturns if the trial has been force finished}
+\title{Returns if the trial has been force finished}
 \usage{
 was_trial_force_finished(obj, iTrial)
 }
 \arguments{
-\item{obj}{}
+\item{obj}{BrainvrObject}
 
-\item{iTrial}{}
+\item{iTrial}{trial index (starting with 1)}
 }
 \description{
-REturns if the trial has been force finished
+Returns if the trial has been force finished
 }

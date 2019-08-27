@@ -7,9 +7,9 @@
 get_trial_distance(obj, iTrial, ...)
 }
 \arguments{
-\item{obj}{Brainvr object}
+\item{obj}{BrainvrObject}
 
-\item{iTrial}{trial index}
+\item{iTrial}{trial index (startin with 1)}
 }
 \description{
 Returns walked distance in a particular trial

@@ -7,7 +7,7 @@
 get_trial_position(obj, iTrial, ...)
 }
 \arguments{
-\item{obj}{brainvr}
+\item{obj}{BrainvrObject}
 }
 \value{
 navr object

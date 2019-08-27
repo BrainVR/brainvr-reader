@@ -7,7 +7,7 @@
 get_trial_log(obj, iTrial, ...)
 }
 \arguments{
-\item{obj}{}
+\item{obj}{BrainvrObject}
 }
 \value{
 player log for particulat trial

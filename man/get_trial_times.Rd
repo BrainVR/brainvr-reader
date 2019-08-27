@@ -6,6 +6,11 @@
 \usage{
 get_trial_times(obj, iTrial, ...)
 }
+\arguments{
+\item{obj}{BrainvrObject}
+
+\item{iTrial}{trial index(starting with 1)}
+}
 \value{
 list with waitingToStart, start and finish
 }

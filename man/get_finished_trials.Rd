@@ -7,7 +7,7 @@
 get_finished_trials(obj)
 }
 \arguments{
-\item{obj}{Brainvr object}
+\item{obj}{BrainvrObject}
 }
 \value{
 indices of finished trials
