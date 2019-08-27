@@ -73,7 +73,7 @@
       <h1>Brainvr.R showcase of loading and preprocessing</h1>
                         <h4 class="author">Lukáš hejtmy Hejtmánek</h4>
             
-            <h4 class="date">2019-07-25</h4>
+            <h4 class="date">2019-08-27</h4>
       
       
       <div class="hidden name"><code>main.Rmd</code></div>
@@ -95,7 +95,7 @@
 <a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt;   c.quosures     rlang</span></a>
 <a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt;   print.quosures rlang</span></a>
 <a class="sourceLine" id="cb1-9" title="9">dir_path &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"brainvr.reader"</span>)</a>
-<a class="sourceLine" id="cb1-10" title="10">obj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/load_experiments.html">load_experiments</a></span>(dir_path)</a>
+<a class="sourceLine" id="cb1-10" title="10">obj &lt;-<span class="st"> </span><span class="kw">load_experiments</span>(dir_path)</a>
 <a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt; [1] "Loading preprocessed player logC:/Users/hejtm/Documents/R/win-library/3.6/brainvr.reader/extdata/NEO_player_17-41-52-03-12-2017_preprocessed.txt"</span></a>
 <a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; [1] "Loading preprocessed player logC:/Users/hejtm/Documents/R/win-library/3.6/brainvr.reader/extdata/NEO_player_18-07-09-03-12-2017_preprocessed.txt"</span></a>
 <a class="sourceLine" id="cb1-13" title="13">obj &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]</a></code></pre></div>
@@ -104,9 +104,9 @@
 <h1 class="hasAnchor">
 <a href="#recentering-map" class="anchor"></a>Recentering map</h1>
 <p>IN case we need a new offset, we can do that as well</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">obj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/translate_positions.html">translate_positions</a></span>(obj, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">33.5</span>, <span class="dv">0</span>, <span class="fl">47.75</span>))</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">obj &lt;-<span class="st"> </span><span class="kw">translate_positions</span>(obj, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">33.5</span>, <span class="dv">0</span>, <span class="fl">47.75</span>))</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; [1] "Couldn't translate positions in player log. Have you preprocessed it correctly? Quitting."</span></a>
-<a class="sourceLine" id="cb2-3" title="3">obj &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mirror_axes.html">mirror_axes</a></span>(obj)</a>
+<a class="sourceLine" id="cb2-3" title="3">obj &lt;-<span class="st"> </span><span class="kw">mirror_axes</span>(obj)</a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; [1] "Couldn't mirror positions in player log. Have you preprocessed it correctly? Quitting."</span></a></code></pre></div>
 </div>
 <div id="visualising" class="section level1">

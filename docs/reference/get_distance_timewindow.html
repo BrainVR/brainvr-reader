@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns navr_object with data for a particular trial — get_trial_position • brainvr.reader</title>
+<title>Returns amount of moved distance in given timewindow — get_distance_timewindow • brainvr.reader</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Returns navr_object with data for a particular trial — get_trial_position" />
+<meta property="og:title" content="Returns amount of moved distance in given timewindow — get_distance_timewindow" />
 
-<meta property="og:description" content="Returns navr_object with data for a particular trial" />
+<meta property="og:description" content="Returns amount of moved distance in given timewindow" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,31 +106,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns navr_object with data for a particular trial</h1>
+    <h1>Returns amount of moved distance in given timewindow</h1>
     
-    <div class="hidden name"><code>get_trial_position.Rd</code></div>
+    <div class="hidden name"><code>get_distance_timewindow.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns navr_object with data for a particular trial</p>
+    <p>Returns amount of moved distance in given timewindow</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_trial_position</span>(<span class='no'>obj</span>, <span class='no'>iTrial</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_distance_timewindow</span>(<span class='no'>obj</span>, <span class='no'>start</span>, <span class='no'>end</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obj</th>
-      <td><p>BrainvrObject</p></td>
+      <td><p>brainvr object</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>movement start timestamp</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>movement end timestamp</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>navr object</p>
+    <p>moved distance or NA if the</p>
     
 
   </div>

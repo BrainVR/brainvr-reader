@@ -117,8 +117,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-objects" class="hasAnchor"><a href="#section-objects" class="anchor"></a>Objects</h2>
+          <p class="section-desc"><p>Definitions of main objects</p></p>
         </th>
       </tr>
       <tr>
@@ -127,42 +127,88 @@
           <p><code><a href="BrainvrObject.html">BrainvrObject()</a></code> </p>
         </td>
         <td><p>Title</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-loading-functions" class="hasAnchor"><a href="#section-loading-functions" class="anchor"></a>Loading functions</h2>
+          <p class="section-desc"><p>Functions to load brainvr-framework data</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="load_experiment.html">load_experiment()</a></code> </p>
+        </td>
+        <td><p>Loads files form a folder into BrainvrObject</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="export_position_log.html">export_position_log()</a></code> </p>
+          <p><code><a href="load_experiments.html">load_experiments()</a></code> </p>
         </td>
-        <td><p>Exports preprocessed player log</p></td>
+        <td><p>Goes through the folder and loads every experiment info into separate object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_experiment_log.html">get_experiment_log()</a></code> </p>
+          <p><code><a href="load_experiment_info.html">load_experiment_info()</a></code> </p>
         </td>
-        <td><p>Returns experiment log data</p></td>
+        <td><p>Loads particular info file into a list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_experiment_settings.html">get_experiment_settings()</a></code> </p>
+          <p><code><a href="load_experiment_log.html">load_experiment_log()</a></code> </p>
         </td>
-        <td><p>Returns experiment settings in a list</p></td>
+        <td><p>Loads expeirment log into a predefined list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_finished_trials.html">get_finished_trials()</a></code> </p>
+          <p><code><a href="load_result_log.html">load_result_log()</a></code> </p>
         </td>
-        <td><p>Returns which trials were finished</p></td>
+        <td><p>Loads results log at a specific path</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="open_brainvr_logs.html">open_brainvr_logs()</a></code> </p>
+        </td>
+        <td><p>Generic loading of all the results, experiment and other logs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_experiment_infos.html">open_experiment_infos()</a></code> </p>
+        </td>
+        <td><p>Searches the directory for experiment log files. Returs single one if multiple are found</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_experiment_logs.html">open_experiment_logs()</a></code> </p>
+        </td>
+        <td><p>Iterates over all _test_ files in a folder asnd saves them one by one to a return list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_player_log.html">open_player_log()</a></code> </p>
+        </td>
+        <td><p>Searches a directory for a player log. Returns player log data.table</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="open_result_log.html">open_result_log()</a></code> </p>
+        </td>
+        <td><p>Searches for results logs and returns loaded list.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-getter-functions" class="hasAnchor"><a href="#section-getter-functions" class="anchor"></a>Getter functions</h2>
+          <p class="section-desc"><p>Functions to access BrainvrObject properties (<code>get_log</code>) and calculated results (<code>get_trial_distance</code>)</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="get_log.html">get_log()</a></code> </p>
         </td>
         <td><p>Returns entire player log</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_position_timewindow.html">get_position_timewindow()</a></code> </p>
-        </td>
-        <td><p>Returns log between designated times</p></td>
       </tr><tr>
         
         <td>
@@ -202,39 +248,65 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="get_walked_distnace_timewindow.html">get_walked_distnace_timewindow()</a></code> </p>
+          <p><code><a href="get_position_timewindow.html">get_position_timewindow()</a></code> </p>
         </td>
-        <td><p>Returns walked distance in given timewindow</p></td>
+        <td><p>Returns log between designated times</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="load_experiment.html">load_experiment()</a></code> </p>
+          <p><code><a href="get_distance_timewindow.html">get_distance_timewindow()</a></code> </p>
         </td>
-        <td><p>Loads files form a folder into BrainvrObject</p></td>
+        <td><p>Returns amount of moved distance in given timewindow</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="load_experiments.html">load_experiments()</a></code> </p>
+          <p><code><a href="get_experiment_log.html">get_experiment_log()</a></code> </p>
         </td>
-        <td><p>Goes through the folder and loads every experiment info into separate object</p></td>
+        <td><p>Returns experiment log data</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="load_experiment_info.html">load_experiment_info()</a></code> </p>
+          <p><code><a href="get_experiment_settings.html">get_experiment_settings()</a></code> </p>
         </td>
-        <td><p>Loads particular info file into a list</p></td>
+        <td><p>Returns experiment settings in a list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="load_experiment_log.html">load_experiment_log()</a></code> </p>
+          <p><code><a href="get_finished_trials.html">get_finished_trials()</a></code> </p>
         </td>
-        <td><p>Loads expeirment log into a predefined list</p></td>
+        <td><p>Returns which trials were finished</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="load_result_log.html">load_result_log()</a></code> </p>
+          <p><code><a href="was_trial_force_finished.html">was_trial_force_finished()</a></code> </p>
         </td>
-        <td><p>Loads results log at a specific path</p></td>
+        <td><p>Returns if the trial has been force finished</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-preprocessing-functions" class="hasAnchor"><a href="#section-preprocessing-functions" class="anchor"></a>Preprocessing functions</h2>
+          <p class="section-desc"><p>function to preprocess mostly player log, transpose axes, smooth positions, and save</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="preprocess_player_log.html">preprocess_player_log()</a></code> </p>
+        </td>
+        <td><p>Preprocesses player log and returns it</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="export_position_log.html">export_position_log()</a></code> </p>
+        </td>
+        <td><p>Exports preprocessed player log</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="smooth_positions.brainvr.html">smooth_positions(<i>&lt;brainvr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Smooths positions and recalculates distances</p></td>
       </tr><tr>
         
         <td>
@@ -244,71 +316,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="open_brainvr_logs.html">open_brainvr_logs()</a></code> </p>
-        </td>
-        <td><p>Generic loading of all the results, experiment and other logs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="open_experiment_infos.html">open_experiment_infos()</a></code> </p>
-        </td>
-        <td><p>Searches the directory for experiment log files. Returs single one if multiple are found</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="open_experiment_logs.html">open_experiment_logs()</a></code> </p>
-        </td>
-        <td><p>Iterates over all _test_ files in a folder asnd saves them one by one to a return list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="open_player_log.html">open_player_log()</a></code> </p>
-        </td>
-        <td><p>Searches a directory for a player log. Returns player log data.table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="open_result_log.html">open_result_log()</a></code> </p>
-        </td>
-        <td><p>Searches for results logs and returns loaded list.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_trial_path.html">plot_trial_path()</a></code> </p>
-        </td>
-        <td><p>Plots trial path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prepare_navr_log.html">prepare_navr_log()</a></code> </p>
-        </td>
-        <td><p>SUPER IMPORTANT - renames Unity Z to Y and vice versa, because NAVR calculates
-speeds from x and y not x and z</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="preprocess_player_log.html">preprocess_player_log()</a></code> </p>
-        </td>
-        <td><p>Preprocesses player log and returns it</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="resize_layout.html">resize_layout()</a></code> </p>
         </td>
         <td><p>Resizes the map to fit the new constraints.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="save_preprocessed_player.html">save_preprocessed_player()</a></code> </p>
-        </td>
-        <td><p>Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
-If there are multiple player logs in the folder,takes the name from the first available</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="smooth_positions.brainvr.html">smooth_positions.brainvr()</a></code> </p>
-        </td>
-        <td><p>Smooths positions and recalculates distances</p></td>
       </tr><tr>
         
         <td>
@@ -318,9 +328,24 @@ If there are multiple player logs in the folder,takes the name from the first av
       </tr><tr>
         
         <td>
-          <p><code><a href="was_trial_force_finished.html">was_trial_force_finished()</a></code> </p>
+          <p><code><a href="save_preprocessed_player.html">save_preprocessed_player()</a></code> </p>
         </td>
-        <td><p>REturns if the trial has been force finished</p></td>
+        <td><p>Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
+If there are multiple player logs in the folder,takes the name from the first available</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-visualisations" class="hasAnchor"><a href="#section-visualisations" class="anchor"></a>Visualisations</h2>
+          <p class="section-desc"><p>Functions to visualise aspects fo the position. Mostly wrappers around <a href="https://github.io/hejtmy/navr">navr</a> visualisation functions</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="plot_trial_path.html">plot_trial_path()</a></code> </p>
+        </td>
+        <td><p>Plots trial path</p></td>
       </tr>
     </tbody>
     </table>
@@ -329,7 +354,11 @@ If there are multiple player logs in the folder,takes the name from the first av
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-objects">Objects</a></li>
+      <li><a href="#section-loading-functions">Loading functions</a></li>
+      <li><a href="#section-getter-functions">Getter functions</a></li>
+      <li><a href="#section-preprocessing-functions">Preprocessing functions</a></li>
+      <li><a href="#section-visualisations">Visualisations</a></li>
     </ul>
   </div>
 </div>

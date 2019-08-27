@@ -117,7 +117,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>open_experiment_logs</span>(<span class='no'>directory</span>, <span class='kw'>exp_timestamp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>flatten</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>open_experiment_logs</span>(<span class='no'>directory</span>, <span class='kw'>exp_timestamp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>flatten</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,7 +132,7 @@
     </tr>
     <tr>
       <th>flatten</th>
-      <td><p>in case of only a single list is returned, unnests the list</p></td>
+      <td><p>in case of only a single list is returned, unnests the list. Beware, unnested list causes issues with opening experiments</p></td>
     </tr>
     </table>
     

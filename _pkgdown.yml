@@ -33,6 +33,8 @@ reference:
   - '`get_finished_trials`'
   - '`was_trial_force_finished`'
 - title: Preprocessing functions
+  desc: function to preprocess mostly player log, transpose axes, smooth positions, and save
+  contents:
   - '`preprocess_player_log`'
   - '`export_position_log`'
   - '`smooth_positions.brainvr`'
