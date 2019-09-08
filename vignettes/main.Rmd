@@ -33,7 +33,6 @@ obj <- translate_positions(obj, c(33.5, 0, 47.75))
 obj <- mirror_axes(obj)
 ```
 
-
 # Visualising
 Plotting player path
 ```{r}

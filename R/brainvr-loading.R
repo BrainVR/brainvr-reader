@@ -176,7 +176,7 @@ find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL, warning
     return(NULL)
   }
   if(length(logs) > 1 & !is.null(exp_timestamp)){
-    warning(paste0("There are multiple ", log_name, " in the ", directory, " with timestamp ", exp_timstamp))
+    warning(paste0("There are multiple ", log_name, " in the ", directory, " with timestamp ", exp_timestamp))
     return(NULL)
   }
   else return(logs)

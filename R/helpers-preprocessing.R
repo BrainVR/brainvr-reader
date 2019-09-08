@@ -1,10 +1,10 @@
 #' @noRd
-repare_navr_log <- function(position_log){
+prepare_navr_log <- function(position_log){
   ## Converting position
   position_log <- vector3_to_columns(position_log)
   #TODO - remove data.table
-  position_log[, Position:= NULL]
-  position_log <- navr::prepare_column_names(position_log)
+  position_log[, Position := NULL]
+  position_log <- prepare_navr_column_names(position_log)
   #' SUPER IMPORTANT - renames Unity Z to Y and vice versa, because NAVR calculates
   #' speeds from x and y not x and z
   position_log <- switch_y_and_z(position_log)
@@ -42,10 +42,31 @@ replace_strings <- function(vec, strings, replacements){
   }
   return(vec)
 }
+
 switch_y_and_z <- function(dt_log){
   dt_log <- dt_log[, position_temp := position_z]
   dt_log <- dt_log[, position_z := position_y]
   dt_log <- dt_log[, position_y := position_temp]
   dt_log <- dt_log[, position_temp := NULL]
   return(dt_log)
+}
+
+#' Tries to rename columns so they correspond to proper naming conventions
+#' @description changes "." to "_" to correspond with python conventions,
+#' makes everything lowecase, renames Time column if present to "timestamp"
+#'
+#' @param df dataframe
+#'
+#' @return modified dataframe
+#' @noRd
+prepare_navr_column_names <- function(df){
+  df <- rename_column(df, "Time", "timestamp")
+  new_names <- tolower(gsub("[.]", "_", colnames(df))) #replaces . with _
+  colnames(df) <- new_names
+  return(df)
+}
+
+rename_column <- function(df, old_column, new_column){
+  colnames(df)[colnames(df)==old_column] <- new_column
+  return(df)
 }
