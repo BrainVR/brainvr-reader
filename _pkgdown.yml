@@ -30,7 +30,7 @@ reference:
   - '`get_distance_timewindow`'
   - '`get_experiment_log`'
   - '`get_experiment_settings`'
-  - '`get_finished_trials`'
+  - '`get_finished_trials_indices`'
   - '`was_trial_force_finished`'
 - title: Preprocessing functions
   desc: function to preprocess mostly player log, transpose axes, smooth positions, and save

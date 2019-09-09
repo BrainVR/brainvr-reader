@@ -18,8 +18,8 @@ test_that("Can get trial times", {
 })
 
 test_that("Can get trial overviews stats",{
-  expect_type(get_finished_trials(obj), "integer")
-  expect_equal(max(get_finished_trials(obj)), 17)
+  expect_type(get_finished_trials_indices(obj), "integer")
+  expect_equal(max(get_finished_trials_indices(obj)), 18)
 })
 
 

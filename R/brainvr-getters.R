@@ -220,19 +220,21 @@ get_distance_timewindow <- function(obj, start, end){
 #' Returns which trials were finished
 #'
 #' @param obj BrainvrObject
+#' @param zero_based if T, it keeps the indices as they are reported by the framework, beginning with 0
+#' @param ... 
 #'
-#' @return indices of finished trials
+#' @return indices of finished trials. One based
 #' @export
 #'
 #' @examples
-#TODO - rename to better reflect the return variable
-get_finished_trials <- function(obj, ...){
-  UseMethod("get_finished_trials")
+get_finished_trials_indices <- function(obj, zero_based = F, ...){
+  UseMethod("get_finished_trials_indices")
 }
 #' @export
-get_finished_trials <- function(obj){
+get_finished_trials_indices <- function(obj, zero_based = F){
   df_experiment <- get_experiment_log(obj)
   indices <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Event == "Finished", "Index"]
+  if(!zero_based) indices <- indices + 1L
   return(indices)
 }
 
