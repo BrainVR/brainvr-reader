@@ -72,7 +72,7 @@ open_experiment_infos <- function(directory, exp_timestamp = NULL, flatten = F){
 load_experiment_info <- function(filepath){
   ls <- list()
   #reads into a text file at first
-  text <- readLines(filepath, warn = F)
+  text <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   ls$header <- get_json_between(text, "SESSION HEADER")
   ls$Experiment <- get_json_between(text, "EXPERIMENT INFO")
   return(ls)     
@@ -99,7 +99,7 @@ open_experiment_logs <- function(directory, exp_timestamp = NULL, flatten = F){
 load_experiment_log <- function(filepath){
   ls <- list()
   #reads into a text file at first
-  text <- readLines(filepath, warn = F)
+  text <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   #needs to be before resaving text
   bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
   
@@ -208,7 +208,7 @@ open_player_log <- function(directory, exp_timestamp = NULL, override = F, save 
     }
   }
   print(paste0("Loading unprocessed player log", ls_log_path$path))
-  text <- readLines(ls_log_path$path, warn = F) #TODO - chagne so it doesn't read text so friggin much :(
+  text <- readLines(ls_log_path$path, warn = F, encoding="UTF-8") #TODO - chagne so it doesn't read text so friggin much :(
   bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end #get beginning of the log
   #reads the data without the header file
   #TODO - remove data.table

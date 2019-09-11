@@ -19,7 +19,7 @@ create_separator <- function(string){
 
 load_header <- function(filepath){
   ls <- list()
-  text <- readLines(filepath, warn = F)
+  text <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
   i_start <- which(grepl(ptr, text))
   ls <- list()
@@ -92,7 +92,7 @@ experiment_name_from_filename <- function(filename){
   return(capture_groups[, 2])
 }
 
-##Helper for escaping characters in quest names
+## Helper for escaping characters in quest names
 escape_regex <- function(string){
   return(gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", string))
 }
