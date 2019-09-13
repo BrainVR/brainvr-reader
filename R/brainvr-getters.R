@@ -230,26 +230,44 @@ get_distance_timewindow <- function(obj, start, end){
 get_finished_trials_indices <- function(obj, zero_based = F, ...){
   UseMethod("get_finished_trials_indices")
 }
+
+#' Returns which trials were finished
+#'
+#' @param obj BrainvrObject
+#' @param zero_based if T, it keeps the indices as they are reported by the framework, beginning with 0
+#' @param exclude_force_finished if TRUE, removes trial indeices for trials that were force finished
+#' 
+#' @return indices of finished trials. One based
 #' @export
-get_finished_trials_indices <- function(obj, zero_based = F){
+#'
+#' @examples
+get_finished_trials_indices <- function(obj, zero_based = FALSE, exclude_force_finished = FALSE){
   df_experiment <- get_experiment_log(obj)
   indices <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Event == "Finished", "Index"]
+  if(exclude_force_finished){
+    was_force_finished <- sapply(indices, function(x){was_trial_force_finished(obj, x, zero_based = TRUE)})
+    indices <- indices[!was_force_finished]
+  }
   if(!zero_based) indices <- indices + 1L
   return(indices)
 }
 
 #' Returns if the trial has been force finished
 #'
-#' @param obj BrainvrObject
-#' @param iTrial trial index (starting with 1)
+#' @param obj \code{\link{BrainvrObject}}
+#' @param iTrial trial index starting with 1 or 0 if \code{zero_based=TRUE}
+#' @param zero_based if TRUE, it keeps the indices as they are reported 
+#' by the framework, beginning with 0. Otherwise trials start with 1
 #'
-#' @return
+#' @return logical
 #' @export
 #'
 #' @examples
-was_trial_force_finished <- function(obj, iTrial){
-  return(nrow(filter(obj$data$experiment_log$data, 
-                      Sender == "Trial" & 
-                      Index == (iTrial - 1) & 
-                      Event == "ForceFinished")) > 1)
+was_trial_force_finished <- function(obj, iTrial, zero_based = FALSE){
+  if(!zero_based) iTrial <- iTrial - 1
+  df_experiment <-get_experiment_log(obj)
+  selected <- df_experiment[df_experiment$Sender == "Trial" & 
+                          df_experiment$Index == iTrial &
+                          df_experiment$Event == "ForceFinished", ]
+  return(nrow(selected) >= 1)
 }

@@ -4,18 +4,32 @@
 \alias{get_finished_trials_indices}
 \title{Returns which trials were finished}
 \usage{
-get_finished_trials_indices(obj, zero_based = F)
+get_finished_trials_indices(obj, zero_based = FALSE,
+  exclude_force_finished = FALSE)
+
+get_finished_trials_indices(obj, zero_based = FALSE,
+  exclude_force_finished = FALSE)
 }
 \arguments{
 \item{obj}{BrainvrObject}
 
 \item{zero_based}{if T, it keeps the indices as they are reported by the framework, beginning with 0}
 
+\item{exclude_force_finished}{if TRUE, removes trial indeices for trials that were force finished}
+
 \item{...}{}
+
+\item{obj}{BrainvrObject}
+
+\item{zero_based}{if T, it keeps the indices as they are reported by the framework, beginning with 0}
 }
 \value{
 indices of finished trials. One based
+
+indices of finished trials. One based
 }
 \description{
+Returns which trials were finished
+
 Returns which trials were finished
 }

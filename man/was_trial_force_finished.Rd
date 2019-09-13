@@ -4,12 +4,18 @@
 \alias{was_trial_force_finished}
 \title{Returns if the trial has been force finished}
 \usage{
-was_trial_force_finished(obj, iTrial)
+was_trial_force_finished(obj, iTrial, zero_based = FALSE)
 }
 \arguments{
-\item{obj}{BrainvrObject}
+\item{obj}{\code{\link{BrainvrObject}}}
 
-\item{iTrial}{trial index (starting with 1)}
+\item{iTrial}{trial index starting with 1 or 0 if \code{zero_based=TRUE}}
+
+\item{zero_based}{if TRUE, it keeps the indices as they are reported 
+by the framework, beginning with 0. Otherwise trials start with 1}
+}
+\value{
+logical
 }
 \description{
 Returns if the trial has been force finished
