@@ -172,7 +172,7 @@ find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL, warning
   ptr <- create_log_search_pattern(log_name, exp_timestamp)
   logs <- list.files(directory, pattern = ptr, full.names = T)
   if(length(logs) < 1){
-    if(warning_missing) warning(paste0("Could not find any ", log_name, " logs in ", directory))
+    if(warning_missing) warning(paste0("Could not find any ", log_name, " logs in ", directory, " for timestamp ", exp_timestamp))
     return(NULL)
   }
   if(length(logs) > 1 & !is.null(exp_timestamp)){
