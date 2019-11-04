@@ -94,10 +94,9 @@ add_goal_order.brainvr <- function(obj, order){
 #' @param obj BrainvrObject
 #' @param type median, spline
 #' @param ... optional parameters for the smoothing. VIZ. navr::smooth_positions_df
-#'
+#' @importFrom navr smooth_positions
 #' @return Brainvr object with smoothed positions
 #' @export
-
 smooth_positions.brainvr <- function(obj, type, ...){
   obj$data$position <- navr::smooth_positions_df(obj$data$position, type, ...)
   obj$data$position <- navr::add_distances(obj$data$position)

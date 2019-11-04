@@ -12,10 +12,8 @@ Remotes:
   hejtmy/navr
 Depends:
   R (>= 3.1.0),
-  data.table,
   navr
 Imports:
-  navr,
   stringr,
   jsonlite,
   data.table,
