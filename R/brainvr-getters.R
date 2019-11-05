@@ -77,7 +77,7 @@ get_trial_position <- function(obj, iTrial, ...){
 }
 #' @export
 get_trial_position.brainvr <- function(obj, iTrial) {
-  timewindow <- get_trial_times.brainvr(obj, iTrial)
+  timewindow <- get_trial_times(obj, iTrial)
   navr_obj <- get_position_timewindow.brainvr(obj, timewindow$start, timewindow$end)
   return(navr_obj)
 }
@@ -102,7 +102,7 @@ get_trial_log.brainvr <- function(obj, iTrial) {
 #' 
 #' @param obj BrainvrObject
 #' @param iTrial trial index(starting with 1)
-#' @return list with waitingToStart, start and finish 
+#' @return list with waitingToStart, start and end 
 #' 
 #' @export
 get_trial_times <- function(obj, iTrial, ...){

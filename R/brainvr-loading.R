@@ -143,8 +143,12 @@ open_result_log <- function(directory, exp_timestamp = NULL){
 #'
 #' @examples
 load_result_log <- function(filepath){
-  ls <- load_header(filepath)
-  return(ls)
+  result <- load_header(filepath)
+  bottom_index <- get_bottom_header_index(filepath)
+  ## See if there is a data.frame
+  df_data <- try(read.table(filepath, skip = bottom_index, sep=";", stringsAsFactors = FALSE), silent = TRUE)
+  if(class(df_data) == "data.frame") result$data <- df_data
+  return(result)
 }
 
 #' Generic loading of all the results, experiment and other logs

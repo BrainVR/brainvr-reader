@@ -16,20 +16,18 @@ create_separator <- function(string){
   return(ls)
 }
 
-
 load_header <- function(filepath){
-  ls <- list()
-  text <- readLines(filepath, warn = FALSE, encoding="UTF-8")
+  txt <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
-  i_start <- which(grepl(ptr, text))
-  ls <- list()
+  i_start <- which(grepl(ptr, txt))
+  result <- list()
   for(i in i_start){
-    section_name <- gsub(SEPARATOR_START, "", text[i])
+    section_name <- gsub(SEPARATOR_START, "", txt[i])
     #TODO issue in case we have nested values of the same name
-    if(section_was_serialised(ls, section_name)) next
-    ls[[section_name]] <- load_header_section(text, section_name)
+    if(section_was_serialised(result, section_name)) next
+    result[[section_name]] <- load_header_section(txt, section_name)
   }
-  return(ls)
+  return(result)
 }
 
 load_header_section <- function(text, section_name){
@@ -58,8 +56,11 @@ section_was_serialised <- function(ls, section_name){
   return(any(grepl(section_name, all_names)))
 }
 
-get_bottom_header_index <- function(string){
-  
+get_bottom_header_index <- function(filepath){
+  txt <- readLines(filepath, warn = FALSE, encoding="UTF-8")
+  ptr <- paste0(SEPARATOR_END, "(.*)", SEPARATOR_END)
+  i_end <- which(grepl(ptr, txt))
+  return(tail(i_end, 1))
 }
 
 ### TODO
