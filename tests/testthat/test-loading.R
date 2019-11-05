@@ -4,7 +4,7 @@ DIR <- system.file("extdata", package = "brainvr.reader")
 
 test_that("Loading helpers", {
   example_header <- file.path(DIR, "example-header.txt")
-  header <- load_header(example_header)
+  header <- load_headers(example_header)
 })
  
 test_that("Loading from a folder", {

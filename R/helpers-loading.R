@@ -16,7 +16,7 @@ create_separator <- function(string){
   return(ls)
 }
 
-load_header <- function(filepath){
+load_headers <- function(filepath){
   txt <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
   i_start <- which(grepl(ptr, txt))
@@ -25,7 +25,10 @@ load_header <- function(filepath){
     section_name <- gsub(SEPARATOR_START, "", txt[i])
     #TODO issue in case we have nested values of the same name
     if(section_was_serialised(result, section_name)) next
-    result[[section_name]] <- load_header_section(txt, section_name)
+    section <- load_header_section(txt, section_name)
+    section_name <- gsub(" ", "_", section_name)
+    section_name <- tolower(section_name)
+    result[[section_name]] <- section
   }
   return(result)
 }
