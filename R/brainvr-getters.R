@@ -30,6 +30,28 @@ get_experiment_log.brainvr <- function(obj){
   return(obj$data$experiment_log$data)
 }
 
+#' Return results log data
+#'
+#' @param obj Brainvr object with loaded results
+#' @param ... 
+#'
+#' @return results data.frame or NULL if empty
+#' @export
+#'
+#' @examples
+get_results_log <- function(obj, ...){
+  UseMethod("get_results_log")
+}
+#' @export
+get_results_log.brainvr <- function(obj){
+  res <- try(obj$data$results_log$data, silent = T)
+  if(!class(res) == "data.frame"){
+    warning("There is no results log or it doesn't contain valid data frame")
+    return(NULL)
+  }
+  return(res)
+}
+
 #' Returns experiment settings in a list
 #'
 #' @param obj Brainvr Object

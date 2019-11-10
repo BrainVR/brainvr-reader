@@ -12,7 +12,7 @@ get_trial_times(obj, iTrial, ...)
 \item{iTrial}{trial index(starting with 1)}
 }
 \value{
-list with waitingToStart, start and finish
+list with waitingToStart, start and end
 }
 \description{
 Gets start and finish times of trial

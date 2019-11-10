@@ -29,6 +29,7 @@ reference:
   - '`get_position_timewindow`'
   - '`get_distance_timewindow`'
   - '`get_experiment_log`'
+  - '`get_results_log`'
   - '`get_experiment_settings`'
   - '`get_finished_trials_indices`'
   - '`was_trial_force_finished`'
