@@ -19,13 +19,6 @@ vector3_to_columns <- function(df_position){
   return(df_position)
 }
 
-text_to_vector3 <- function(text){
-  values_split <- strsplit(substring(text, 2, nchar(text) - 1), ",")
-  if(length(values_split[[1]]) > 2) return(sapply(values_split[[1]], as.numeric,
-                                                  warning = F, USE.NAMES = F))
-  return(NULL)
-}
-
 #pure helpers for my particular unity logging 
 position_to_vector <- function(list){
   listNames <- names(list)
@@ -37,7 +30,7 @@ position_to_vector <- function(list){
                      position_z = numeric(numberOfItems))
     for (i in 1:length(ls)){
       stringVector <- ls[i]
-      df[i, ] <- text_to_vector3(stringVector)
+      df[i, ] <- unity_vector_to_numeric(stringVector)
     }
     list[[name]] <- df
   }

@@ -32,3 +32,24 @@ save_preprocessed_player <- function(directory, exp_timestamp = NULL, log, orig_
   write.table(format(log, digits=precision, nsmall=precision, trim=T), preprocessed_filename, sep = ";", 
               dec = ".", quote = F, row.names = F)
 }
+
+
+#' Converts output of unity loggin a vector 3 to a vector of three
+#' 
+#' @description Unity logs vector as (x, y, z). This function simply 
+#' splits it into three parts and returns a numeric(2 or 3)
+#'
+#' @param text unity (x, y, z) vector3 ouput
+#'
+#' @return
+#' @export
+#'
+#' @examples
+unity_vector_to_numeric <- function(text){
+  txt <- gsub("[()]", "", text)
+  values_split <- strsplit(txt, ",")
+  if(length(values_split[[1]]) > 2){
+    return(sapply(values_split[[1]], as.numeric,warning = F, USE.NAMES = F))
+  }
+  return(NULL)
+}
