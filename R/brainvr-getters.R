@@ -154,17 +154,17 @@ get_trial_times.brainvr <- function(obj, iTrial){
 #' @param iTrial trial index (starting with 1)
 #' @param pause_limit minimum time to be considered pause. Defaults to 5
 #' @param path_limit maximum distance to be considered not moving. Defaults to 1
-#' @param without_pauses Defaults to true
+#' @param without_pauses Should the reported duration be calculated without pauses? Defaults to FALSE
 #'
 #' @return 
 #' @export
 #'
 #' @examples
-get_trial_duration <- function(obj, iTrial, without_pauses = TRUE, pause_limit = 5, path_limit = 1, ...){
+get_trial_duration <- function(obj, iTrial, without_pauses = FALSE, pause_limit = 5, path_limit = 1, ...){
   UseMethod("get_trial_duration")
 }
 #' @export
-get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = TRUE, pause_limit = 5, path_limit = 1){
+get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = FALSE, pause_limit = 5, path_limit = 1){
   times <- get_trial_times.brainvr(obj, iTrial)
   dur <- times$end - times$start
   if(without_pauses & dur > pause_limit){# cannot be paused shorter times than the trial is long
