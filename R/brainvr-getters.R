@@ -160,14 +160,14 @@ get_trial_times.brainvr <- function(obj, iTrial){
 #' @export
 #'
 #' @examples
-get_trial_duration <- function(obj, iTrial, without_pauses = T, pause_limit = 5, path_limit = 1, ...){
+get_trial_duration <- function(obj, iTrial, without_pauses = TRUE, pause_limit = 5, path_limit = 1, ...){
   UseMethod("get_trial_duration")
 }
 #' @export
-get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = T, pause_limit = 5, path_limit = 1){
+get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = TRUE, pause_limit = 5, path_limit = 1){
   times <- get_trial_times.brainvr(obj, iTrial)
   dur <- times$end - times$start
-  if(without_pauses){
+  if(without_pauses & dur > pause_limit){# cannot be paused shorter times than the trial is long
     log <- get_trial_log.brainvr(obj, iTrial)
     freq <- round(pause_limit/mean(diff(log$timestamp[1:100]))) #how many rows is the pause
     distance_in_limit <- navr::rolling_sum(log$distance, freq)
