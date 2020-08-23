@@ -107,7 +107,7 @@ get_trial_position.brainvr <- function(obj, iTrial) {
 #' Returns data.table with player log for a particular trial
 #'
 #' @param obj BrainvrObject
-#' @param 
+#' @param iTrial index of the trial to be analyzed 
 #' @return player log for particulat trial
 #' 
 #' @export

@@ -102,13 +102,13 @@ load_experiment_log <- function(filepath){
   text <- readLines(filepath, warn = FALSE, encoding="UTF-8")
   #needs to be before resaving text
   bottomHeaderIndex <- get_indicies_between(text, "TEST HEADER")$end
-  
+
   text <- get_text_between(text, "TEST HEADER")
   ls$name <- experiment_name_from_filename(filepath)
   ls$settings <- get_json_between(text, "EXPERIMENT SETTINGS")
   ls$positions <- get_json_between(text, "POSITIONS")
   ls$positions <- position_to_vector(ls$positions)
-  ls$data <- read.table(filepath, header = T, sep = ";", 
+  ls$data <- read.table(filepath, header = T, sep = ";",
                         stringsAsFactors = F, skip = bottomHeaderIndex,
                         encoding="UTF-8")
   #deleting the last column - always empty

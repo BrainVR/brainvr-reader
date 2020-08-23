@@ -24,6 +24,7 @@ test_that("Loading all separately works", {
 test_that("Loaded data have expected structure", {
   exps <- load_experiments(DIR)
   exp <- exps[[1]]
-  expect_equal(names(exp$data), c("experiment_info","position","experiment_log","results_log"))
+  expect_equal(names(exp$data), c("experiment_info", "position", 
+                                  "experiment_log", "results_log"))
   expect_equal(names(exp$data$experiment_info), c("header","Experiment"))
 })

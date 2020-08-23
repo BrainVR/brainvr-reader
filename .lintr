@@ -1,0 +1,10 @@
+linters: with_defaults(line_length_linter = line_length_linter(100),
+                      paren_brace_linter = NULL)
+exclusions: c(list.files("tests/cache", recursive = TRUE, full.names = TRUE),
+  list.files("docs/",recursive = TRUE, full.names = TRUE),
+  list.files("inst/", recursive = TRUE, full.names = TRUE),
+  list.files("man/", recursive = TRUE, full.names = TRUE),
+  list.files("vignettes/*", recursive = TRUE, full.names = TRUE))
+exclude: "# Exclude Linting"
+exclude_start: "# Begin Exclude Linting"
+exclude_end: "# End Exclude Linting"

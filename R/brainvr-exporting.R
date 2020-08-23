@@ -1,11 +1,9 @@
 #' Exports preprocessed player log
 #'
-#' @param playerLog: data table log as preprocessed by the Analysis fuynction
+#' @param log data table log as preprocessed by the Analysis fuynction
 #' @param path: path to the file. Defaults to workign directory
-#' @
 #' 
-#' 
-#' DOESN'T WORK ... need to fix all the getters
+#'DOESN'T WORK ... need to fix all the getters
 export_position_log <- function(log, id, path = getwd()){
   log[, Position := NULL]
   filePath <- paste(path, "/", id, "_player.log", sep = "")
