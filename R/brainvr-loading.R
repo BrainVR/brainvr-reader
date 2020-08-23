@@ -15,7 +15,7 @@ load_experiments <- function(folder, override = FALSE, save = TRUE) {
   for (i in 1:length(experiment_infos)) {
     info <- experiment_infos[[i]]
     ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp,
-                               override = override, save = TRUE)
+                               override = override, save = save)
   }
   return(ls)
 }
