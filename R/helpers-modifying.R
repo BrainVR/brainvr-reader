@@ -9,7 +9,7 @@ mirror_positions_df <- function(df){
   if(!is_valid_positions_df(df)) return(NULL)
   df$position_x <- -df$position_x
   df$position_z <- -df$position_z
-  ## flips all rotations in dt_player 
+  ## flips all rotations in dt_player
   ## all player logs should be data.table, otehrwise this breaks
   df_colnames <- colnames(df)
   rotation_cols <- df_colnames[grep("Rotation", df_colnames)]
@@ -80,7 +80,8 @@ transform_object.brainvr <- function(obj, procedure, df_function, list_function,
     transformed_player <- df_function(obj$data$position$data, value)
   }
   if(is.null(transformed_player)){
-    print(paste0("Couldn't ", procedure," positions in player log. Have you preprocessed it correctly? Quitting."))
+    warning("Couldn't ", procedure," positions in player log.
+                 Have you preprocessed it correctly? Quitting.")
     return(obj)
   }
   if(missing(value)){
@@ -89,7 +90,8 @@ transform_object.brainvr <- function(obj, procedure, df_function, list_function,
     transformed_positions <- list_function(obj$data$experiment_log$positions, value)
   }
   if(is.null(transformed_positions)){
-    print(paste0("Couldn't ", procedure, " positions in expeirment log. Have you preprocessed it correctly? Quitting."))
+    warning("Couldn't ", procedure, " positions in expeirment log.
+                 Have you preprocessed it correctly? Quitting.")
     return(obj)
   }
   obj$data$player_log <- transformed_player
@@ -109,7 +111,7 @@ apply_transformation <- function(ls_positions, fun, value){
       transformed <- fun(df, value)
     }
     if(is.null(transformed)) {
-      print(paste0("Couldn't transform data.frame ", name))
+      warning("Couldn't transform data.frame ", name)
       return(NULL)
     } else {
       ls_transformed[[name]] <- transformed

@@ -1,11 +1,11 @@
 create_results_df <- function(column_names, column_types, nRows){
   if(length(column_names) != length(column_types)){
-    print("You have passed different size of colnames and coltypes. Cannot continue")
+    warning("You have passed different size of colnames and coltypes. Cannot continue")
     return(NULL)
   }
   df <- as.data.frame(matrix(nrow = nRows, ncol = length(column_names)))
   colnames(df) <- column_names
-  for(i in 1:length(column_types)){
+  for(i in seq_len(length(column_types))){
     df[,i] <- create_column(nRows, column_types[i])
   }
   return(df)
@@ -19,7 +19,7 @@ create_column <- function(nRows, type){
     return(rep(NA, nRows))
   }
   else{
-    print(paste0("The type", type, "you have passed cannot be used."))
+    warning("The type", type, "you have passed cannot be used.")
     return(NULL)
   }
 }

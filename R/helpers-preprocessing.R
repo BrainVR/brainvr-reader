@@ -3,7 +3,7 @@ prepare_navr_log <- function(position_log){
   ## Converting position
   position_log <- vector3_to_columns(position_log)
   #TODO - remove data.table
-  position_log[, Position := NULL]
+  position_log[, Position := NULL] #no lint
   position_log <- prepare_navr_column_names(position_log)
   #' SUPER IMPORTANT - renames Unity Z to Y and vice versa, because NAVR calculates
   #' speeds from x and y not x and z
@@ -16,7 +16,7 @@ is_column_present <- function(table, name){
 }
 
 json_to_list <- function(text){
-  if(!requireNamespace("jsonlite", quietly = T)){
+  if(!requireNamespace("jsonlite", quietly = TRUE)){
     stop("needs jsonlite to continue")
   }
   if(is.null(text)) return(NULL)
@@ -43,21 +43,22 @@ replace_strings <- function(vec, strings, replacements){
   return(vec)
 }
 
+# TODO - remove data table
 switch_y_and_z <- function(dt_log){
-  dt_log <- dt_log[, position_temp := position_z]
-  dt_log <- dt_log[, position_z := position_y]
-  dt_log <- dt_log[, position_y := position_temp]
-  dt_log <- dt_log[, position_temp := NULL]
+  dt_log <- dt_log[, position_temp := position_z] #no lint
+  dt_log <- dt_log[, position_z := position_y] #no lint
+  dt_log <- dt_log[, position_y := position_temp] #no lint
+  dt_log <- dt_log[, position_temp := NULL] #no lint
   return(dt_log)
 }
 
 #' Tries to rename columns so they correspond to proper naming conventions
 #' @description changes "." to "_" to correspond with python conventions,
-#' makes everything lowecase, renames Time column if present to "timestamp"
+#' makes everything lowercase, renames Time column if present to "timestamp"
 #'
-#' @param df dataframe
+#' @param df data.frame
 #'
-#' @return modified dataframe
+#' @return modified data.frame
 #' @noRd
 prepare_navr_column_names <- function(df){
   df <- rename_column(df, "Time", "timestamp")

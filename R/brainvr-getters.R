@@ -6,11 +6,11 @@
 #' @export
 #'
 #' @examples
-get_log <- function(obj, ...){
+get_log <- function(obj, ...) {
   UseMethod("get_log")
 }
 #' @export
-get_log.brainvr <- function(obj){
+get_log.brainvr <- function(obj) {
   return(obj$data$position$data)
 }
 
@@ -22,30 +22,30 @@ get_log.brainvr <- function(obj){
 #' @export
 #'
 #' @examples
-get_experiment_log <- function(obj, ...){
+get_experiment_log <- function(obj, ...) {
   UseMethod("get_experiment_log")
 }
 #' @export
-get_experiment_log.brainvr <- function(obj){
+get_experiment_log.brainvr <- function(obj) {
   return(obj$data$experiment_log$data)
 }
 
 #' Return results log data
 #'
 #' @param obj Brainvr object with loaded results
-#' @param ... 
+#' @param ...
 #'
 #' @return results data.frame or NULL if empty
 #' @export
 #'
 #' @examples
-get_results_log <- function(obj, ...){
+get_results_log <- function(obj, ...) {
   UseMethod("get_results_log")
 }
 #' @export
-get_results_log.brainvr <- function(obj){
+get_results_log.brainvr <- function(obj) {
   res <- try(obj$data$results_log$data, silent = T)
-  if(!class(res) == "data.frame"){
+  if (!class(res) == "data.frame") {
     warning("There is no results log or it doesn't contain valid data frame")
     return(NULL)
   }
@@ -60,29 +60,29 @@ get_results_log.brainvr <- function(obj){
 #' @export
 #'
 #' @examples
-get_experiment_settings <- function(obj, ...){
+get_experiment_settings <- function(obj, ...) {
   UseMethod("get_experiment_settings")
 }
 #' @export
-get_experiment_settings.brainvr <- function(obj){
+get_experiment_settings.brainvr <- function(obj) {
   return(obj$data$experiment_log$settings)
 }
 
 #' Returns log between designated times
 #'
-#' @param obj 
-#' @param start 
-#' @param end 
+#' @param obj
+#' @param start
+#' @param end
 #'
 #' @return navr object with preprocessed times
 #' @export
 #'
 #' @examples
-get_position_timewindow <- function(obj, start, end, ...){
+get_position_timewindow <- function(obj, start, end, ...) {
   UseMethod("get_position_timewindow")
 }
 #' @export
-get_position_timewindow.brainvr <- function(obj, start, end){
+get_position_timewindow.brainvr <- function(obj, start, end) {
   navr_obj <- navr::filter_times(obj$data$position, c(start, end))
   return(navr_obj)
 }
@@ -90,11 +90,11 @@ get_position_timewindow.brainvr <- function(obj, start, end){
 #' Returns navr_object with data for a particular trial
 #'
 #' @param obj BrainvrObject
-#' @param 
+#' @param
 #' @return navr object
-#' 
+#'
 #' @export
-get_trial_position <- function(obj, iTrial, ...){
+get_trial_position <- function(obj, iTrial, ...) {
   UseMethod("get_trial_position")
 }
 #' @export
@@ -107,11 +107,11 @@ get_trial_position.brainvr <- function(obj, iTrial) {
 #' Returns data.table with player log for a particular trial
 #'
 #' @param obj BrainvrObject
-#' @param iTrial index of the trial to be analyzed 
+#' @param iTrial index of the trial to be analyzed
 #' @return player log for particulat trial
-#' 
+#'
 #' @export
-get_trial_log <- function(obj, iTrial, ...){
+get_trial_log <- function(obj, iTrial, ...) {
   UseMethod("get_trial_log")
 }
 #' @export
@@ -121,29 +121,36 @@ get_trial_log.brainvr <- function(obj, iTrial) {
 }
 
 #' Gets start and finish times of trial
-#' 
+#'
 #' @param obj BrainvrObject
 #' @param iTrial trial index(starting with 1)
-#' @return list with waitingToStart, start and end 
-#' 
+#' @return list with waitingToStart, start and end
+#'
 #' @export
-get_trial_times <- function(obj, iTrial, ...){
+get_trial_times <- function(obj, iTrial, ...) {
   UseMethod("get_trial_times")
 }
 #' @export
-get_trial_times.brainvr <- function(obj, iTrial){
+get_trial_times.brainvr <- function(obj, iTrial) {
   df_experiment <- get_experiment_log(obj)
-  #correction for c# indexing
+  # correction for c# indexing
   iTrial <- iTrial - 1
   ls <- list()
-  df_trial <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Index == iTrial, ]
-  ls$WaitingToStart <-  df_trial[df_trial$Event == "WaitingToStart", "Time"][1]
+  df_trial <- df_experiment[df_experiment$Sender == "Trial" &
+                              df_experiment$Index == iTrial, ]
+  ls$WaitingToStart <- df_trial[df_trial$Event == "WaitingToStart", "Time"][1]
   ls$start <- df_trial[df_trial$Event == "Running", "Time"][1]
-  #selects only hte first element - its because fome of hte old logs had potential two finished tiems 
-  #if the experiment or trial was force finished before closed (finished effectively twice)
+  # selects only hte first element - its because fome of hte old logs had potential two finished tiems
+  # if the experiment or trial was force finished before closed (finished effectively twice)
   ls$end <- df_trial[df_trial$Event == "Finished", "Time"][1]
-  #replaces missing values with NAs
-  newValues <- sapply(ls, function(x) if(length(x)== 0) {x <- as.numeric(NA)} else {x <- x})
+  # replaces missing values with NAs
+  newValues <- sapply(ls, function(x) {
+    if (length(x) == 0) {
+      x <- as.numeric(NA)
+    } else {
+      x <- x
+    }
+  })
   ls <- as.list(newValues)
   return(ls)
 }
@@ -156,24 +163,28 @@ get_trial_times.brainvr <- function(obj, iTrial){
 #' @param path_limit maximum distance to be considered not moving. Defaults to 1
 #' @param without_pauses Should the reported duration be calculated without pauses? Defaults to FALSE
 #'
-#' @return 
+#' @return
 #' @export
 #'
 #' @examples
-get_trial_duration <- function(obj, iTrial, without_pauses = FALSE, pause_limit = 5, path_limit = 1, ...){
+get_trial_duration <- function(obj, iTrial, without_pauses = FALSE, 
+                               pause_limit = 5, path_limit = 1, ...) {
   UseMethod("get_trial_duration")
 }
 #' @export
-get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = FALSE, pause_limit = 5, path_limit = 1){
+get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = FALSE, 
+                                       pause_limit = 5, path_limit = 1) {
   times <- get_trial_times.brainvr(obj, iTrial)
   dur <- times$end - times$start
-  if(without_pauses & dur > pause_limit){# cannot be paused shorter times than the trial is long
+  if (without_pauses & dur > pause_limit) { # cannot be paused shorter times than the trial is long
     log <- get_trial_log.brainvr(obj, iTrial)
-    freq <- round(pause_limit/mean(diff(log$timestamp[1:100]))) #how many rows is the pause
+    freq <- round(pause_limit / mean(diff(log$timestamp[1:100]))) # how many rows is the pause
     distance_in_limit <- navr::rolling_sum(log$distance, freq)
-    if(is.null(distance_in_limit)) return(dur) #trial shorter than pause
+    if (is.null(distance_in_limit)) {
+      return(dur)
+    } # trial shorter than pause
     is_stationary <- distance_in_limit < path_limit
-    pause_time <- sum(is_stationary * 1/freq)
+    pause_time <- sum(is_stationary * 1 / freq)
     dur <- dur - pause_time
   }
   return(dur)
@@ -184,33 +195,33 @@ get_trial_duration.brainvr <- function(obj, iTrial, without_pauses = FALSE, paus
 #' @param obj BrainvrObject
 #' @param iTrial trial index (startin with 1)
 #'
-#' @return 
+#' @return
 #' @export
 #'
 #' @examples
-get_trial_distance <- function(obj, iTrial, ...){
+get_trial_distance <- function(obj, iTrial, ...) {
   UseMethod("get_trial_distance")
 }
 #' @export
-get_trial_distance.brainvr <- function(obj, iTrial){
+get_trial_distance.brainvr <- function(obj, iTrial) {
   log <- get_trial_log.brainvr(obj, iTrial)
   return(diff(range(log$distance_total)))
 }
 
 #' Returns times of certain events happening in particular trials
 #'
-#' @param obj 
+#' @param obj
 #' @param iTrial vector or trial indices starting with 1
 #'
 #' @return times of certain events
 #' @export
 #'
 #' @examples
-get_trial_event_times <- function(obj, iTrial, event_name = "", ...){
+get_trial_event_times <- function(obj, iTrial, event_name = "", ...) {
   UseMethod("get_trial_event_times")
 }
 #' @export
-get_trial_event_times.brainvr <- function(obj, iTrial, event_name = ""){
+get_trial_event_times.brainvr <- function(obj, iTrial, event_name = "") {
   exp_log <- get_experiment_log(obj)
   trial_log <- get_trial_events(exp_log, iTrial)
   event_times <- get_times_events(trial_log, event_name)
@@ -222,12 +233,12 @@ get_trial_event_times.brainvr <- function(obj, iTrial, event_name = ""){
 #' @param start movement start timestamp
 #' @param end movement end timestamp
 #'
-#' @return moved distance or NA if the 
+#' @return moved distance or NA if the
 #' @export
 #'
 #' @examples
-get_distance_timewindow <- function(obj, start, end){
-  #TODO - fix
+get_distance_timewindow <- function(obj, start, end) {
+  # TODO - fix
   pos <- get_position_timewindow.brainvr(obj, start, end)
   dt_position <- pos$data
   if (dt_position[, .N] < 2) {
@@ -243,13 +254,13 @@ get_distance_timewindow <- function(obj, start, end){
 #'
 #' @param obj BrainvrObject
 #' @param zero_based if T, it keeps the indices as they are reported by the framework, beginning with 0
-#' @param ... 
+#' @param ...
 #'
 #' @return indices of finished trials. One based
 #' @export
 #'
 #' @examples
-get_finished_trials_indices <- function(obj, zero_based = F, ...){
+get_finished_trials_indices <- function(obj, zero_based = FALSE, ...) {
   UseMethod("get_finished_trials_indices")
 }
 
@@ -258,19 +269,23 @@ get_finished_trials_indices <- function(obj, zero_based = F, ...){
 #' @param obj BrainvrObject
 #' @param zero_based if T, it keeps the indices as they are reported by the framework, beginning with 0
 #' @param exclude_force_finished if TRUE, removes trial indeices for trials that were force finished
-#' 
+#'
 #' @return indices of finished trials. One based
 #' @export
 #'
 #' @examples
-get_finished_trials_indices <- function(obj, zero_based = FALSE, exclude_force_finished = FALSE){
+get_finished_trials_indices <- function(obj, zero_based = FALSE, 
+                                        exclude_force_finished = FALSE) {
   df_experiment <- get_experiment_log(obj)
-  indices <- df_experiment[df_experiment$Sender == "Trial" & df_experiment$Event == "Finished", "Index"]
-  if(exclude_force_finished){
-    was_force_finished <- sapply(indices, function(x){was_trial_force_finished(obj, x, zero_based = TRUE)})
+  indices <- df_experiment[df_experiment$Sender == "Trial" & 
+                             df_experiment$Event == "Finished", "Index"]
+  if (exclude_force_finished) {
+    was_force_finished <- sapply(indices, function(x) {
+      was_trial_force_finished(obj, x, zero_based = TRUE)
+    })
     indices <- indices[!was_force_finished]
   }
-  if(!zero_based) indices <- indices + 1L
+  if (!zero_based) indices <- indices + 1L
   return(indices)
 }
 
@@ -278,18 +293,18 @@ get_finished_trials_indices <- function(obj, zero_based = FALSE, exclude_force_f
 #'
 #' @param obj \code{\link{BrainvrObject}}
 #' @param iTrial trial index starting with 1 or 0 if \code{zero_based=TRUE}
-#' @param zero_based if TRUE, it keeps the indices as they are reported 
+#' @param zero_based if TRUE, it keeps the indices as they are reported
 #' by the framework, beginning with 0. Otherwise trials start with 1
 #'
 #' @return logical
 #' @export
 #'
 #' @examples
-was_trial_force_finished <- function(obj, iTrial, zero_based = FALSE){
-  if(!zero_based) iTrial <- iTrial - 1
-  df_experiment <-get_experiment_log(obj)
-  selected <- df_experiment[df_experiment$Sender == "Trial" & 
-                          df_experiment$Index == iTrial &
-                          df_experiment$Event == "ForceFinished", ]
+was_trial_force_finished <- function(obj, iTrial, zero_based = FALSE) {
+  if (!zero_based) iTrial <- iTrial - 1
+  df_experiment <- get_experiment_log(obj)
+  selected <- df_experiment[df_experiment$Sender == "Trial" &
+    df_experiment$Index == iTrial &
+    df_experiment$Event == "ForceFinished", ]
   return(nrow(selected) >= 1)
 }
