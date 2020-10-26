@@ -7,8 +7,6 @@
 get_trial_event_times(obj, iTrial, event_name = "", ...)
 }
 \arguments{
-\item{obj}{}
-
 \item{iTrial}{vector or trial indices starting with 1}
 }
 \value{

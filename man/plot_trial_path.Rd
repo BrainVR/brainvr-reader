@@ -11,6 +11,9 @@ plot_trial_path(obj, iTrial, ...)
 
 \item{iTrial}{trial index (starting with 1)}
 }
+\value{
+
+}
 \description{
 Plots trial path
 }

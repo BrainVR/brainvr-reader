@@ -7,10 +7,6 @@
 get_position_timewindow(obj, start, end, ...)
 }
 \arguments{
-\item{obj}{}
-
-\item{start}{}
-
 \item{end}{}
 }
 \value{

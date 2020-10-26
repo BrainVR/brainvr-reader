@@ -9,6 +9,9 @@ load_result_log(filepath)
 \arguments{
 \item{filepath}{}
 }
+\value{
+
+}
 \description{
 Loads results log at a specific path
 }

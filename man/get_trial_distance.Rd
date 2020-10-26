@@ -11,6 +11,9 @@ get_trial_distance(obj, iTrial, ...)
 
 \item{iTrial}{trial index (startin with 1)}
 }
+\value{
+
+}
 \description{
 Returns walked distance in a particular trial
 }

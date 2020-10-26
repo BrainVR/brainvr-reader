@@ -8,6 +8,8 @@ get_trial_log(obj, iTrial, ...)
 }
 \arguments{
 \item{obj}{BrainvrObject}
+
+\item{iTrial}{index of the trial to be analyzed}
 }
 \value{
 player log for particulat trial

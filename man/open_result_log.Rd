@@ -4,16 +4,17 @@
 \alias{open_result_log}
 \title{Searches for results logs and returns loaded list.}
 \usage{
-open_result_log(directory, exp_timestamp = NULL)
+open_result_log(dir, exp_timestamp = NULL)
 }
 \arguments{
-\item{directory}{where to search}
-
 \item{exp_timestamp}{timestamp of a particular results log}
+
+\item{directory}{where to search}
 }
 \value{
 list with loaded result log
 }
 \description{
-REsults log have a _results_ in their filename. In case your's doesn't, use load_result_log instead
+REsults log have a _results_ in their filename. 
+In case your's doesn't, use load_result_log instead
 }

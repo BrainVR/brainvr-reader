@@ -2,17 +2,23 @@
 % Please edit documentation in R/brainvr-loading.R
 \name{open_experiment_logs}
 \alias{open_experiment_logs}
-\title{Iterates over all _test_ files in a folder asnd saves them one by one to a return list}
+\title{Iterates over all _test_ files in a folder asnd saves them one by one to 
+a return list}
 \usage{
-open_experiment_logs(directory, exp_timestamp = NULL, flatten = F)
+open_experiment_logs(dir, exp_timestamp = NULL, flatten = FALSE)
 }
 \arguments{
-\item{directory}{directory where the file is located}
-
 \item{exp_timestamp}{time of the}
 
-\item{flatten}{in case of only a single list is returned, unnests the list. Beware, unnested list causes issues with opening experiments}
+\item{flatten}{in case of only a single list is returned, unnests the list.
+Beware, unnested list causes issues with opening experiments}
+
+\item{directory}{directory where the file is located}
+}
+\value{
+
 }
 \description{
-Iterates over all _test_ files in a folder asnd saves them one by one to a return list
+Iterates over all _test_ files in a folder asnd saves them one by one to 
+a return list
 }

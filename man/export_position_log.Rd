@@ -7,9 +7,11 @@
 export_position_log(log, id, path = getwd())
 }
 \arguments{
-\item{playerLog:}{data table log as preprocessed by the Analysis fuynction}
+\item{log}{data table log as preprocessed by the Analysis fuynction}
 
-\item{path:}{path to the file. Defaults to workign directory}
+\item{path:}{path to the file. Defaults to workign directory
+
+DOESN'T WORK ... need to fix all the getters}
 }
 \description{
 Exports preprocessed player log

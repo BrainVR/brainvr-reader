@@ -105,7 +105,6 @@ load_experiment_info <- function(filepath) {
 #' @param exp_timestamp time of the
 #'
 #' @return
-#' @export
 open_experiment_logs <- function(dir, exp_timestamp = NULL, flatten = FALSE) {
   out <- open_brainvr_logs(dir, log_name = "test", exp_timestamp = exp_timestamp,
                            func = load_experiment_log, flatten = flatten)
@@ -116,7 +115,6 @@ open_experiment_logs <- function(dir, exp_timestamp = NULL, flatten = FALSE) {
 #'
 #' @param filepath path tot he expeirment log
 #' @return list with loaded settings files and data
-#' @export
 load_experiment_log <- function(filepath) {
   res <- load_brainvr_log(filepath)
   res$name <- experiment_name_from_filename(filepath)
@@ -165,7 +163,7 @@ load_result_log <- function(filepath) {
 #' log, extract some log specific information etc.). If null, default function is used
 #'
 #' @return
-#'
+#' @export
 #' @examples
 open_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL,
                               func = NULL, flatten = FALSE) {
@@ -324,5 +322,3 @@ find_player_path <- function(directory, exp_timestamp = NULL) {
   }
   return(ls)
 }
-
-
