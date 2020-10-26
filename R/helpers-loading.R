@@ -46,11 +46,13 @@ load_header_section <- function(txt) {
     for (i in i_subsections) {
       section_name <- gsub(SEPARATOR_START, "", txt[i])
       # TODO issue in case we have nested values of the same name
-      section_text <- get_text_between(txt, section_name)
-      section <- load_header_section(section_text)
-      section_name <- gsub("\\s+", "_", section_name)
-      section_name <- tolower(section_name)
-      res[[section_name]] <- section
+      # Let's just say it won't happen
+      name <- tolower(gsub("\\s+", "_", section_name))
+      if(!header_section_was_serialised(res, name)){
+        section_text <- get_text_between(txt, section_name)
+        section <- load_header_section(section_text)
+        res[[name]] <- section
+      }
     }
   } else {
     res <- json_to_list(txt)
@@ -64,6 +66,15 @@ get_bottom_header_index <- function(filepath) {
   i_end <- tail(which(grepl(ptr, txt)), 1)
   return(i_end)
 }
+
+header_section_was_serialised <- function(res, section_name) {
+  all_names <- names(unlist(res))
+  # removes the past parameter name
+  ptr <- "\\.(?:.(?!\\.))+$" # negative search from the last .
+  all_names <- gsub(ptr, "", all_names, perl = TRUE)
+  return(any(grepl(section_name, all_names)))
+}
+
 
 ### TODO
 ### Can massively speed it up if only reads part of the text or do it line by line
