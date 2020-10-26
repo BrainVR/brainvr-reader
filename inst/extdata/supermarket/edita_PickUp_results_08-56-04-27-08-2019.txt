@@ -1,0 +1,17 @@
+***SESSION HEADER***
+{
+  "Participant": "edita",
+  "Timestamp": "08-56-04-27-08-2019"
+}
+---SESSION HEADER---
+***TEST HEADER***
+
+---TEST HEADER---
+TimeFinished; TimeStarted; TaskItems; ItemsCollected; AdditionalItems; MissingItems; TaskTime; TaskTrajectory; AdditionalItemsList; MissingItemsList;
+123.9545;71.71;3;3;0;0;46.69;60.84;;;
+227.3574;145.4;4;4;0;0;76.41;130.71;;;
+477.5156;253.45;5;5;1;0;218.52;125.24;;;
+584.4506;504.47;5;2;4;3;74.43;82.15;(Třešně,Kalhoty,Časopisy);(Tužka,Tužka,Omalovánky,Omalovánky);
+737.4163;613.62;5;3;2;2;118.24;134.9;(Omalovánky,Vajíčka);(Voda,Cola);
+880.8734;766.76;5;3;2;2;108.57;151.04;(Paštika,Srdinky v konzervě);(Hranolky);
+1097.5240;909.67;5;3;1;2;182.31;264.91;(Limetka,Puding);(Burákové máslo);

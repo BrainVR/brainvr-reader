@@ -1,0 +1,13 @@
+***SESSION HEADER***
+{
+  "Participant": "1003",
+  "Timestamp": "13-29-31-12-06-2020"
+}
+---SESSION HEADER---
+***TEST HEADER***
+
+---TEST HEADER---
+Time_finished;Time_started;Test_cycle;Task_items_list;Task_items;Items_collected;Task_items_collected;Additional_items;Missing_items;Duplicated_items;Task_time;Task_trajectory;Missing_items_list;Additional_items_list;Duplicated_items_list;
+594.7069;511.77;1;(ITEM_BEET,ITEM_MONKEY,ITEM_BUTTER);3;3;3;0;0;0;76.92;102.32;;;;
+951.8336;851.13;2;(ITEM_SLICEDTOMATOES,ITEM_SHAMPOO,ITEM_MAYONNAISE,ITEM_PAINTINGS,ITEM_PEAR);5;4;4;0;1;0;94.68;109.1;(ITEM_PAINTINGS);;;
+1328.2660;1174.74;3;(ITEM_CHOCOLATE,ITEM_TOYBEAR,ITEM_MACARONI,ITEM_COOKINGPOT,ITEM_CUCUMBER,ITEM_PILLOW,ITEM_BRUSHES);7;6;5;1;2;0;147.52;113.89;(ITEM_PILLOW,ITEM_BRUSHES);(ITEM_PAINTINGS);;

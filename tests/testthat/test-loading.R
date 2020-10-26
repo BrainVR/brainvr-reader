@@ -1,9 +1,10 @@
 context("Loading")
 
-DIR <- system.file("extdata", package = "brainvr.reader")
+HEADER <- system.file("extdata/example-header.txt", package = "brainvr.reader")
+DIR <- system.file("extdata/CFNS/", package = "brainvr.reader")
 
 test_that("Loading helpers", {
-  example_header <- file.path(DIR, "example-header.txt")
+  example_header <- file.path(HEADER)
   header <- load_headers(example_header)
 })
  
