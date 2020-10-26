@@ -11,6 +11,10 @@ translate_positions(obj, offset)
 
 \item{offset}{New X, Z and Y vector. Needs to be a int vector of lenght 3 (X, Y, Z).}
 }
+\value{
+BrainvrObject
+}
 \description{
-Operates on given BrainvrObject, as it needs to fix not only player log, but potential goal positions in the object as well
+Operates on given BrainvrObject, as it needs to fix not only player log,
+but potential goal positions in the object as well
 }

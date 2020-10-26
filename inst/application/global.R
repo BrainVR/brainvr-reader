@@ -1,6 +1,6 @@
 library(brainvr.reader)
 library(ggplot2)
-obj <- load_experiment("../extdata/")
+obj <- load_experiment("../extdata/CFNS/")
 obj <- mirror_axes(obj)
 obj <- translate_positions(obj, c(33.5, 0, 47.75))
 n_trials <- length(unique(obj$data$experiment_log$data$Index))

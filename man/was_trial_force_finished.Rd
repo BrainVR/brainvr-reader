@@ -11,7 +11,7 @@ was_trial_force_finished(obj, iTrial, zero_based = FALSE)
 
 \item{iTrial}{trial index starting with 1 or 0 if \code{zero_based=TRUE}}
 
-\item{zero_based}{if TRUE, it keeps the indices as they are reported 
+\item{zero_based}{if TRUE, it keeps the indices as they are reported
 by the framework, beginning with 0. Otherwise trials start with 1}
 }
 \value{

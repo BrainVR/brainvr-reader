@@ -1,0 +1,62 @@
+***SESSION HEADER***
+{
+  "Participant": "edita",
+  "Timestamp": "08-56-04-27-08-2019"
+}
+---SESSION HEADER---
+***EXPERIMENT INFO***
+{
+  "Participant": {
+    "Id": "edita",
+    "Age": 47,
+    "Sex": 1,
+    "Platform": 1,
+    "Group": 0
+  },
+  "Settings": {
+    "settings": [
+      "name: Default setting",
+      "tour: True",
+      "tourTime: 240",
+      "showListTime: 15",
+      "showListIncrement: 5",
+      "delay: True",
+      "delayTime: 5",
+      "taskTimeLimit: 1800",
+      "keySubmit: True",
+      "generateLogs: True",
+      "restartPlayer: True",
+      "randomUnique: True",
+      "randomList: True",
+      "randomListItems: 3",
+      "randomListIncrement: 1",
+      "platform: 0",
+      "tasks: generated",
+      "name: Default setting",
+      "tour: true",
+      "tourTime: 240.0",
+      "showListTime: 10.0",
+      "showListIncrement: 5.0",
+      "delay: true",
+      "delayTime: 5.0",
+      "taskTimeLimit: 1800.0",
+      "keySubmit: true",
+      "generateLogs: true",
+      "restartPlayer: true",
+      "randomUnique: true",
+      "randomList: true",
+      "randomListItems: 2",
+      "randomListIncrement: 1",
+      "tasks: generated"
+    ]
+  },
+  "CameraInfo": {
+    "FieldOfView": 60.0,
+    "FacClipPlane": 1000.0
+  },
+  "ScreenInfo": {
+    "Height": 768.0,
+    "Width": 1366.0
+  }
+}
+---EXPERIMENT INFO---

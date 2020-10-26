@@ -2,11 +2,17 @@
 % Please edit documentation in R/brainvr-preprocessing.R
 \name{save_preprocessed_player}
 \alias{save_preprocessed_player}
-\title{Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
-If there are multiple player logs in the folder,takes the name from the first available}
+\title{Saves preprocessed player ot hte given folder. Receives either specific name,
+or gets the name from already present player logs. If there are multiple
+player logs in the folder,takes the name from the first available}
 \usage{
-save_preprocessed_player(directory, exp_timestamp = NULL, log,
-  orig_filename = NULL, precision = 4)
+save_preprocessed_player(
+  directory,
+  exp_timestamp = NULL,
+  log,
+  orig_filename = NULL,
+  precision = 4
+)
 }
 \arguments{
 \item{directory}{Where shoudl i save the file. Should end with a slash!}
@@ -19,6 +25,7 @@ save_preprocessed_player(directory, exp_timestamp = NULL, log,
 
 }
 \description{
-Saves preprocessed player ot hte given folder. Receives either specific name, or gets the name from already present player logs
-If there are multiple player logs in the folder,takes the name from the first available
+Saves preprocessed player ot hte given folder. Receives either specific name,
+or gets the name from already present player logs. If there are multiple
+player logs in the folder,takes the name from the first available
 }

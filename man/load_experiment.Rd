@@ -4,10 +4,21 @@
 \alias{load_experiment}
 \title{Loads files form a folder into BrainvrObject}
 \usage{
-load_experiment(folder, exp_timestamp = NULL, override = FALSE)
+load_experiment(folder, exp_timestamp = NULL, override = FALSE, save = TRUE)
 }
 \arguments{
 \item{folder}{path to the folder respective to the working directory}
+
+\item{exp_timestamp}{timestamp of a particular experiment to search for}
+
+\item{override}{if a preprocessed file is found, should it be overridden? 
+IF TRUE, then all files are preprocessed again. Default is FALSE}
+
+\item{save}{logical should the files be saved after being preprocessed? 
+default is TRUE}
+}
+\value{
+BrainvrObject object
 }
 \description{
 Loads files form a folder into BrainvrObject

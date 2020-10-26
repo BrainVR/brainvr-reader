@@ -52,22 +52,6 @@ get_results_log.brainvr <- function(obj) {
   return(res)
 }
 
-#' Returns experiment settings in a list
-#'
-#' @param obj Brainvr Object
-#'
-#' @return List with saved experiment settings
-#' @export
-#'
-#' @examples
-get_experiment_settings <- function(obj, ...) {
-  UseMethod("get_experiment_settings")
-}
-#' @export
-get_experiment_settings.brainvr <- function(obj) {
-  return(obj$data$experiment_log$settings)
-}
-
 #' Returns log between designated times
 #'
 #' @param obj

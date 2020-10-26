@@ -1,0 +1,71 @@
+***SESSION HEADER***
+{
+  "Participant": "1003",
+  "Timestamp": "13-29-31-12-06-2020"
+}
+---SESSION HEADER---
+***EXPERIMENT INFO***
+{
+  "Participant": {
+    "Id": "1003",
+    "Age": 67,
+    "Sex": 0,
+    "Platform": 0,
+    "Group": 0
+  },
+  "Settings": {
+    "settings": [
+      "name: Default setting",
+      "tour: True",
+      "tourTime: 240",
+      "showListTime: 5",
+      "showListIncrement: 10",
+      "delay: True",
+      "delayTime: 180",
+      "taskTimeLimit: 1800",
+      "keySubmit: True",
+      "generateLogs: True",
+      "restartPlayer: True",
+      "randomUnique: True",
+      "randomList: False",
+      "randomListItems: 0",
+      "randomListIncrement: 0",
+      "lang: CZ",
+      "tasks: D:/Users/VIPdc/Documents/Supermarket_cesko/supermarket_Data/../ExperimentTasks/test_B_11.json",
+      "name: Default setting",
+      "tour: true",
+      "tourTime: 240.0",
+      "showListTime: 10.0",
+      "showListIncrement: 5.0",
+      "delay: true",
+      "delayTime: 5.0",
+      "taskTimeLimit: 1800.0",
+      "keySubmit: true",
+      "generateLogs: true",
+      "restartPlayer: true",
+      "randomUnique: true",
+      "randomList: true",
+      "randomListItems: 2",
+      "randomListIncrement: 1",
+      "tasks: generated"
+    ]
+  },
+  "Task": {
+    "tasks": [
+      "ITEM_BEET; ITEM_MONKEY; ITEM_BUTTER",
+      "ITEM_SLICEDTOMATOES; ITEM_SHAMPOO; ITEM_MAYONNAISE; ITEM_PAINTINGS; ITEM_PEAR",
+      "ITEM_CHOCOLATE; ITEM_TOYBEAR; ITEM_MACARONI; ITEM_COOKINGPOT; ITEM_CUCUMBER; ITEM_PILLOW; ITEM_BRUSHES",
+      "ITEM_PLUM; ITEM_BALL; ITEM_SALMON; ITEM_TOWEL; ITEM_FLOUR; ITEM_BOWL; ITEM_PANTS; ITEM_CORN; ITEM_CANDLE",
+      "ITEM_MELON; ITEM_SOAP; ITEM_TOYTRUCK; ITEM_BEER; ITEM_TABLET; ITEM_RICE; ITEM_BOOK; ITEM_BANANA; ITEM_GLASS; ITEM_PASHTET; ITEM_PIG"
+    ]
+  },
+  "CameraInfo": {
+    "FieldOfView": 111.74057,
+    "FacClipPlane": 1000.0
+  },
+  "ScreenInfo": {
+    "Height": 1200.0,
+    "Width": 1920.0
+  }
+}
+---EXPERIMENT INFO---

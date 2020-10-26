@@ -6,6 +6,9 @@
 \usage{
 BrainvrObject()
 }
+\value{
+
+}
 \description{
 Title
 }

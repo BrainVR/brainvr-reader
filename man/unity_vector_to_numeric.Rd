@@ -9,7 +9,10 @@ unity_vector_to_numeric(text)
 \arguments{
 \item{text}{unity (x, y, z) vector3 ouput}
 }
+\value{
+
+}
 \description{
-Unity logs vector as (x, y, z). This function simply 
+Unity logs vector as (x, y, z). This function simply
 splits it into three parts and returns a numeric(2 or 3)
 }

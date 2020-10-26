@@ -3,8 +3,6 @@ obj <- brainvr_object
 
 test_that("Can get parts of the object",{
   expect_type(get_experiment_log(obj)$Index, "integer")
-  expect_type(get_experiment_settings(obj), "list")
-  expect_type(get_experiment_settings(obj)$GoalNames, "character")
 })
 
 test_that("Can get trial parts",{

@@ -4,15 +4,23 @@
 \alias{open_brainvr_logs}
 \title{Generic loading of all the results, experiment and other logs}
 \usage{
-open_brainvr_logs(directory, log_name, func, exp_timestamp = NULL,
-  flatten = F)
+open_brainvr_logs(
+  directory,
+  log_name,
+  exp_timestamp = NULL,
+  func = NULL,
+  flatten = FALSE
+)
 }
 \arguments{
-\item{directory}{}
+\item{directory}{directory where to look for the log}
 
-\item{log_name}{}
+\item{log_name}{name of the log to be searched for and loaded}
 
-\item{exp_timestamp}{}
+\item{exp_timestamp}{timestamp of the particular type of log}
+
+\item{func}{R functions which actually loads the object (contains code to preprocess the 
+log, extract some log specific information etc.). If null, default function is used}
 
 \item{flatten}{in case only a single file is found, should it be unnested? defaults to false}
 }

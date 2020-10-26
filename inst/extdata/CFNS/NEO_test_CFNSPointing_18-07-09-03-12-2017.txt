@@ -1,7 +1,7 @@
 ***SESSION HEADER***
 {
   "Participant": "NEO",
-  "Timestamp": "18-07-09-03-12-2017
+  "Timestamp": "18-07-09-03-12-2017"
 }
 ---SESSION HEADER---
 ***TEST HEADER***

@@ -4,19 +4,28 @@
 \alias{get_trial_duration}
 \title{Returns how long the trial took and removes potential pauses in the log}
 \usage{
-get_trial_duration(obj, iTrial, without_pauses = T, pause_limit = 5,
-  path_limit = 1, ...)
+get_trial_duration(
+  obj,
+  iTrial,
+  without_pauses = FALSE,
+  pause_limit = 5,
+  path_limit = 1,
+  ...
+)
 }
 \arguments{
 \item{obj}{BrainVr object with preprocessed player log}
 
 \item{iTrial}{trial index (starting with 1)}
 
-\item{without_pauses}{Defaults to true}
+\item{without_pauses}{Should the reported duration be calculated without pauses? Defaults to FALSE}
 
 \item{pause_limit}{minimum time to be considered pause. Defaults to 5}
 
 \item{path_limit}{maximum distance to be considered not moving. Defaults to 1}
+}
+\value{
+
 }
 \description{
 Returns how long the trial took and removes potential pauses in the log

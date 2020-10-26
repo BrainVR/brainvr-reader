@@ -4,15 +4,17 @@
 \alias{load_experiments}
 \title{Goes through the folder and loads every experiment info into separate object}
 \usage{
-load_experiments(folder, override = FALSE)
+load_experiments(folder, override = FALSE, save = TRUE)
 }
 \arguments{
 \item{folder}{where to look for brainvr files}
 
 \item{override}{if TRUE, deletes and recomputes preprocessed player. defaults to FALSE}
+
+\item{save}{if true, then preprocessed logs are saved to the folder}
 }
 \value{
-list of objecs
+list of objects
 }
 \description{
 Goes through the folder and loads every experiment info into separate object
