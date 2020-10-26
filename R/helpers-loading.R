@@ -9,69 +9,68 @@ create_log_search_pattern <- function(log_name, exp_timestamp) {
   return(ptr)
 }
 
-create_separator <- function(string) {
-  ls <- list()
-  ls$beginning <- paste0(SEPARATOR_START, string, SEPARATOR_START)
-  ls$end <- paste(SEPARATOR_END, string, SEPARATOR_END, sep = "")
-  return(ls)
+create_header_separator <- function(string) {
+  res <- list()
+  res$start <- paste0(SEPARATOR_START, string, SEPARATOR_START)
+  res$end <- paste0(SEPARATOR_END, string, SEPARATOR_END)
+  return(res)
 }
 
+#' Loads the header portion from the log. Overall simply a wrapper around a 
+#' \code{\link{load_header_section}} function which parses the header from a 
+#' text
+#'
+#' @param filepath path to the file
+#'
+#' @return list of parsed settings
+#'
+#' @examples
 load_headers <- function(filepath) {
   txt <- readLines(filepath, warn = FALSE, encoding = "UTF-8")
-  ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
-  i_start <- which(grepl(ptr, txt))
-  result <- list()
-  for (i in i_start) {
-    section_name <- gsub(SEPARATOR_START, "", txt[i])
-    # TODO issue in case we have nested values of the same name
-    if (section_was_serialised(result, section_name)) next
-    section <- load_header_section(txt, section_name)
-    section_name <- gsub(" ", "_", section_name)
-    section_name <- tolower(section_name)
-    result[[section_name]] <- section
-  }
+  result <- load_header_section(txt)
   return(result)
 }
 
-load_header_section <- function(text, section_name) {
-  ls <- list()
-  section_text <- get_text_between(text, section_name)
-  ptr <- paste0(SEPARATOR_START, "(.*)", SEPARATOR_START)
-  i_subsections <- which(grepl(ptr, section_text))
+#' Parses brainvr framework headers
+#'
+#' @param txt 
+#'
+#' @return
+#'
+#' @examples
+load_header_section <- function(txt) {
+  res <- list()
+  ptr <- create_header_separator("(.*)")$start
+  i_subsections <- which(grepl(ptr, txt))
   if (length(i_subsections) > 0) {
     for (i in i_subsections) {
-      section_name <- gsub(SEPARATOR_START, "", section_text[i])
+      section_name <- gsub(SEPARATOR_START, "", txt[i])
       # TODO issue in case we have nested values of the same name
-      if (section_was_serialised(ls, section_name)) next
-      ls[[section_name]] <- load_header_section(section_text, section_name)
+      section_text <- get_text_between(txt, section_name)
+      section <- load_header_section(section_text)
+      section_name <- gsub("\\s+", "_", section_name)
+      section_name <- tolower(section_name)
+      res[[section_name]] <- section
     }
   } else {
-    ls <- get_json_between(text, section_name)
+    res <- json_to_list(txt)
   }
-  return(ls)
-}
-
-section_was_serialised <- function(ls, section_name) {
-  all_names <- names(unlist(ls))
-  # removes the past parameter name
-  ptr <- "\\.(?:.(?!\\.))+$" # negative search from the last .
-  all_names <- gsub(ptr, "", all_names, perl = T)
-  return(any(grepl(section_name, all_names)))
+  return(res)
 }
 
 get_bottom_header_index <- function(filepath) {
   txt <- readLines(filepath, warn = FALSE, encoding = "UTF-8")
-  ptr <- paste0(SEPARATOR_END, "(.*)", SEPARATOR_END)
-  i_end <- which(grepl(ptr, txt))
-  return(tail(i_end, 1))
+  ptr <- create_header_separator("(.*)")$end
+  i_end <- tail(which(grepl(ptr, txt)), 1)
+  return(i_end)
 }
 
 ### TODO
 ### Can massively speed it up if only reads part of the text or do it line by line
 get_indicies_between <- function(text, string) {
   ls <- list()
-  ls$beginning <- which(grepl(create_separator(string)$beginning, text))
-  ls$end <- which(grepl(create_separator(string)$end, text))
+  ls$start <- which(grepl(create_header_separator(string)$start, text))
+  ls$end <- which(grepl(create_header_separator(string)$end, text))
   return(ls)
 }
 
@@ -82,10 +81,10 @@ get_json_between <- function(text, string) {
 
 get_text_between <- function(text, string) {
   indices <- get_indicies_between(text, string)
-  if (length(indices$beginning) != 1 || length(indices$end) != 1) {
+  if (length(indices$start) != 1 || length(indices$end) != 1) {
     return(NULL)
   }
-  text <- text[(indices$beginning + 1):(indices$end - 1)]
+  text <- text[(indices$start + 1):(indices$end - 1)]
   return(text)
 }
 

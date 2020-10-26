@@ -106,10 +106,8 @@ load_experiment_info <- function(filepath) {
 #' @export
 open_experiment_logs <- function(directory, exp_timestamp = NULL,
                                  flatten = FALSE) {
-  out <- open_brainvr_logs(
-    directory, "test", load_experiment_log,
-    exp_timestamp, flatten
-  )
+  out <- open_brainvr_logs(directory, "test", load_experiment_log,
+                            exp_timestamp, flatten)
   return(out)
 }
 
@@ -191,6 +189,8 @@ load_result_log <- function(filepath) {
 #' @param log_name name of the log to be searched for and loaded
 #' @param exp_timestamp timestamp of the particular type of log
 #' @param flatten in case only a single file is found, should it be unnested? defaults to false
+#' @param func R functions which actually loads the object (contains code to preprocess the 
+#' log, extract some log specific information etc.)
 #'
 #' @return
 #'
@@ -213,19 +213,14 @@ find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL,
   logs <- list.files(directory, pattern = ptr, full.names = TRUE)
   if (length(logs) < 1) {
     if (warning_missing) {
-      warning(paste0(
-        "Could not find any ", log_name,
-        " logs in ", directory, " for timestamp ",
-        exp_timestamp
-      ))
+      warning("Could not find any ", log_name, " logs in ", directory,
+              " for timestamp ",exp_timestamp)
     }
     return(NULL)
   }
   if (length(logs) > 1 & !is.null(exp_timestamp)) {
-    warning(paste0(
-      "There are multiple ", log_name, " in the ", directory,
-      " with timestamp ", exp_timestamp
-    ))
+    warning("There are multiple ", log_name, " in the ", directory,
+      " with timestamp ", exp_timestamp)
     return(NULL)
   } else {
     return(logs)
@@ -301,3 +296,5 @@ find_player_path <- function(directory, exp_timestamp = NULL) {
   }
   return(ls)
 }
+
+
