@@ -2,15 +2,17 @@
 % Please edit documentation in R/brainvr-preprocessing.R
 \name{unity_vector_to_numeric}
 \alias{unity_vector_to_numeric}
-\title{Converts output of unity loggin a vector 3 to a vector of three}
+\title{Converts output of unity logging a vector 3 to a vector of three}
 \usage{
 unity_vector_to_numeric(text)
 }
 \arguments{
-\item{text}{unity (x, y, z) vector3 ouput}
+\item{text}{Vector of"(x, y, z)" characters. If single value is passed, 
+the result is returned as a vector. If multiple are passed, it is returned 
+as a matrix with each row being single converted value}
 }
 \value{
-
+matrix of vector of numbers
 }
 \description{
 Unity logs vector as (x, y, z). This function simply

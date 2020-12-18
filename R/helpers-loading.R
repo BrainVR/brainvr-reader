@@ -25,6 +25,7 @@ create_header_separator <- function(string) {
 #' @return list of parsed settings
 #'
 #' @examples
+#' @noRd
 load_headers <- function(filepath) {
   txt <- readLines(filepath, warn = FALSE, encoding = "UTF-8")
   result <- load_header_section(txt)
@@ -38,6 +39,7 @@ load_headers <- function(filepath) {
 #' @return
 #'
 #' @examples
+#' @noRd
 load_header_section <- function(txt) {
   res <- list()
   ptr <- create_header_separator("(.*)")$start
