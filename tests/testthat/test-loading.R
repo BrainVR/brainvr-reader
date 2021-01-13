@@ -9,7 +9,7 @@ test_that("Loading helpers", {
 })
  
 test_that("Loading from a folder", {
-  dir_loaded <- load_experiments(DIR)
+  dir_loaded <- load_experiments(DIR, save = FALSE)
   expect_length(dir_loaded, 2)
 })
 
@@ -20,6 +20,9 @@ test_that("Loading player log works", {
                                               save = FALSE))
   expect_s3_class(obj$data, "data.frame")
   expect_gt(nrow(obj$data), 100)
+  expect_message(obj2 <- open_player_log(DIR, exp_timestamp = TIMESTAMP,
+                                        override = TRUE, remove = FALSE,
+                                        save = FALSE))
 })
 
 test_that("loading custom logs work", {

@@ -13,13 +13,13 @@ load_experiments <- function(folder, override = FALSE, save = TRUE) {
                                         func = load_experiment_info,
                                         flatten = FALSE)
   if (is.null(experiment_infos)) stop("Experiment info not found")
-  ls <- list()
+  res <- list()
   for (i in 1:length(experiment_infos)) {
     info <- experiment_infos[[i]]
-    ls[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp,
+    res[[i]] <- load_experiment(folder, exp_timestamp = info$header$Timestamp,
                                override = override, save = save)
   }
-  return(ls)
+  return(res)
 }
 
 #' Loads files form a folder into BrainvrObject
@@ -265,16 +265,18 @@ find_brainvr_logs <- function(directory, log_name, exp_timestamp = NULL,
 #' @param exp_timestamp provides timestamp of a log to load
 #' @param override if true, deletes processed player log and loads the unprocessed.
 #' if FALSE, load preprocessed log if present
+#' @param remove should the existing prepricessed log be removed
 #' @param save Should the log be saved after being preprocessed
+#'
 #' @return data.table with the loaded player log or NULL.
 #' @export
 #' @import data.table
 open_player_log <- function(directory, exp_timestamp = NULL, override = FALSE,
-                            save = TRUE) {
+                            save = TRUE, remove = FALSE) {
   ls_log_path <- find_player_path(directory, exp_timestamp)
   if (nchar(ls_log_path$path) == 0) return(NULL)
   if (nchar(ls_log_path$path_preprocessed) > 0) {
-    if (override) {
+    if (override & remove) {
       message("Removing preprocessed log ", ls_log_path$path_preprocessed)
       file.remove(ls_log_path$path_preprocessed)
     } else {
@@ -294,7 +296,6 @@ open_player_log <- function(directory, exp_timestamp = NULL, override = FALSE,
   text <- readLines(ls_log_path$path, warn = FALSE, encoding = "UTF-8")
   i_bottom <- get_header_end_index(text)
   #bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end # get beginning of the log
-  
   # TODO - remove data.table
   df_position <- fread(ls_log_path$path,
     header = TRUE, sep = ";", dec = ".",

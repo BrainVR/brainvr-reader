@@ -88,7 +88,9 @@ get_indicies_between <- function(text, string) {
 }
 
 get_header_end_index <- function(text){
-  out <- which(grepl(create_header_separator("[.*]")$end))  
+  out <- which(grepl(create_header_separator(".*")$end, text))
+  out <- max(out)
+  return(out)
 }
 
 get_json_between <- function(text, string) {
