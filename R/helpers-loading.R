@@ -81,10 +81,14 @@ header_section_was_serialised <- function(res, section_name) {
 ### TODO
 ### Can massively speed it up if only reads part of the text or do it line by line
 get_indicies_between <- function(text, string) {
-  ls <- list()
-  ls$start <- which(grepl(create_header_separator(string)$start, text))
-  ls$end <- which(grepl(create_header_separator(string)$end, text))
-  return(ls)
+  out <- list()
+  out$start <- which(grepl(create_header_separator(string)$start, text))
+  out$end <- which(grepl(create_header_separator(string)$end, text))
+  return(out)
+}
+
+get_header_end_index <- function(text){
+  out <- which(grepl(create_header_separator("[.*]")$end))  
 }
 
 get_json_between <- function(text, string) {

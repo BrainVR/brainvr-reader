@@ -2,6 +2,7 @@ context("Loading")
 
 HEADER <- system.file("extdata/example-header.txt", package = "brainvr.reader")
 DIR <- system.file("extdata/CFNS/", package = "brainvr.reader")
+TIMESTAMP = "17-41-52-03-12-2017"
 
 test_that("Loading helpers", {
   expect_silent(header <- load_headers(file.path(HEADER)))
@@ -10,6 +11,23 @@ test_that("Loading helpers", {
 test_that("Loading from a folder", {
   dir_loaded <- load_experiments(DIR)
   expect_length(dir_loaded, 2)
+})
+
+test_that("Loading player log works", {
+  # Multiple in the same dir
+  expect_warning(obj <- open_player_log(DIR, save = FALSE))
+  expect_message(obj <- open_player_log(DIR, exp_timestamp = TIMESTAMP,
+                                              save = FALSE))
+  expect_s3_class(obj$data, "data.frame")
+  expect_gt(nrow(obj$data), 100)
+})
+
+test_that("loading custom logs work", {
+  results_filepath <- file.path(DIR, "NEO_results_CFNSLearning_17-41-52-03-12-2017.txt")
+  expect_silent(results <- open_brainvr_log(DIR, log_name = "results",
+                                            exp_timestamp = "17-41-52-03-12-2017"))
+  expect_silent(results2 <- load_brainvr_log(results_filepath))
+  expect_equal(results, results2)
 })
 
 test_that("Loading all separately works", {

@@ -36,7 +36,7 @@ load_experiments <- function(folder, override = FALSE, save = TRUE) {
 #' @export
 load_experiment <- function(folder, exp_timestamp = NULL,
                             override = FALSE, save = TRUE) {
-  if (is.null(folder)) stop("no folder set")
+  if (is.null(folder)) stop("No folder set")
   # TODO - this should return only a single one per timestamp
   experiment_info <- open_brainvr_log(folder, log_name = "ExperimentInfo",
                                       exp_timestamp = exp_timestamp,
@@ -196,7 +196,7 @@ open_brainvr_log <- function(directory, log_name, exp_timestamp = NULL,
   pths <- find_brainvr_logs(directory, log_name, exp_timestamp)
   if(is.null(pths)) return(NULL)
   if(length(pths) > 1){
-    warning("Cannot open log ", log_name, " in ", directory, 
+    warning("Cannot open log ", log_name, " in ", directory,
     ". Multiple logs of the same name.  You need to specify the timestamp")
     return(NULL)
   }
@@ -208,7 +208,8 @@ open_brainvr_log <- function(directory, log_name, exp_timestamp = NULL,
 #' data notaions. 
 #'
 #' @param filepath path to the log
-#' @param func optional loading function
+#' @param func optional loading function, it loads the log instead of the 
+#' default
 #'
 #' @return list with parsed data and optionally $data field with log's dataframe
 #' @export
@@ -226,8 +227,13 @@ load_brainvr_log <- function(filepath, func = NULL) {
                             stringsAsFactors = FALSE, encoding = "UTF-8"
   ), silent = TRUE)
   if (class(df_data) == "data.frame"){
+    # removes empty last columns in many brainvr framework logs
+    n_scanning <- ifelse(nrow(df_data) < 50, nrow(data), 50)
+    if(grepl("X", colnames(df_data)[ncol(df_data)]) &
+      all(is.na(df_data[1:n_scanning, ncol(df_data)]))){
+      df_data[, ncol(df_data)] <- NULL
+    }
     result$data <- df_data
-    result$data[, ncol(result$data)] <- NULL
   }
   return(result)
 }
@@ -286,11 +292,13 @@ open_player_log <- function(directory, exp_timestamp = NULL, override = FALSE,
   message("Loading unprocessed player log ", ls_log_path$path)
   # TODO - chagne so it doesn't read text so friggin much :(
   text <- readLines(ls_log_path$path, warn = FALSE, encoding = "UTF-8")
-  bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end # get beginning of the log
+  i_bottom <- get_header_end_index(text)
+  #bottomHeaderIndex <- get_indicies_between(text, "SESSION HEADER")$end # get beginning of the log
+  
   # TODO - remove data.table
   df_position <- fread(ls_log_path$path,
     header = TRUE, sep = ";", dec = ".",
-    skip = bottomHeaderIndex, stringsAsFactors = FALSE
+    skip = i_bottom, stringsAsFactors = FALSE
   )
   # deletes the last column - it's there for the easier logging from unity
   # - its here because of how preprocessing works
