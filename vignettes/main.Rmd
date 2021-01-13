@@ -3,21 +3,10 @@ title: "Brainvr.R showcase of loading and preprocessing"
 author: "Lukáš hejtmy Hejtmánek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 # Loading single experiemnt
-Loading single experimet the first time
+Loading single experiment the first time
 
 ```{r}
 library(brainvr.reader)

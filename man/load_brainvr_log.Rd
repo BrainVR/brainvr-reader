@@ -10,7 +10,8 @@ load_brainvr_log(filepath, func = NULL)
 \arguments{
 \item{filepath}{path to the log}
 
-\item{func}{optional loading function}
+\item{func}{optional loading function, it loads the log instead of the 
+default}
 }
 \value{
 list with parsed data and optionally $data field with log's dataframe

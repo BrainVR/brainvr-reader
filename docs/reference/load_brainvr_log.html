@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns how long the trial took and removes potential pauses in the log — get_trial_duration • brainvr.reader</title>
+<title>Loads a generic brainvr framework log. These logs have specific header and
+data notaions. — load_brainvr_log • brainvr.reader</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="Returns how long the trial took and removes potential pauses in the log — get_trial_duration" />
-<meta property="og:description" content="Returns how long the trial took and removes potential pauses in the log" />
+<meta property="og:title" content="Loads a generic brainvr framework log. These logs have specific header and
+data notaions. — load_brainvr_log" />
+<meta property="og:description" content="Loads a generic brainvr framework log. These logs have specific header and
+data notaions." />
 
 
 
@@ -115,54 +118,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns how long the trial took and removes potential pauses in the log</h1>
+    <h1>Loads a generic brainvr framework log. These logs have specific header and
+data notaions.</h1>
     
-    <div class="hidden name"><code>get_trial_duration.Rd</code></div>
+    <div class="hidden name"><code>load_brainvr_log.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns how long the trial took and removes potential pauses in the log</p>
+    <p>Loads a generic brainvr framework log. These logs have specific header and
+data notaions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_trial_duration</span><span class='op'>(</span>
-  <span class='va'>obj</span>,
-  <span class='va'>iTrial</span>,
-  without_pauses <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  pause_limit <span class='op'>=</span> <span class='fl'>5</span>,
-  path_limit <span class='op'>=</span> <span class='fl'>1</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>load_brainvr_log</span><span class='op'>(</span><span class='va'>filepath</span>, func <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>BrainVr object with preprocessed player log</p></td>
+      <th>filepath</th>
+      <td><p>path to the log</p></td>
     </tr>
     <tr>
-      <th>iTrial</th>
-      <td><p>trial index (starting with 1)</p></td>
-    </tr>
-    <tr>
-      <th>without_pauses</th>
-      <td><p>Should the reported duration be calculated without pauses? Defaults to FALSE</p></td>
-    </tr>
-    <tr>
-      <th>pause_limit</th>
-      <td><p>minimum time to be considered pause. Defaults to 5</p></td>
-    </tr>
-    <tr>
-      <th>path_limit</th>
-      <td><p>maximum distance to be considered not moving. Defaults to 1</p></td>
+      <th>func</th>
+      <td><p>optional loading function</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>list with parsed data and optionally $data field with log's dataframe</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

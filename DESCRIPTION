@@ -1,6 +1,6 @@
 Package: brainvr.reader
 Title: Loading, preprocessing and visualising logs from brainvr framework based app
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.com",
                   role = c("aut", "cre"))
 Description: This package comes with functions to load, preprocess

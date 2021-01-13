@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns how long the trial took and removes potential pauses in the log — get_trial_duration • brainvr.reader</title>
+<title>Searches for and loads a generic brainvr framework log. 
+Contains framework specific header, and optionally data.frame data. See 
+load_brainvr_log for specifics — open_brainvr_log • brainvr.reader</title>
 
 
 <!-- jquery -->
@@ -39,8 +41,12 @@
 
 
 
-<meta property="og:title" content="Returns how long the trial took and removes potential pauses in the log — get_trial_duration" />
-<meta property="og:description" content="Returns how long the trial took and removes potential pauses in the log" />
+<meta property="og:title" content="Searches for and loads a generic brainvr framework log. 
+Contains framework specific header, and optionally data.frame data. See 
+load_brainvr_log for specifics — open_brainvr_log" />
+<meta property="og:description" content="Searches for and loads a generic brainvr framework log. 
+Contains framework specific header, and optionally data.frame data. See 
+load_brainvr_log for specifics" />
 
 
 
@@ -115,46 +121,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns how long the trial took and removes potential pauses in the log</h1>
+    <h1>Searches for and loads a generic brainvr framework log. 
+Contains framework specific header, and optionally data.frame data. See 
+<code><a href='load_brainvr_log.html'>load_brainvr_log</a></code> for specifics</h1>
     
-    <div class="hidden name"><code>get_trial_duration.Rd</code></div>
+    <div class="hidden name"><code>open_brainvr_log.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns how long the trial took and removes potential pauses in the log</p>
+    <p>Searches for and loads a generic brainvr framework log. 
+Contains framework specific header, and optionally data.frame data. See 
+<code><a href='load_brainvr_log.html'>load_brainvr_log</a></code> for specifics</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_trial_duration</span><span class='op'>(</span>
-  <span class='va'>obj</span>,
-  <span class='va'>iTrial</span>,
-  without_pauses <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  pause_limit <span class='op'>=</span> <span class='fl'>5</span>,
-  path_limit <span class='op'>=</span> <span class='fl'>1</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>open_brainvr_log</span><span class='op'>(</span><span class='va'>directory</span>, <span class='va'>log_name</span>, exp_timestamp <span class='op'>=</span> <span class='cn'>NULL</span>, func <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obj</th>
-      <td><p>BrainVr object with preprocessed player log</p></td>
+      <th>directory</th>
+      <td><p>Where to search for the log</p></td>
     </tr>
     <tr>
-      <th>iTrial</th>
-      <td><p>trial index (starting with 1)</p></td>
+      <th>log_name</th>
+      <td><p>name of the log (e.g.)</p></td>
     </tr>
     <tr>
-      <th>without_pauses</th>
-      <td><p>Should the reported duration be calculated without pauses? Defaults to FALSE</p></td>
+      <th>exp_timestamp</th>
+      <td><p>necessary if multiple logs are in the same folder</p></td>
     </tr>
     <tr>
-      <th>pause_limit</th>
-      <td><p>minimum time to be considered pause. Defaults to 5</p></td>
-    </tr>
-    <tr>
-      <th>path_limit</th>
-      <td><p>maximum distance to be considered not moving. Defaults to 1</p></td>
+      <th>func</th>
+      <td><p>function used to load the log. Optional. IF NULL, default loading
+function is used</p></td>
     </tr>
     </table>
 

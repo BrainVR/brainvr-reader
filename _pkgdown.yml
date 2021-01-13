@@ -4,13 +4,22 @@ reference:
   contents:
   - '`BrainvrObject`'
 - title: Loading functions
-  desc: Functions to load brainvr-framework data
+  desc: Functions to load brainvr-framework data. Genreally split into two categories of functions. 
+    Loading and opening. The loading functions (with the expection of load_experiment/s) take exact
+    filepath to the object to be loaded. The opening functions take a folder and log name (e.g. "results")
+    and perform both searching and loading for a particular log. This is done so you don't have
+    to write your own regex searches for specific files. The opening functions are usually in both
+    plural (open_brainvr_logs) and singular versions. The singualr expect a single log of a particular
+    type to exist (given folder, name and optinally timestamp), otherwise they throw error and return NULL
+    The plural versions load all logs of given type.
   contents:
   - '`load_experiment`'
   - '`load_experiments`'
+  - '`load_brainvr_log `'
   - '`load_experiment_info`'
   - '`load_experiment_log`'
   - '`load_result_log`'
+  - '`open_brainvr_log`'
   - '`open_brainvr_logs`'
   - '`open_experiment_infos`'
   - '`open_experiment_logs`'
@@ -30,7 +39,6 @@ reference:
   - '`get_distance_timewindow`'
   - '`get_experiment_log`'
   - '`get_results_log`'
-  - '`get_experiment_settings`'
   - '`get_finished_trials_indices`'
   - '`was_trial_force_finished`'
 - title: Preprocessing functions
@@ -47,8 +55,10 @@ reference:
   desc: Functions to visualise aspects fo the position. Mostly wrappers around [navr](https://github.io/hejtmy/navr) visualisation functions
   contents:
   - '`plot_trial_path`'
-
-
+- title: Helpers
+  desc: Helping functions
+  contents:
+  - '`unity_vector_to_numeric`'
 
 
 
