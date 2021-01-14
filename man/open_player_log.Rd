@@ -4,7 +4,13 @@
 \alias{open_player_log}
 \title{Searches a directory for a player log. Returns player log data.table}
 \usage{
-open_player_log(directory, exp_timestamp = NULL, override = FALSE, save = TRUE)
+open_player_log(
+  directory,
+  exp_timestamp = NULL,
+  override = FALSE,
+  save = TRUE,
+  remove = FALSE
+)
 }
 \arguments{
 \item{directory}{where the log should be located}
@@ -15,6 +21,8 @@ open_player_log(directory, exp_timestamp = NULL, override = FALSE, save = TRUE)
 if FALSE, load preprocessed log if present}
 
 \item{save}{Should the log be saved after being preprocessed}
+
+\item{remove}{should the existing prepricessed log be removed}
 }
 \value{
 data.table with the loaded player log or NULL.

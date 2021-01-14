@@ -228,7 +228,7 @@ load_brainvr_log <- function(filepath, func = NULL) {
   ), silent = TRUE)
   if (class(df_data) == "data.frame"){
     # removes empty last columns in many brainvr framework logs
-    n_scanning <- ifelse(nrow(df_data) < 50, nrow(data), 50)
+    n_scanning <- ifelse(nrow(df_data) < 50, nrow(df_data), 50)
     if(grepl("X", colnames(df_data)[ncol(df_data)]) &
       all(is.na(df_data[1:n_scanning, ncol(df_data)]))){
       df_data[, ncol(df_data)] <- NULL
@@ -276,9 +276,11 @@ open_player_log <- function(directory, exp_timestamp = NULL, override = FALSE,
   ls_log_path <- find_player_path(directory, exp_timestamp)
   if (nchar(ls_log_path$path) == 0) return(NULL)
   if (nchar(ls_log_path$path_preprocessed) > 0) {
-    if (override & remove) {
-      message("Removing preprocessed log ", ls_log_path$path_preprocessed)
-      file.remove(ls_log_path$path_preprocessed)
+    if (override) {
+      if(remove){
+        message("Removing preprocessed log ", ls_log_path$path_preprocessed)
+        file.remove(ls_log_path$path_preprocessed)
+      }
     } else {
       message("Loading preprocessed player log ", ls_log_path$path_preprocessed)
       # TODO - remove data.table
