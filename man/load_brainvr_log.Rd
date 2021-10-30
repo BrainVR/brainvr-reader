@@ -5,13 +5,16 @@
 \title{Loads a generic brainvr framework log. These logs have specific header and
 data notaions.}
 \usage{
-load_brainvr_log(filepath, func = NULL)
+load_brainvr_log(filepath, func = NULL, ...)
 }
 \arguments{
 \item{filepath}{path to the log}
 
 \item{func}{optional loading function, it loads the log instead of the 
 default}
+
+\item{...}{additional parameters passed to read.table. skip, sep, header, 
+stringsAsFactos and encoding cannot be changed}
 }
 \value{
 list with parsed data and optionally $data field with log's dataframe

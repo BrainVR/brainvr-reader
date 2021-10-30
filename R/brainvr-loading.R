@@ -210,12 +210,14 @@ open_brainvr_log <- function(directory, log_name, exp_timestamp = NULL,
 #' @param filepath path to the log
 #' @param func optional loading function, it loads the log instead of the 
 #' default
+#' @param ... additional parameters passed to read.table. skip, sep, header, 
+#' stringsAsFactos and encoding cannot be changed
 #'
 #' @return list with parsed data and optionally $data field with log's dataframe
 #' @export
 #'
 #' @examples
-load_brainvr_log <- function(filepath, func = NULL) {
+load_brainvr_log <- function(filepath, func = NULL, ...) {
   if(!is.null(func)){
     result <- func(filepath)
     return(result)
@@ -224,7 +226,8 @@ load_brainvr_log <- function(filepath, func = NULL) {
   i_bottom <- get_bottom_header_index(filepath)
   df_data <- try(read.table(filepath,
                             skip = i_bottom, sep = ";", header = TRUE,
-                            stringsAsFactors = FALSE, encoding = "UTF-8"
+                            stringsAsFactors = FALSE, encoding = "UTF-8", 
+                            ...
   ), silent = TRUE)
   if (class(df_data) == "data.frame"){
     # removes empty last columns in many brainvr framework logs
